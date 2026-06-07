@@ -191,5 +191,6 @@ document.getElementById("createSubBtn").addEventListener("click", handleCreateSu
 bindDropzone();
 loadState().catch(function(error) { setMessage("uploadMsg", error.message, "err"); });
 </script>
+<script>(function(){var h=document.documentElement;var c=document.cookie.replace(/(?:(?:^|.*;\s*)theme\s*\=\s*([^;]*).*$)|^.*$/,"$1");if(c==="light")h.className="theme-light";var b=document.getElementById("themeBtn");if(!b)return;b.onclick=function(e){e=e||window.event;e.preventDefault();if(h.className.indexOf("theme-light")<0){h.className="theme-light";document.cookie="theme=light;path=/;max-age=31536000"}else{h.className="theme-dark";document.cookie="theme=dark;path=/;max-age=31536000"}};})();</script>
 </body>
 </html>

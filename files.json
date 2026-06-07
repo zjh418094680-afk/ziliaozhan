@@ -5,9 +5,29 @@
     "modified": "2026-06-06 11:00"
   },
   {
+    "name": "CLAUDE.md",
+    "size": 2124,
+    "modified": "2026-06-07 18:16"
+  },
+  {
+    "name": "__pycache__//gen_pages_v2.cpython-312.pyc",
+    "size": 14204,
+    "modified": "2026-06-07 18:32"
+  },
+  {
+    "name": "__pycache__//site_builder.cpython-312.pyc",
+    "size": 40559,
+    "modified": "2026-06-07 18:32"
+  },
+  {
+    "name": "__pycache__//test_site.cpython-312.pyc",
+    "size": 2317,
+    "modified": "2026-06-07 18:32"
+  },
+  {
     "name": "about.html",
-    "size": 5465,
-    "modified": "2026-06-07 16:31"
+    "size": 3693,
+    "modified": "2026-06-07 20:09"
   },
   {
     "name": "admin//china.json",
@@ -21,53 +41,53 @@
   },
   {
     "name": "admin//files.html",
-    "size": 8491,
-    "modified": "2026-06-07 16:31"
+    "size": 9001,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "admin//stats.html",
-    "size": 12907,
-    "modified": "2026-06-07 16:31"
+    "size": 13417,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "cat//game.html",
-    "size": 11124,
-    "modified": "2026-06-07 16:31"
+    "size": 17973,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "cat//history.html",
-    "size": 11537,
-    "modified": "2026-06-07 16:31"
+    "size": 18281,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "cat//money.html",
-    "size": 11124,
-    "modified": "2026-06-07 16:31"
+    "size": 17973,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "cat//movie.html",
-    "size": 11124,
-    "modified": "2026-06-07 16:31"
+    "size": 17973,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "cat//study.html",
-    "size": 11826,
-    "modified": "2026-06-07 16:31"
+    "size": 18399,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "cat//tool.html",
-    "size": 11121,
-    "modified": "2026-06-07 16:31"
+    "size": 17970,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "cat//work.html",
-    "size": 11124,
-    "modified": "2026-06-07 16:31"
+    "size": 17973,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "design-test.html",
     "size": 12307,
-    "modified": "2026-06-07 16:31"
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "favicon.ico",
@@ -76,8 +96,8 @@
   },
   {
     "name": "features.html",
-    "size": 7163,
-    "modified": "2026-06-07 16:31"
+    "size": 4069,
+    "modified": "2026-06-07 20:09"
   },
   {
     "name": "gen_pages_v2.py",
@@ -95,6 +115,21 @@
     "modified": "2026-06-04 21:36"
   },
   {
+    "name": "inc//common.css",
+    "size": 12880,
+    "modified": "2026-06-07 19:51"
+  },
+  {
+    "name": "inc//navbar.html",
+    "size": 1301,
+    "modified": "2026-06-07 19:52"
+  },
+  {
+    "name": "inc//theme.js",
+    "size": 525,
+    "modified": "2026-06-07 19:51"
+  },
+  {
     "name": "index.html.v1",
     "size": 16100,
     "modified": "2026-06-07 14:29"
@@ -107,22 +142,22 @@
   {
     "name": "index_v2.html",
     "size": 12307,
-    "modified": "2026-06-07 16:31"
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "index_v3.html",
     "size": 26100,
-    "modified": "2026-06-07 16:31"
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "privacy.html",
-    "size": 3963,
-    "modified": "2026-06-07 16:31"
+    "size": 3378,
+    "modified": "2026-06-07 20:08"
   },
   {
     "name": "promo.html",
-    "size": 9605,
-    "modified": "2026-06-07 16:31"
+    "size": 8448,
+    "modified": "2026-06-07 20:09"
   },
   {
     "name": "risk_word_db.json",
@@ -131,8 +166,8 @@
   },
   {
     "name": "site_builder.py",
-    "size": 23746,
-    "modified": "2026-06-07 16:31"
+    "size": 37082,
+    "modified": "2026-06-07 19:12"
   },
   {
     "name": "site_meta.json",
@@ -142,7 +177,7 @@
   {
     "name": "stats_cache.json",
     "size": 21070,
-    "modified": "2026-06-06 17:16"
+    "modified": "2026-06-07 17:17"
   },
   {
     "name": "study//gaokao//2007//数学//2007年高考数学试卷（理）（全国卷Ⅰ）（空白卷）.pdf",
@@ -12901,23 +12936,68 @@
   },
   {
     "name": "terms.html",
-    "size": 4354,
-    "modified": "2026-06-07 16:31"
+    "size": 3765,
+    "modified": "2026-06-07 20:09"
+  },
+  {
+    "name": "test_site.py",
+    "size": 1289,
+    "modified": "2026-06-07 18:16"
   },
   {
     "name": "tpl_page.html",
-    "size": 6396,
-    "modified": "2026-06-07 16:31"
+    "size": 6315,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "tpl_province.html",
-    "size": 5069,
-    "modified": "2026-06-07 16:31"
+    "size": 4988,
+    "modified": "2026-06-07 19:32"
   },
   {
     "name": "tpl_subpage.html",
     "size": 7866,
-    "modified": "2026-06-07 16:31"
+    "modified": "2026-06-07 19:32"
+  },
+  {
+    "name": "training//__pycache__//api.cpython-312.pyc",
+    "size": 11599,
+    "modified": "2026-06-07 18:32"
+  },
+  {
+    "name": "training//__pycache__//proc.cpython-312.pyc",
+    "size": 8013,
+    "modified": "2026-06-07 18:32"
+  },
+  {
+    "name": "training//api.py",
+    "size": 9391,
+    "modified": "2026-06-07 18:30"
+  },
+  {
+    "name": "training//api_data.json",
+    "size": 164,
+    "modified": "2026-06-07 18:30"
+  },
+  {
+    "name": "training//ci.sh",
+    "size": 5047,
+    "modified": "2026-06-07 18:32"
+  },
+  {
+    "name": "training//proc.py",
+    "size": 5559,
+    "modified": "2026-06-07 18:31"
+  },
+  {
+    "name": "training//stripe.html",
+    "size": 9125,
+    "modified": "2026-06-07 19:32"
+  },
+  {
+    "name": "validate_smart.py",
+    "size": 1698,
+    "modified": "2026-06-07 19:12"
   },
   {
     "name": "wechat_qr.jpg",

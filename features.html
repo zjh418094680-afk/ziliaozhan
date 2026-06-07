@@ -1,84 +1,47 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="theme-dark">
+<html lang="zh-CN" class="<!--# if expr='$cookie_theme = light' -->theme-light<!--# else -->theme-dark<!--# endif -->">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>功能介绍 - 资料栈</title>
 <link rel="icon" href="/favicon.ico">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;background:#0F172A;color:#F1F5F9;line-height:1.8;transition:background .35s,color .35s}
-.theme-light body{background:#F9FAFB;color:#111827}
-.navbar{background:rgba(15,23,42,.92);border-bottom:1px solid #334155;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
-.theme-light .navbar{background:rgba(255,255,255,.92);border-bottom:1px solid #E5E7EB}
-.navbar-inner{max-width:800px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:20px;font-weight:700;color:#3B82F6;text-decoration:none;display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#3B82F6,#60A5FA);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px}
-.back-link{color:#94A3B8;text-decoration:none;font-size:14px;display:flex;align-items:center;gap:4px}
-.theme-light .back-link{color:#6B7280}
-.back-link:hover{color:#3B82F6}
-.main{max-width:800px;margin:0 auto;padding:40px 24px 60px}
-h1{font-size:28px;font-weight:800;margin-bottom:24px}
-h2{font-size:20px;font-weight:700;margin:36px 0 16px}
-p{margin-bottom:16px;color:#94A3B8;font-size:15px}
-.theme-light p{color:#6B7280}
-p:last-child{margin-bottom:0}
-.hero-card{background:linear-gradient(135deg,#3B82F6,#60A5FA);border-radius:20px;padding:40px 32px;color:#fff;margin-bottom:40px;text-align:center}
-.hero-card h2{color:#fff;margin:0 0 12px;font-size:24px}
-.hero-card p{color:rgba(255,255,255,.9);margin:0;font-size:15px}
-.info-card{background:#1E293B;border-radius:16px;padding:28px 24px;border:1.5px solid #334155;margin-bottom:24px}
-.theme-light .info-card{background:#fff;border-color:#E5E7EB}
-.info-card h3{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.info-card p{margin-bottom:0}
-.contact-list{list-style:none;padding:0}
-.contact-list li{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #334155}
-.theme-light .contact-list li{border-bottom:1px solid #E5E7EB}
-.contact-list li:last-child{border-bottom:none}
-.contact-list a{color:#3B82F6;text-decoration:none}
-.contact-list a:hover{text-decoration:underline}
-@media(max-width:768px){.main{padding:24px 16px 40px}h1{font-size:24px}.hero-card{padding:28px 20px}}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
+<!--# include file="/inc/common.css" -->
 
-<style>
-.feature-list{display:flex;flex-direction:column;gap:24px}
-.feature-item{background:#1E293B;border-radius:16px;padding:28px 24px;border:1.5px solid #334155;transition:all .25s}
-.theme-light .feature-item{background:#fff;border-color:#E5E7EB}
-.feature-item:hover{border-color:#60A5FA;box-shadow:0 8px 30px rgba(59,130,246,.1);transform:translateY(-2px)}
-.feature-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.feature-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#3B82F6,#60A5FA);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
-.feature-title{font-size:18px;font-weight:700}
-.feature-desc{color:#94A3B8;font-size:14px;line-height:1.8;padding-left:62px}
-.theme-light .feature-desc{color:#6B7280}
-.subtitle{color:#94A3B8;font-size:15px;margin-bottom:40px}
-.theme-light .subtitle{color:#6B7280}
-@media(max-width:768px){.feature-item{padding:20px 16px}.feature-desc{padding-left:0;margin-top:8px}}
-
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
+.main { max-width: 800px; margin: 0 auto; padding: 40px 24px 60px; }
+.main h1 { font-size: 28px; font-weight: 800; margin-bottom: 12px; color: #F5F6F7; }
+.theme-light .main h1 { color: #0A0F1A; }
+.subtitle { color: #94A3B8; font-size: 15px; margin-bottom: 40px; }
+.theme-light .subtitle { color: #6B7280; }
+.feature-list { display: flex; flex-direction: column; gap: 24px; }
+.feature-item { background: rgba(255,255,255,.015); border: 1px solid rgba(255,255,255,.05); border-radius: 16px; padding: 28px 24px; transition: all .25s; }
+.theme-light .feature-item { background: #fff; border-color: #E5E7EB; box-shadow: 0 2px 8px rgba(0,0,0,.02); }
+.feature-item:hover { border-color: #60A5FA; transform: translateY(-2px); }
+.feature-header { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.feature-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg,#3B82F6,#60A5FA); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.feature-title { font-size: 18px; font-weight: 700; color: #F5F6F7; }
+.theme-light .feature-title { color: #0A0F1A; }
+.feature-desc { color: #94A3B8; font-size: 14px; line-height: 1.8; padding-left: 62px; }
+.theme-light .feature-desc { color: #6B7280; }
+@media(max-width:768px){.feature-item{padding:20px 16px}.feature-desc{padding-left:0;margin-top:8px}.main{padding:24px 16px 40px}.main h1{font-size:24px}}
+</style>
 </head>
 <body>
-<script>
-(function(){
-function getCookie(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n.replace(/([.$?*|{}()\\[\\]\\\\\\/\\+^])/g,'\\\\$1')+'=([^;]*)'));return m?decodeURIComponent(m[1]):'';}
-function getTheme(){try{var t=localStorage.getItem('theme');if(t)return t;}catch(e){}return getCookie('theme')||'dark';}
-var h=document.documentElement;var s=getTheme();h.className=(s==='light')?'theme-light':'theme-dark';
-})();
-</script>
-<nav class="navbar"><div class="navbar-inner">
-    <a class="logo" href="/"><div class="logo-icon">📚</div>资料栈</span>
-    <a class="back-link" href="/">← 返回首页</span>
-</div></nav>
 
 <section class="main">
-    <h1>🚀 功能介绍</h1>
-    <p class="subtitle">资料栈为您提供安全、高效、便捷的文件分享体验</p>
-    
-    <div class="feature-list">
-        <div class="feature-item"><div class="feature-header"><div class="feature-icon">📂</div><div class="feature-title">智能分类浏览</div></div><p class="feature-desc">所有资料按用途自动分为 7 大类别：学习资料、工作文档、影视资源、游戏相关、赚钱项目、历史文物、工具软件。点击分类卡片即可快速筛选，无需翻找。</p></div>
-        <div class="feature-item"><div class="feature-header"><div class="feature-icon">🔍</div><div class="feature-title">全站即时搜索</div></div><p class="feature-desc">支持全站关键词搜索，输入即可实时匹配文件名。搜索结果标注所属分类，支持一键预览（PDF/图片/视频）或直接下载。</p></div>
-        <div class="feature-item"><div class="feature-header"><div class="feature-icon">👁</div><div class="feature-title">在线预览</div></div><p class="feature-desc">PDF 文档、图片（JPG/PNG/GIF/WebP）、视频（MP4/WebM）均支持浏览器内直接预览，无需下载即可查看内容。其他格式一键下载到本地。</p></div>
-        <div class="feature-item"><div class="feature-header"><div class="feature-icon">⬇</div><div class="feature-title">高速下载</div></div><p class="feature-desc">所有文件托管于阿里云服务器，国内访问速度极快。点击下载按钮即可获取文件，无需注册登录，无下载次数限制。</p></div>
-        <div class="feature-item"><div class="feature-header"><div class="feature-icon">🌙</div><div class="feature-title">深色模式</div></div><p class="feature-desc">内置日间/夜间主题切换，自动跟随系统偏好或手动选择。护眼舒适，夜间使用不刺眼。</p></div>
-        <div class="feature-item"><div class="feature-header"><div class="feature-icon">📱</div><div class="feature-title">响应式设计</div></div><p class="feature-desc">完美适配手机、平板、桌面设备。无论何时何地，打开浏览器即可使用，无需安装任何 App。</p></div>
-    </div>
+<h1>🚀 功能介绍</h1>
+<p class="subtitle">资料栈为您提供安全、高效、便捷的文件分享体验</p>
+
+<div class="feature-list">
+<div class="feature-item"><div class="feature-header"><div class="feature-icon">📂</div><div class="feature-title">智能分类浏览</div></div><p class="feature-desc">所有资料按用途自动分为 7 大类别：学习资料、工作文档、影视资源、游戏相关、赚钱项目、历史文物、工具软件。点击分类卡片即可快速筛选，无需翻找。</p></div>
+<div class="feature-item"><div class="feature-header"><div class="feature-icon">🔍</div><div class="feature-title">全站即时搜索</div></div><p class="feature-desc">支持全站关键词搜索，输入即可实时匹配文件名。搜索结果标注所属分类，支持一键预览（PDF/图片/视频）或直接下载。</p></div>
+<div class="feature-item"><div class="feature-header"><div class="feature-icon">👁</div><div class="feature-title">在线预览</div></div><p class="feature-desc">PDF 文档、图片（JPG/PNG/GIF/WebP）、视频（MP4/WebM）均支持浏览器内直接预览，无需下载即可查看内容。其他格式一键下载到本地。</p></div>
+<div class="feature-item"><div class="feature-header"><div class="feature-icon">⬇</div><div class="feature-title">高速下载</div></div><p class="feature-desc">所有文件托管于阿里云服务器，国内访问速度极快。点击下载按钮即可获取文件，无需注册登录，无下载次数限制。</p></div>
+<div class="feature-item"><div class="feature-header"><div class="feature-icon">🌙</div><div class="feature-title">深色模式</div></div><p class="feature-desc">内置日间/夜间主题切换，自动跟随系统偏好或手动选择。护眼舒适，夜间使用不刺眼。</p></div>
+<div class="feature-item"><div class="feature-header"><div class="feature-icon">📱</div><div class="feature-title">响应式设计</div></div><p class="feature-desc">完美适配手机、平板、桌面设备。无论何时何地，打开浏览器即可使用，无需安装任何 App。</p></div>
+</div>
 </section>
-</body></html>
+
+<script><!--# include file="/inc/theme.js" --></script>
+</body>
+</html>

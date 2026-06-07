@@ -1,72 +1,73 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="<!--# if expr='$cookie_theme = light' -->theme-light<!--# else -->theme-dark<!--# endif -->">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>隐私政策 - 资料栈</title>
-    <style>
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #F9FAFB; color: #111827; line-height: 1.7; padding: 40px 20px; }
-        .container { max-width: 800px; margin: 0 auto; background: #FFFFFF; border-radius: 16px; padding: 48px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
-        h1 { font-size: 28px; margin-bottom: 24px; color: #3B82F6; border-bottom: 2px solid #E5E7EB; padding-bottom: 12px; }
-        h2 { font-size: 20px; margin: 32px 0 12px; color: #111827; }
-        p { margin-bottom: 14px; color: #6B7280; font-size: 15px; }
-        ul { margin: 12px 0 14px 24px; color: #6B7280; }
-        li { margin-bottom: 8px; font-size: 15px; }
-        .back { display: inline-block; margin-bottom: 20px; color: #3B82F6; text-decoration: none; font-size: 14px; }
-        .back:hover { text-decoration: underline; }
-        .last-updated { margin-top: 32px; padding-top: 16px; border-top: 1px solid #E5E7EB; font-size: 13px; color: #9CA3AF; }
-        @media (max-width: 600px) {
-            body { padding: 16px; }
-            .container { padding: 24px 20px; }
-            h1 { font-size: 22px; }
-            h2 { font-size: 17px; }
-        }
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>隐私政策 - 资料栈</title>
+<link rel="icon" href="/favicon.ico">
+<style>
+<!--# include file="/inc/common.css" -->
+
+.content { max-width: 800px; margin: 0 auto; padding: 48px 24px 60px; }
+.content h1 { font-size: 28px; font-weight: 800; margin-bottom: 24px; color: #3B82F6; border-bottom: 2px solid rgba(255,255,255,.08); padding-bottom: 12px; }
+.theme-light .content h1 { border-bottom-color: #E5E7EB; }
+.content h2 { font-size: 20px; font-weight: 700; margin: 32px 0 12px; color: #F5F6F7; }
+.theme-light .content h2 { color: #111827; }
+.content p { margin-bottom: 14px; color: #94A3B8; font-size: 15px; line-height: 1.7; }
+.theme-light .content p { color: #374151; }
+.content ul { margin: 12px 0 14px 24px; color: #94A3B8; }
+.theme-light .content ul { color: #374151; }
+.content li { margin-bottom: 8px; font-size: 15px; }
+.theme-light .content li { color: #374151; }
+.last-updated { margin-top: 32px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.06); font-size: 13px; color: #9CA3AF; }
+.theme-light .last-updated { color: #6B7280; border-top-color: #D1D5DB; }
+@media(max-width:600px){.content{padding:32px 20px 48px}.content h1{font-size:22px}.content h2{font-size:17px}}
+</style>
 </head>
 <body>
-    <a class="back" href="/">← 返回首页</span>
-    <div class="container">
-        <h1>隐私政策</h1>
-        <p><strong>最后更新日期：2026年6月3日</strong></p>
-        
-        <h2>一、信息收集</h2>
-        <p>资料栈（以下简称"我们"）重视用户隐私保护。我们的隐私政策说明了当您使用本平台时，我们如何收集、使用和保护您的信息。</p>
-        <ul>
-            <li>我们<strong>不主动收集</strong>任何个人身份信息（姓名、邮箱、电话等）</li>
-            <li>服务器自动记录访问日志（IP地址、访问时间、浏览器类型），仅用于安全监控和统计分析</li>
-            <li>上传的文件内容仅供分享用途，不会被用于其他目的</li>
-        </ul>
 
-        <h2>二、信息使用</h2>
-        <ul>
-            <li>访问日志仅用于：保障平台安全、排查技术故障、优化用户体验</li>
-            <li>文件存储于阿里云ECS服务器，位于中国境内</li>
-            <li>我们不会将您的数据出售、出租或共享给任何第三方</li>
-        </ul>
+<div class="content">
+<h1>隐私政策</h1>
+<p><strong>最后更新日期：2026年6月3日</strong></p>
 
-        <h2>三、信息安全</h2>
-        <ul>
-            <li>采用HTTPS加密传输，保护数据传输安全</li>
-            <li>服务器定期进行安全更新和漏洞修复</li>
-            <li>采取合理措施防止数据泄露、丢失或滥用</li>
-        </ul>
+<h2>一、信息收集</h2>
+<p>资料栈（以下简称"我们"）重视用户隐私保护。我们的隐私政策说明了当您使用本平台时，我们如何收集、使用和保护您的信息。</p>
+<ul>
+<li>我们<strong>不主动收集</strong>任何个人身份信息（姓名、邮箱、电话等）</li>
+<li>服务器自动记录访问日志（IP地址、访问时间、浏览器类型），仅用于安全监控和统计分析</li>
+<li>上传的文件内容仅供分享用途，不会被用于其他目的</li>
+</ul>
 
-        <h2>四、Cookie 使用</h2>
-        <p>本网站使用浏览器本地存储（localStorage）保存用户的主题偏好（亮色/暗色模式），不使用追踪型 Cookie。</p>
+<h2>二、信息使用</h2>
+<ul>
+<li>访问日志仅用于：保障平台安全、排查技术故障、优化用户体验</li>
+<li>文件存储于阿里云ECS服务器，位于中国境内</li>
+<li>我们不会将您的数据出售、出租或共享给任何第三方</li>
+</ul>
 
-        <h2>五、用户权利</h2>
-        <ul>
-            <li>您可以随时删除自己上传的文件</li>
-            <li>如对隐私政策有疑问，可通过页脚联系方式与我们联系</li>
-            <li>您有权要求我们删除与您相关的访问记录</li>
-        </ul>
+<h2>三、信息安全</h2>
+<ul>
+<li>采用HTTPS加密传输，保护数据传输安全</li>
+<li>服务器定期进行安全更新和漏洞修复</li>
+<li>采取合理措施防止数据泄露、丢失或滥用</li>
+</ul>
 
-        <h2>六、政策更新</h2>
-        <p>我们可能会不时更新本隐私政策。重大变更时，我们会通过网站公告方式通知您。建议您定期查阅本页面以了解最新信息。</p>
+<h2>四、Cookie 使用</h2>
+<p>本网站使用浏览器本地存储（localStorage）保存用户的主题偏好（亮色/暗色模式），不使用追踪型 Cookie。</p>
 
-        <div class="last-updated">本政策自2026年6月3日起生效 · 资料栈团队</div>
-    </div>
+<h2>五、用户权利</h2>
+<ul>
+<li>您可以随时删除自己上传的文件</li>
+<li>如对隐私政策有疑问，可通过页脚联系方式与我们联系</li>
+<li>您有权要求我们删除与您相关的访问记录</li>
+</ul>
+
+<h2>六、政策更新</h2>
+<p>我们可能会不时更新本隐私政策。重大变更时，我们会通过网站公告方式通知您。建议您定期查阅本页面以了解最新信息。</p>
+
+<div class="last-updated">本政策自2026年6月3日起生效 · 资料栈团队</div>
+</div>
+
+<script><!--# include file="/inc/theme.js" --></script>
 </body>
 </html>

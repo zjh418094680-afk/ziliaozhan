@@ -1,85 +1,68 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="theme-dark">
+<html lang="zh-CN" class="<!--# if expr='$cookie_theme = light' -->theme-light<!--# else -->theme-dark<!--# endif -->">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>关于我们 - 资料栈</title>
 <link rel="icon" href="/favicon.ico">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;background:#0F172A;color:#F1F5F9;line-height:1.8;transition:background .35s,color .35s}
-.theme-light body{background:#F9FAFB;color:#111827}
-.navbar{background:rgba(15,23,42,.92);border-bottom:1px solid #334155;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
-.theme-light .navbar{background:rgba(255,255,255,.92);border-bottom:1px solid #E5E7EB}
-.navbar-inner{max-width:800px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:20px;font-weight:700;color:#3B82F6;text-decoration:none;display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#3B82F6,#60A5FA);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px}
-.back-link{color:#94A3B8;text-decoration:none;font-size:14px;display:flex;align-items:center;gap:4px}
-.theme-light .back-link{color:#6B7280}
-.back-link:hover{color:#3B82F6}
-.main{max-width:800px;margin:0 auto;padding:40px 24px 60px}
-h1{font-size:28px;font-weight:800;margin-bottom:24px}
-h2{font-size:20px;font-weight:700;margin:36px 0 16px}
-p{margin-bottom:16px;color:#94A3B8;font-size:15px}
-.theme-light p{color:#6B7280}
-p:last-child{margin-bottom:0}
-.hero-card{background:linear-gradient(135deg,#3B82F6,#60A5FA);border-radius:20px;padding:40px 32px;color:#fff;margin-bottom:40px;text-align:center}
-.hero-card h2{color:#fff;margin:0 0 12px;font-size:24px}
-.hero-card p{color:rgba(255,255,255,.9);margin:0;font-size:15px}
-.info-card{background:#1E293B;border-radius:16px;padding:28px 24px;border:1.5px solid #334155;margin-bottom:24px}
-.theme-light .info-card{background:#fff;border-color:#E5E7EB}
-.info-card h3{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.info-card p{margin-bottom:0}
-.contact-list{list-style:none;padding:0}
-.contact-list li{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #334155}
-.theme-light .contact-list li{border-bottom:1px solid #E5E7EB}
-.contact-list li:last-child{border-bottom:none}
-.contact-list a{color:#3B82F6;text-decoration:none}
-.contact-list a:hover{text-decoration:underline}
+<!--# include file="/inc/common.css" -->
+
+.main { max-width: 800px; margin: 0 auto; padding: 40px 24px 60px; }
+h1 { font-size: 28px; font-weight: 800; margin-bottom: 24px; color: #F5F6F7; }
+.theme-light h1 { color: #0A0F1A; }
+h2 { font-size: 20px; font-weight: 700; margin: 36px 0 16px; color: #F5F6F7; }
+.theme-light h2 { color: #111827; }
+p { margin-bottom: 16px; color: #94A3B8; font-size: 15px; line-height: 1.8; }
+.theme-light p { color: #6B7280; }
+.hero-card { background: linear-gradient(135deg,#3B82F6,#60A5FA); border-radius: 20px; padding: 40px 32px; color: #fff; margin-bottom: 40px; text-align: center; }
+.hero-card h2 { color: #fff; margin: 0 0 12px; font-size: 24px; }
+.hero-card p { color: rgba(255,255,255,.9); margin: 0; font-size: 15px; }
+.info-card { background: rgba(255,255,255,.015); border: 1px solid rgba(255,255,255,.05); border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; }
+.theme-light .info-card { background: #fff; border-color: #E5E7EB; box-shadow: 0 2px 8px rgba(0,0,0,.02); }
+.info-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; color: #F5F6F7; }
+.theme-light .info-card h3 { color: #0A0F1A; }
+.info-card p { margin-bottom: 0; }
+.contact-list { list-style: none; padding: 0; }
+.contact-list li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04); font-size: 15px; color: #C8CDD6; }
+.theme-light .contact-list li { border-bottom-color: #E5E7EB; color: #2D2A26; }
+.contact-list li:last-child { border-bottom: none; }
 @media(max-width:768px){.main{padding:24px 16px 40px}h1{font-size:24px}.hero-card{padding:28px 20px}}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
+</style>
 </head>
 <body>
-<script>
-(function(){
-function getCookie(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n.replace(/([.$?*|{}()\\[\\]\\\\\\/\\+^])/g,'\\\\$1')+'=([^;]*)'));return m?decodeURIComponent(m[1]):'';}
-function getTheme(){try{var t=localStorage.getItem('theme');if(t)return t;}catch(e){}return getCookie('theme')||'dark';}
-var h=document.documentElement;var s=getTheme();h.className=(s==='light')?'theme-light':'theme-dark';
-})();
-</script>
-<nav class="navbar"><div class="navbar-inner">
-    <a class="logo" href="/"><div class="logo-icon">📚</div>资料栈</span>
-    <a class="back-link" href="/">← 返回首页</span>
-</div></nav>
 
 <section class="main">
-    <div class="hero-card">
-        <h2>📚 资料栈</h2>
-        <p>安全 · 高效 · 便捷的资料分享平台</p>
-    </div>
-    
-    <h1>关于我们</h1>
-    <p>资料栈是一个专注于资料整理与分享的平台，致力于为用户提供安全、高效、便捷的文件获取体验。我们相信优质的信息应该被更好地组织和传播。</p>
-    
-    <h2>🎯 我们的使命</h2>
-    <p>打破信息壁垒，让有价值的资料触手可及。无论是学习提升、工作参考，还是兴趣探索，我们都希望成为你获取资源的第一站。</p>
-    
-    <h2>💡 平台特色</h2>
-    <div class="info-card"><h3>🗂️ 分类清晰</h3><p>7 大类别覆盖学习、工作、娱乐、工具等多个领域，快速定位所需资料。</p></div>
-    <div class="info-card"><h3>⚡ 访问便捷</h3><p>无需注册，打开即用。支持全站搜索、在线预览、一键下载。</p></div>
-    <div class="info-card"><h3>🔒 安全可靠</h3><p>所有文件均经过筛选，托管于稳定服务器，确保下载安全、速度稳定。</p></div>
-    
-    <h2>📮 联系我们</h2>
-    <div class="info-card">
-        <ul class="contact-list">
-            <li>📧 邮箱：<span>联系站内管理员</span></li>
-            <li>💬 微信：扫码添加（首页页脚二维码）</li>
-            <li>⏰ 响应时间：通常 24 小时内回复</li>
-        </ul>
-    </div>
-    
-    <h2>🤝 合作与反馈</h2>
-    <p>如果您有优质资源想要分享，或发现平台有任何问题，欢迎随时联系我们。我们期待与您一起，让资料栈变得更好。</p>
-    <p style="margin-top:40px;text-align:center;font-size:13px">© 2026 资料栈 · 用心整理每一份资料</p>
+<div class="hero-card">
+<h2>📚 资料栈</h2>
+<p>安全 · 高效 · 便捷的资料分享平台</p>
+</div>
+
+<h1>关于我们</h1>
+<p>资料栈是一个专注于资料整理与分享的平台，致力于为用户提供安全、高效、便捷的文件获取体验。我们相信优质的信息应该被更好地组织和传播。</p>
+
+<h2>🎯 我们的使命</h2>
+<p>打破信息壁垒，让有价值的资料触手可及。无论是学习提升、工作参考，还是兴趣探索，我们都希望成为你获取资源的第一站。</p>
+
+<h2>💡 平台特色</h2>
+<div class="info-card"><h3>🗂️ 分类清晰</h3><p>7 大类别覆盖学习、工作、娱乐、工具等多个领域，快速定位所需资料。</p></div>
+<div class="info-card"><h3>⚡ 访问便捷</h3><p>无需注册，打开即用。支持全站搜索、在线预览、一键下载。</p></div>
+<div class="info-card"><h3>🔒 安全可靠</h3><p>所有文件均经过筛选，托管于稳定服务器，确保下载安全、速度稳定。</p></div>
+
+<h2>📮 联系我们</h2>
+<div class="info-card">
+<ul class="contact-list">
+<li>📧 邮箱：联系站内管理员</li>
+<li>💬 微信：扫码添加（首页页脚二维码）</li>
+<li>⏰ 响应时间：通常 24 小时内回复</li>
+</ul>
+</div>
+
+<h2>🤝 合作与反馈</h2>
+<p>如果您有优质资源想要分享，或发现平台有任何问题，欢迎随时联系我们。我们期待与您一起，让资料栈变得更好。</p>
+<p style="margin-top:40px;text-align:center;font-size:13px;color:#5E636B">© 2026 资料栈 · 用心整理每一份资料</p>
 </section>
-</body></html>
+
+<script><!--# include file="/inc/theme.js" --></script>
+</body>
+</html>

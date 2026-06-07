@@ -1,72 +1,73 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="<!--# if expr='$cookie_theme = light' -->theme-light<!--# else -->theme-dark<!--# endif -->">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服务条款 - 资料栈</title>
-    <style>
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #F9FAFB; color: #111827; line-height: 1.7; padding: 40px 20px; }
-        .container { max-width: 800px; margin: 0 auto; background: #FFFFFF; border-radius: 16px; padding: 48px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
-        h1 { font-size: 28px; margin-bottom: 24px; color: #3B82F6; border-bottom: 2px solid #E5E7EB; padding-bottom: 12px; }
-        h2 { font-size: 20px; margin: 32px 0 12px; color: #111827; }
-        p { margin-bottom: 14px; color: #6B7280; font-size: 15px; }
-        ul { margin: 12px 0 14px 24px; color: #6B7280; }
-        li { margin-bottom: 8px; font-size: 15px; }
-        .back { display: inline-block; margin-bottom: 20px; color: #3B82F6; text-decoration: none; font-size: 14px; }
-        .back:hover { text-decoration: underline; }
-        .last-updated { margin-top: 32px; padding-top: 16px; border-top: 1px solid #E5E7EB; font-size: 13px; color: #9CA3AF; }
-        @media (max-width: 600px) {
-            body { padding: 16px; }
-            .container { padding: 24px 20px; }
-            h1 { font-size: 22px; }
-            h2 { font-size: 17px; }
-        }
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>服务条款 - 资料栈</title>
+<link rel="icon" href="/favicon.ico">
+<style>
+<!--# include file="/inc/common.css" -->
+
+.content { max-width: 800px; margin: 0 auto; padding: 48px 24px 60px; }
+.content h1 { font-size: 28px; font-weight: 800; margin-bottom: 24px; color: #3B82F6; border-bottom: 2px solid rgba(255,255,255,.08); padding-bottom: 12px; }
+.theme-light .content h1 { border-bottom-color: #E5E7EB; }
+.content h2 { font-size: 20px; font-weight: 700; margin: 32px 0 12px; color: #F5F6F7; }
+.theme-light .content h2 { color: #111827; }
+.content p { margin-bottom: 14px; color: #94A3B8; font-size: 15px; line-height: 1.7; }
+.theme-light .content p { color: #374151; }
+.content ul { margin: 12px 0 14px 24px; color: #94A3B8; }
+.theme-light .content ul { color: #374151; }
+.content li { margin-bottom: 8px; font-size: 15px; }
+.theme-light .content li { color: #374151; }
+.last-updated { margin-top: 32px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.06); font-size: 13px; color: #9CA3AF; }
+.theme-light .last-updated { color: #6B7280; border-top-color: #D1D5DB; }
+@media(max-width:600px){.content{padding:32px 20px 48px}.content h1{font-size:22px}.content h2{font-size:17px}}
+</style>
 </head>
 <body>
-    <a class="back" href="/">← 返回首页</span>
-    <div class="container">
-        <h1>服务条款</h1>
-        <p><strong>最后更新日期：2026年6月3日</strong></p>
-        
-        <h2>一、服务说明</h2>
-        <p>资料栈（以下简称"本平台"）是一个文件存储与分享服务平台。使用本平台即表示您已阅读、理解并同意遵守以下服务条款。</p>
 
-        <h2>二、用户行为规范</h2>
-        <ul>
-            <li><strong>合法内容</strong>：您仅可上传和使用合法的文件资料，严禁上传包含违法、侵权、色情、暴力、诈骗等违规内容的文件</li>
-            <li><strong>版权尊重</strong>：您应确保上传的文件不侵犯他人的知识产权（著作权、商标权等）</li>
-            <li><strong>禁止滥用</strong>：不得利用本平台进行任何可能损害服务器安全或影响其他用户的行为</li>
-            <li><strong>自行负责</strong>：您对上传、下载和分享的文件内容承担全部法律责任</li>
-        </ul>
+<div class="content">
+<h1>服务条款</h1>
+<p><strong>最后更新日期：2026年6月3日</strong></p>
 
-        <h2>三、平台权利</h2>
-        <ul>
-            <li>本平台保留在不事先通知的情况下，删除任何违规或不适当内容的权利</li>
-            <li>本平台有权根据运营需要，调整服务功能或暂停部分服务</li>
-            <li>对于长期未访问的文件，平台有权进行清理以释放存储空间</li>
-        </ul>
+<h2>一、服务说明</h2>
+<p>资料栈（以下简称"本平台"）是一个文件存储与分享服务平台。使用本平台即表示您已阅读、理解并同意遵守以下服务条款。</p>
 
-        <h2>四、免责声明</h2>
-        <ul>
-            <li>本平台提供的服务按"现状"提供，不作任何明示或暗示的保证</li>
-            <li>对于因使用或无法使用本平台而导致的任何损失，平台不承担责任</li>
-            <li>平台不对用户上传的内容进行预先审查，但发现违规内容后会及时处理</li>
-            <li>因不可抗力（如自然灾害、网络故障等）导致的服务中断，平台不承担赔偿责任</li>
-        </ul>
+<h2>二、用户行为规范</h2>
+<ul>
+<li><strong>合法内容</strong>：您仅可上传和使用合法的文件资料，严禁上传包含违法、侵权、色情、暴力、诈骗等违规内容的文件</li>
+<li><strong>版权尊重</strong>：您应确保上传的文件不侵犯他人的知识产权（著作权、商标权等）</li>
+<li><strong>禁止滥用</strong>：不得利用本平台进行任何可能损害服务器安全或影响其他用户的行为</li>
+<li><strong>自行负责</strong>：您对上传、下载和分享的文件内容承担全部法律责任</li>
+</ul>
 
-        <h2>五、知识产权</h2>
-        <ul>
-            <li>本平台的网站设计、代码、标识等知识产权归资料栈所有</li>
-            <li>用户上传文件的原始知识产权归原权利人所有，本平台仅提供存储和分享服务</li>
-        </ul>
+<h2>三、平台权利</h2>
+<ul>
+<li>本平台保留在不事先通知的情况下，删除任何违规或不适当内容的权利</li>
+<li>本平台有权根据运营需要，调整服务功能或暂停部分服务</li>
+<li>对于长期未访问的文件，平台有权进行清理以释放存储空间</li>
+</ul>
 
-        <h2>六、争议解决</h2>
-        <p>如对本服务条款有任何疑问或争议，建议首先通过页脚联系方式与我们协商解决。协商不成的，双方同意提交至平台所在地有管辖权的人民法院诉讼解决。</p>
+<h2>四、免责声明</h2>
+<ul>
+<li>本平台提供的服务按"现状"提供，不作任何明示或暗示的保证</li>
+<li>对于因使用或无法使用本平台而导致的任何损失，平台不承担责任</li>
+<li>平台不对用户上传的内容进行预先审查，但发现违规内容后会及时处理</li>
+<li>因不可抗力（如自然灾害、网络故障等）导致的服务中断，平台不承担赔偿责任</li>
+</ul>
 
-        <div class="last-updated">本条款自2026年6月3日起生效 · 资料栈团队</div>
-    </div>
+<h2>五、知识产权</h2>
+<ul>
+<li>本平台的网站设计、代码、标识等知识产权归资料栈所有</li>
+<li>用户上传文件的原始知识产权归原权利人所有，本平台仅提供存储和分享服务</li>
+</ul>
+
+<h2>六、争议解决</h2>
+<p>如对本服务条款有任何疑问或争议，建议首先通过页脚联系方式与我们协商解决。协商不成的，双方同意提交至平台所在地有管辖权的人民法院诉讼解决。</p>
+
+<div class="last-updated">本条款自2026年6月3日起生效 · 资料栈团队</div>
+</div>
+
+<script><!--# include file="/inc/theme.js" --></script>
 </body>
 </html>

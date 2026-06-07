@@ -1,199 +1,170 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="<!--# if expr='$cookie_theme = light' -->theme-light<!--# else -->theme-dark<!--# endif -->">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>资料栈 · 资料分享平台</title>
+<title>推广 - 资料栈</title>
+<link rel="icon" href="/favicon.ico">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#334155 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.promo-container{width:100%;max-width:900px;padding:40px;text-align:center;color:#fff}
-.slide{display:none;animation:fadeIn .8s ease}.slide.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.logo-big{font-size:80px;font-weight:800;background:linear-gradient(135deg,#3B82F6,#60A5FA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.tagline{font-size:28px;color:#94A3B8;margin-bottom:40px}
-.features{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin:40px 0}
-.feature-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px 32px;min-width:140px;animation:slideUp .6s ease backwards}
-.feature-item:nth-child(1){animation-delay:.1s}.feature-item:nth-child(2){animation-delay:.2s}.feature-item:nth-child(3){animation-delay:.3s}
-@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.feature-icon{font-size:40px;margin-bottom:12px}.feature-text{font-size:16px;color:#CBD5E1}
-.cats{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:30px 0}
-.cat-item{background:linear-gradient(135deg,rgba(59,130,246,.2),rgba(96,165,250,.1));border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:16px 24px;font-size:18px;animation:popIn .4s ease backwards}
-.cat-item:nth-child(1){animation-delay:.1s}.cat-item:nth-child(2){animation-delay:.15s}.cat-item:nth-child(3){animation-delay:.2s}.cat-item:nth-child(4){animation-delay:.25s}.cat-item:nth-child(5){animation-delay:.3s}.cat-item:nth-child(6){animation-delay:.35s}.cat-item:nth-child(7){animation-delay:.4s}
-@keyframes popIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-.url-display{font-size:24px;color:#3B82F6;font-family:monospace;margin:30px 0;padding:16px 32px;background:rgba(59,130,246,.1);border-radius:8px;display:inline-block}
-.cta-btn{display:inline-block;margin-top:30px;padding:16px 48px;background:linear-gradient(135deg,#3B82F6,#2563EB);color:#fff;font-size:18px;font-weight:600;border-radius:30px;text-decoration:none;transition:all .3s;animation:bounce 2s ease-in-out infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.cta-btn:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(59,130,246,.4)}
-.progress-bar{position:fixed;bottom:0;left:0;height:4px;background:#3B82F6;transition:width .3s}
-.skip-btn{position:fixed;top:20px;right:20px;padding:8px 16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;color:#94A3B8;font-size:14px;cursor:pointer;text-decoration:none}
-.skip-btn:hover{background:rgba(255,255,255,.2);color:#fff}
-.sound-toggle{position:fixed;top:20px;left:20px;padding:8px 16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;color:#94A3B8;font-size:14px;cursor:pointer}
-.sound-toggle:hover{background:rgba(255,255,255,.2);color:#fff}
-.sound-toggle.muted{opacity:.5}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
+<!--# include file="/inc/common.css" -->
+
+.promo-container { width: 100%; max-width: 900px; margin: 0 auto; padding: 40px; text-align: center; color: #fff; }
+.slide { display: none; animation: fadeIn .8s ease; }
+.slide.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.logo-big { font-size: 80px; font-weight: 800; background: linear-gradient(135deg,#3B82F6,#60A5FA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+.tagline { font-size: 28px; color: #94A3B8; margin-bottom: 40px; }
+.features { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 40px 0; }
+.feat { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 24px 32px; min-width: 140px; animation: slideUp .6s ease backwards; }
+.feat:nth-child(1) { animation-delay: .1s; } .feat:nth-child(2) { animation-delay: .2s; } .feat:nth-child(3) { animation-delay: .3s; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.feat-icon { font-size: 40px; margin-bottom: 12px; }
+.feat-text { font-size: 16px; color: #CBD5E1; }
+.cats { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 30px 0; }
+.cat-item { background: linear-gradient(135deg,rgba(59,130,246,.2),rgba(96,165,250,.1)); border: 1px solid rgba(59,130,246,.3); border-radius: 12px; padding: 16px 24px; font-size: 18px; animation: popIn .4s ease backwards; }
+.cat-item:nth-child(1) { animation-delay: .1s; } .cat-item:nth-child(2) { animation-delay: .15s; } .cat-item:nth-child(3) { animation-delay: .2s; } .cat-item:nth-child(4) { animation-delay: .25s; } .cat-item:nth-child(5) { animation-delay: .3s; } .cat-item:nth-child(6) { animation-delay: .35s; } .cat-item:nth-child(7) { animation-delay: .4s; }
+@keyframes popIn { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
+.url-display { font-size: 24px; color: #3B82F6; font-family: monospace; margin: 30px 0; padding: 16px 32px; background: rgba(59,130,246,.1); border-radius: 8px; display: inline-block; }
+.cta-btn { display: inline-block; margin-top: 30px; padding: 16px 48px; background: linear-gradient(135deg,#3B82F6,#2563EB); color: #fff; font-size: 18px; font-weight: 600; border-radius: 30px; text-decoration: none; transition: all .3s; animation: bounce 2s ease-in-out infinite; }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.cta-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(59,130,246,.4); }
+.progress-bar { position: fixed; bottom: 0; left: 0; height: 4px; background: #3B82F6; transition: width .3s; }
+.skip-btn { position: fixed; top: 20px; right: 20px; padding: 8px 16px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 20px; color: #94A3B8; font-size: 14px; cursor: pointer; text-decoration: none; z-index: 101; }
+.skip-btn:hover { background: rgba(255,255,255,.2); color: #fff; }
+.sound-toggle { position: fixed; top: 20px; left: 20px; padding: 8px 16px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 20px; color: #94A3B8; font-size: 14px; cursor: pointer; z-index: 101; }
+.sound-toggle:hover { background: rgba(255,255,255,.2); color: #fff; }
+.sound-toggle.muted { opacity: .5; }
+</style>
 </head>
 <body>
-<button class="sound-toggle" id="soundToggle" onclick="toggleSound()">🔊 声音开启</button>
-    <a href="/" class="skip-btn">跳过 →</span>
-    <div class="progress-bar" id="progress"></div>
-    
-    <div class="promo-container">
-        <!-- Slide 1: Logo -->
-        <div class="slide active" data-duration="2500">
-            <div class="logo-big">📚 资料栈</div>
-            <div class="tagline">找资料，来这里</div>
-        </div>
-        
-        <!-- Slide 2: Features -->
-        <div class="slide" data-duration="3000">
-            <div style="font-size: 32px; margin-bottom: 40px;">✨ 核心功能</div>
-            <div class="features">
-                <div class="feature-item">
-                    <div class="feature-icon">📂</div>
-                    <div class="feature-text">7大分类</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🔍</div>
-                    <div class="feature-text">一键搜索</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">⚡</div>
-                    <div class="feature-text">即点即看</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 3: Categories -->
-        <div class="slide" data-duration="3000">
-            <div style="font-size: 28px; margin-bottom: 30px;">📑 丰富资源分类</div>
-            <div class="cats">
-                <div class="cat-item">📚 学习</div>
-                <div class="cat-item">💼 工作</div>
-                <div class="cat-item">🎬 影视</div>
-                <div class="cat-item">🎮 游戏</div>
-            </div>
-            <div class="cats">
-                <div class="cat-item">💰 赚钱</div>
-                <div class="cat-item">🏛️ 历史</div>
-                <div class="cat-item">🔧 工具</div>
-            </div>
-        </div>
-        
-        <!-- Slide 4: CTA -->
-        <div class="slide" data-duration="4000">
-            <div class="logo-big" style="font-size: 60px;">🚀</div>
-            <div style="font-size: 32px; margin-bottom: 20px;">随时随地，高效获取</div>
-            <div class="url-display">47.94.216.51</div>
-            <a href="/" class="cta-btn">开始探索 →</span>
-        </div>
-    </div>
 
-<!-- Progress bar -->
+<button class="sound-toggle" id="soundToggle">🔊 声音开启</button>
+<a href="/" class="skip-btn">跳过 →</a>
 <div class="progress-bar" id="progress" style="width:0%"></div>
 
+<div class="promo-container">
+<div class="slide active" data-duration="2500">
+<div class="logo-big">📚 资料栈</div>
+<div class="tagline">找资料，来这里</div>
+</div>
+
+<div class="slide" data-duration="3000">
+<div style="font-size:32px;margin-bottom:40px;color:#F5F6F7">✨ 核心功能</div>
+<div class="features">
+<div class="feat"><div class="feat-icon">📂</div><div class="feat-text">7大分类</div></div>
+<div class="feat"><div class="feat-icon">🔍</div><div class="feat-text">一键搜索</div></div>
+<div class="feat"><div class="feat-icon">⚡</div><div class="feat-text">即点即看</div></div>
+</div>
+</div>
+
+<div class="slide" data-duration="3000">
+<div style="font-size:28px;margin-bottom:30px;color:#F5F6F7">📑 丰富资源分类</div>
+<div class="cats">
+<div class="cat-item">📚 学习</div><div class="cat-item">💼 工作</div><div class="cat-item">🎬 影视</div><div class="cat-item">🎮 游戏</div>
+</div>
+<div class="cats">
+<div class="cat-item">💰 赚钱</div><div class="cat-item">🏛️ 历史</div><div class="cat-item">🔧 工具</div>
+</div>
+</div>
+
+<div class="slide" data-duration="4000">
+<div class="logo-big" style="font-size:60px">🚀</div>
+<div style="font-size:32px;margin-bottom:20px;color:#F5F6F7">随时随地，高效获取</div>
+<div class="url-display">47.94.216.51</div>
+<a href="/" class="cta-btn">开始探索 →</a>
+</div>
+</div>
+
 <script>
-// Compatible: zero-const zero-let zero-classList zero-addEventListener
-var slides = document.querySelectorAll('.slide');
-var progress = document.getElementById('progress');
+var slides = document.querySelectorAll(".slide");
+var progress = document.getElementById("progress");
 var current = 0;
 var startTime = (new Date()).getTime();
 var totalDuration = 0;
 for (var i = 0; i < slides.length; i++) {
-    totalDuration += parseInt(slides[i].getAttribute('data-duration')) || 3000;
+totalDuration += parseInt(slides[i].getAttribute("data-duration")) || 3000;
 }
 var soundEnabled = true;
 var audioCtx = null;
 
 function initAudio() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 }
 
 function playTone(freq, duration, type, volume) {
-    if (!soundEnabled || !audioCtx) return;
-    var osc = audioCtx.createOscillator();
-    var gain = audioCtx.createGain();
-    osc.type = type || 'sine';
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    gain.gain.setValueAtTime(volume || 0.3, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + duration);
+if (!soundEnabled || !audioCtx) return;
+var osc = audioCtx.createOscillator();
+var gain = audioCtx.createGain();
+osc.type = type || "sine";
+osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+gain.gain.setValueAtTime(volume || 0.3, audioCtx.currentTime);
+gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+osc.start();
+osc.stop(audioCtx.currentTime + duration);
 }
 
 function playChord(freqs, duration) {
-    if (!soundEnabled || !audioCtx) return;
-    for (var i = 0; i < freqs.length; i++) {
-        (function(f) { setTimeout(function() { playTone(f, duration, 'sine', 0.15); }, i * 50); })(freqs[i]);
-    }
+if (!soundEnabled || !audioCtx) return;
+for (var i = 0; i < freqs.length; i++) {
+(function(f) { setTimeout(function() { playTone(f, duration, "sine", 0.15); }, i * 50); })(freqs[i]);
+}
 }
 
 function playSlideSound(index) {
-    initAudio();
-    var chords = [
-        [523.25, 659.25, 783.99],
-        [440, 554.37, 659.25],
-        [392, 493.88, 587.33],
-        [523.25, 659.25, 783.99, 1046.50]
-    ];
-    if (chords[index]) playChord(chords[index], 1.5);
+initAudio();
+var chords = [[523.25,659.25,783.99],[440,554.37,659.25],[392,493.88,587.33],[523.25,659.25,783.99,1046.50]];
+if (chords[index]) playChord(chords[index], 1.5);
 }
 
-function playClickSound() { initAudio(); playTone(800, 0.1, 'square', 0.1); }
+function playClickSound() { initAudio(); playTone(800, 0.1, "square", 0.1); }
 
 function toggleSound() {
-    soundEnabled = !soundEnabled;
-    var btn = document.getElementById('soundToggle');
-    btn.textContent = soundEnabled ? '🔊 声音开启' : '🔇 声音关闭';
-    btn.className = soundEnabled ? 'sound-toggle' : 'sound-toggle muted';
-    if (soundEnabled) initAudio();
+soundEnabled = !soundEnabled;
+var btn = document.getElementById("soundToggle");
+btn.textContent = soundEnabled ? "🔊 声音开启" : "🔇 声音关闭";
+btn.className = soundEnabled ? "sound-toggle" : "sound-toggle muted";
+if (soundEnabled) initAudio();
 }
 
 function showSlide(index) {
-    for (var i = 0; i < slides.length; i++) slides[i].className = 'slide';
-    slides[index].className = 'slide active';
-    playSlideSound(index);
+for (var i = 0; i < slides.length; i++) slides[i].className = "slide";
+slides[index].className = "slide active";
+playSlideSound(index);
 }
 
 function nextSlide() {
-    current++;
-    if (current >= slides.length) {
-        playTone(523.25, 0.5, 'sine', 0.4);
-        setTimeout(function() { window.location.href = '/'; }, 500);
-        return;
-    }
-    showSlide(current);
-    setTimeout(nextSlide, parseInt(slides[current].getAttribute('data-duration')) || 3000);
+current++;
+if (current >= slides.length) {
+playTone(523.25, 0.5, "sine", 0.4);
+setTimeout(function() { window.location.href = "/"; }, 500);
+return;
+}
+showSlide(current);
+setTimeout(nextSlide, parseInt(slides[current].getAttribute("data-duration")) || 3000);
 }
 
-// Progress bar
 setInterval(function() {
-    var elapsed = (new Date()).getTime() - startTime;
-    var pct = Math.min(100, (elapsed / totalDuration) * 100);
-    progress.style.width = pct + '%';
+var elapsed = (new Date()).getTime() - startTime;
+var pct = Math.min(100, (elapsed / totalDuration) * 100);
+progress.style.width = pct + "%";
 }, 100);
 
-// Click sound on links
-var links = document.querySelectorAll('a, button');
+var links = document.querySelectorAll("a, button");
 for (var j = 0; j < links.length; j++) {
-    links[j].onclick = function() { playClickSound(); };
+links[j].onclick = function() { playClickSound(); };
 }
 
-// Init on first click
 var didInit = false;
-document.onclick = function() {
-    if (!didInit) { initAudio(); didInit = true; }
-};
+document.onclick = function() { if (!didInit) { initAudio(); didInit = true; } };
+document.getElementById("soundToggle").onclick = toggleSound;
 
-// Sound toggle button
-document.getElementById('soundToggle').onclick = toggleSound;
-
-// Start
 setTimeout(function() { playSlideSound(0); }, 300);
-setTimeout(nextSlide, parseInt(slides[0].getAttribute('data-duration')) || 3000);
+setTimeout(nextSlide, parseInt(slides[0].getAttribute("data-duration")) || 3000);
 </script>
+
+<script><!--# include file="/inc/theme.js" --></script>
 </body>
 </html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PayFlow - Financial infrastructure for the internet</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',system-ui,-apple-system,sans-serif;background:#fff;color:#64748d;line-height:1.4;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e5edf5}
+.nav-inner{max-width:1080px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.nav-logo{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:600;color:#061b31}
+.nav-logo-dot{width:24px;height:24px;border-radius:6px;background:#533afd;display:grid;place-items:center}
+.nav-logo-dot span{color:#fff;font-size:14px;font-weight:700}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:14px;color:#061b31}
+.nav-links a:hover{color:#533afd}
+.nav-cta{padding:8px 16px;border-radius:4px;font-size:14px;border:none;cursor:pointer}
+.nav-start{background:#533afd;color:#fff}
+.nav-start:hover{background:#4434d4}
+.hero{padding:clamp(80px,12vw,160px) 24px clamp(60px,8vw,100px);text-align:center;max-width:1080px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;margin-bottom:32px;padding:4px 12px;border-radius:4px;background:rgba(83,58,253,.06);border:1px solid rgba(83,58,253,.15);font-size:13px;color:#533afd}
+.hero h1{font-size:clamp(32px,6vw,56px);font-weight:300;line-height:1.03;letter-spacing:-1.4px;color:#061b31;margin-bottom:24px}
+.hero p{font-size:clamp(16px,2vw,18px);font-weight:300;line-height:1.4;color:#64748d;max-width:540px;margin:0 auto 40px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:8px 16px;border-radius:4px;font-size:16px;font-weight:400;border:none;cursor:pointer;transition:all .25s}
+.btn-primary{background:#533afd;color:#fff}
+.btn-primary:hover{background:#4434d4;transform:translateY(-1px);box-shadow:rgba(50,50,93,.25) 0px 13px 27px -5px,rgba(0,0,0,.1) 0px 8px 16px -8px}
+.btn-ghost{background:transparent;color:#533afd;border:1px solid #b9b9f9}
+.stats{display:flex;justify-content:center;gap:clamp(40px,8vw,80px);padding:0 24px 80px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:32px;font-weight:300;line-height:1.1;letter-spacing:-.64px;color:#061b31}
+.stat-label{font-size:13px;color:#64748d;margin-top:8px}
+.sec{padding:0 24px 80px;max-width:1080px;margin:0 auto}
+.sec-tag{font-size:12px;color:#533afd;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+.sec-title{font-size:clamp(26px,3vw,32px);font-weight:300;line-height:1.1;letter-spacing:-.64px;color:#061b31;margin-bottom:16px}
+.sec-sub{font-size:16px;font-weight:300;line-height:1.4;color:#64748d;margin-bottom:48px;max-width:540px}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.feat-card{padding:32px;border-radius:6px;background:#fff;border:1px solid #e5edf5;transition:all .3s}
+.feat-card:hover{box-shadow:rgba(50,50,93,.25) 0px 30px 45px -30px,rgba(0,0,0,.1) 0px 18px 36px -18px;transform:translateY(-2px)}
+.feat-icon{font-size:28px;margin-bottom:20px}
+.feat-name{font-size:22px;font-weight:300;line-height:1.1;color:#061b31;margin-bottom:12px}
+.feat-desc{font-size:16px;font-weight:300;line-height:1.4;color:#64748d}
+.badge{display:inline-block;padding:1px 6px;border-radius:4px;background:rgba(21,190,83,.2);border:1px solid rgba(21,190,83,.4);font-size:10px;color:#108c3d}
+.dark-sec{background:#1c1e54;padding:80px 24px}
+.dark-sec .sec-inner{max-width:1080px;margin:0 auto}
+.dark-sec .sec-tag{color:rgba(255,255,255,.6)}
+.dark-sec .sec-title{color:#fff}
+.dark-sec .sec-sub{color:rgba(255,255,255,.6)}
+.dark-sec .feat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.dark-sec .feat-name{color:#fff}
+.dark-sec .feat-desc{color:rgba(255,255,255,.6)}
+.code-block{background:#0d253d;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:24px;margin-top:24px;overflow-x:auto;font-family:'Source Code Pro',monospace;font-size:12px;line-height:2;color:#e5edf5}
+.footer{border-top:1px solid #e5edf5;padding:48px 24px 32px;color:#64748d;font-size:13px}
+.footer-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px}
+.footer-col h4{font-size:12px;color:#273951;margin-bottom:16px;text-transform:uppercase}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px;font-size:13px}
+.footer-col a:hover{color:#533afd}
+.footer-bottom{max-width:1080px;margin:0 auto;padding-top:24px;border-top:1px solid #e5edf5;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:11px}
+@media(max-width:768px){.nav-links{display:none}.feat-grid{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:480px){.nav-inner{padding:0 16px}.hero h1{font-size:30px}.stats{gap:28px}.footer-inner{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="/" class="nav-logo"><span class="nav-logo-dot"><span>P</span></span>PayFlow</a><div class="nav-links"><a href="#">Products</a><a href="#">Solutions</a><a href="#">Developers</a><a href="#">Pricing</a></div><div><a href="#" class="nav-cta nav-start">Start now</a></div></div></nav>
+<section class="hero"><div class="hero-badge"><span style="width:6px;height:6px;border-radius:50%;background:#15be53;display:inline-block"></span>New: Real-time payment analytics</div><h1>Financial infrastructure for the internet</h1><p>PayFlow powers payments for millions of businesses worldwide.</p><div class="hero-actions"><button class="btn btn-primary">Start now</button><button class="btn btn-ghost">Contact sales</button></div></section>
+<section class="stats"><div class="stat"><div class="stat-num">250M+</div><div class="stat-label">API requests/day</div></div><div class="stat"><div class="stat-num">99.99%</div><div class="stat-label">Uptime</div></div><div class="stat"><div class="stat-num">135+</div><div class="stat-label">Currencies</div></div><div class="stat"><div class="stat-num">47</div><div class="stat-label">Countries</div></div></section>
+<section class="sec"><div class="sec-tag">Products</div><div class="sec-title">Everything you need</div><div class="sec-sub">A complete suite of payment tools.</div><div class="feat-grid"><div class="feat-card"><span class="feat-icon">P</span><div class="feat-name">Payments <span class="badge">New</span></div><div class="feat-desc">Accept cards, wallets, bank transfers in a single integration.</div></div><div class="feat-card"><span class="feat-icon">L</span><div class="feat-name">Connect</div><div class="feat-desc">Route payments between customers and platforms.</div></div><div class="feat-card"><span class="feat-icon">A</span><div class="feat-name">Analytics</div><div class="feat-desc">Real-time dashboards with revenue recognition.</div></div></div></section>
+<div class="dark-sec"><div class="sec-inner"><div class="sec-tag">Developers</div><div class="sec-title">Built for engineers</div><div class="sec-sub">Clean APIs, comprehensive SDKs.</div><div class="feat-grid"><div class="feat-card"><span class="feat-icon">A</span><div class="feat-name">API-first</div><div class="feat-desc">RESTful endpoints with typed responses.</div></div><div class="feat-card"><span class="feat-icon">S</span><div class="feat-name">8 SDKs</div><div class="feat-desc">Python, Node, Ruby, Go, Java, PHP, .NET, Swift.</div></div><div class="feat-card"><span class="feat-icon">T</span><div class="feat-name">Sandbox</div><div class="feat-desc">Full test environment with no real money.</div></div></div><div class="code-block"><pre>const payflow = require('payflow')('sk_live_...');
+const payment = await payflow.payments.create({
+  amount: 2999,
+  currency: 'usd',
+});
+console.log(payment.status); // 'succeeded'</pre></div></div></div>
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><a href="/" class="nav-logo"><span class="nav-logo-dot"><span>P</span></span>PayFlow</a><p>Financial infrastructure for the internet.</p></div><div class="footer-col"><h4>Products</h4><ul><li><a href="#">Payments</a></li><li><a href="#">Billing</a></li><li><a href="#">Connect</a></li></ul></div><div class="footer-col"><h4>Developers</h4><ul><li><a href="#">API</a></li><li><a href="#">SDKs</a></li><li><a href="#">Docs</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div></div><div class="footer-bottom"><span>2026 PayFlow</span><span><a href="#">Privacy</a> · <a href="#">Terms</a></span></div></footer>
+</body>
+</html>

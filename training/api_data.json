@@ -1,0 +1,12 @@
+{
+  "payments": [
+    {
+      "id": 1,
+      "amount": 2999,
+      "currency": "usd",
+      "status": "created",
+      "description": ""
+    }
+  ],
+  "next_id": 2
+}
