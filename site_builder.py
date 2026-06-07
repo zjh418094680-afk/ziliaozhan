@@ -298,13 +298,13 @@ def _footer(meta):
         '<footer class="footer"><div class="footer-inner">'
         '<div class="footer-brand"><div class="logo"><span class="logo-icon">'
         + LOGO_SVG_SMALL + "</span>" + escape(meta["site_name"])
-        + '</div><p>Security, efficiency, convenience. Gaokao exams are public domain under Copyright Law Article 5.</p></div>'
-        '<div class="footer-col"><h4>Resources</h4><ul><li><a href="/">Home</a></li>'
-        + cat_links + '<li><a href="/about.html">About</a></li></ul></div>'
-        '<div class="footer-col"><h4>Contact</h4><ul>'
+        + '</div><p>安全、高效、便捷。高考试题根据著作权法第五条属于公有领域。</p></div>'
+        '<div class="footer-col"><h4>资源</h4><ul><li><a href="/">首页</a></li>'
+        + cat_links + '<li><a href="/about.html">关于</a></li></ul></div>'
+        '<div class="footer-col"><h4>联系</h4><ul>'
         '<li><a href="mailto:' + escape(meta["contact_email"]) + '" class="footer-email">'
         + escape(meta["contact_email"]) + "</a></li>"
-        '<li><a href="/privacy.html">Privacy</a></li><li><a href="/terms.html">Terms</a></li>'
+        '<li><a href="/privacy.html">隐私政策</a></li><li><a href="/terms.html">服务条款</a></li>'
         '</ul></div></div>'
         '<div class="footer-bottom"><span>&copy; 2026 ' + escape(meta["site_name"]) + "</span></div></footer>"
     )
@@ -312,11 +312,11 @@ def _footer(meta):
 def _page(title, body, meta):
     """Wrap body in full HTML document with CSS, navbar, and footer."""
     return (
-        '<!DOCTYPE html>\n<html lang="zh-CN" class="<!--# if expr=\\"$cookie_theme = light\\" -->theme-light<!--# else -->theme-dark<!--# endif -->">\n'
+        '<!DOCTYPE html>\n<html lang="zh-CN" class="<!--# if expr=\"$cookie_theme = light\" -->theme-light<!--# else -->theme-dark<!--# endif -->">\n'
         '<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n'
         "<title>" + escape(title) + "</title>\n"
         '<link rel="icon" href="/favicon.ico">\n<style>\n' + CSS + "\n</style>\n</head>\n<body>\n"
-        + _navbar() + "\n" + body + "\n" + _footer(meta) + "\n</body>\n</html>"
+        + _navbar() + "\n" + body + "\n" + _footer(meta) + "\n<script>(function(){var h=document.documentElement;var b=document.getElementById(\"themeBtn\");b.onclick=function(){var dark=h.className.indexOf(\"theme-dark\")!==-1;h.className=dark?\"theme-light\":\"theme-dark\";document.cookie=\"theme=\"+(dark?\"light\":\"dark\")+\";path=/;max-age=31536000;SameSite=Lax\";};})();</script>\n</body>\n</html>"
     )
 
 # ── Data Layer ─────────────────────────────────────────
@@ -429,7 +429,7 @@ def build_homepage(meta, grouped):
             '<a href="/cat/' + escape(c["slug"]) + '.html" class="cat-card">'
             '<div class="cat-icon">' + escape(c["icon"]) + '</div>'
             '<div class="cat-info"><div class="cat-name">' + escape(c["name"]) + '</div>'
-            '<div class="cat-count">' + str(cnt) + " files</div></div>"
+            '<div class="cat-count">' + str(cnt) + " 个文件</div></div>"
             '<span class="cat-arrow">\u2192</span></a>'
         )
 
@@ -456,30 +456,30 @@ def build_homepage(meta, grouped):
 
     body = (
         '<section class="hero">'
-        "<h1>Find materials <em>simpler</em></h1>"
-        "<p>Gaokao past papers, study docs, work materials &mdash; clean, fast, direct download.</p>"
+        "<h1>找资料<em>更简单</em></h1>"
+        "<p>高考真题、学习资料、工作文档 &mdash; 清爽、快速、直接下载</p>"
         '<div class="hero-actions">'
-        '<a href="/cat/study.html" class="btn btn-primary">\U0001f4da Browse \u2192</a>'
-        '<a href="/about.html" class="btn btn-ghost">Learn more</a>'
+        '<a href="/cat/study.html" class="btn btn-primary">\U0001f4da 浏览资料 →</a>'
+        '<a href="/about.html" class="btn btn-ghost">了解更多</a>'
         "</div></section>"
         '<section class="stats">'
         '<div class="stat"><div class="stat-num"><span class="stat-num-grad">' + str(total)
-        + '</span></div><div class="stat-label">Total Files</div></div>'
+        + '</span></div><div class="stat-label">文件总数</div></div>'
         '<div class="stat"><div class="stat-num"><span class="stat-num-grad">17</span></div>'
-        '<div class="stat-label">Years</div></div>'
+        '<div class="stat-label">年份</div></div>'
         '<div class="stat"><div class="stat-num"><span class="stat-num-grad">'
-        + str(len(meta["categories"])) + '</span></div><div class="stat-label">Categories</div></div>'
+        + str(len(meta["categories"])) + '</span></div><div class="stat-label">分类</div></div>'
         "</section>"
         '<section class="sec"><div class="sec-inner">'
-        '<div class="sec-tag">Recently Updated</div>'
-        '<div class="sec-title">Latest Files</div>'
-        '<div class="sec-sub">Recently uploaded gaokao past papers.</div>'
+        '<div class="sec-tag">最近更新</div>'
+        '<div class="sec-title">最新文件</div>'
+        '<div class="sec-sub">最近上传的高考真题试卷</div>'
         '<div class="file-grid">' + "".join(recent_rows) + "</div>"
         "</div></section>"
         '<section class="sec"><div class="sec-inner">'
-        '<div class="sec-tag">Browse</div>'
-        '<div class="sec-title">By Category</div>'
-        '<div class="sec-sub">Choose a category to find what you need.</div>'
+        '<div class="sec-tag">浏览</div>'
+        '<div class="sec-title">按分类</div>'
+        '<div class="sec-sub">选择分类快速找到你需要的资料</div>'
         '<div class="cat-grid">' + "".join(cards) + "</div>"
         "</div></section>"
     )
@@ -506,7 +506,7 @@ def build_category_page(meta, cat, grouped):
                 '<a href="/' + escape(cat["slug"]) + "/" + escape(sp["slug"]) + '/" class="sub-card">'
                 '<div class="sub-icon">' + escape(sp["icon"]) + '</div>'
                 '<div class="sub-name">' + escape(sp["name"]) + '</div>'
-                '<div class="sub-desc">' + escape(sp["description"]) + " \u00b7 " + str(cnt) + " files</div></a>"
+                '<div class="sub-desc">' + escape(sp["description"]) + " \u00b7 " + str(cnt) + " 个文件</div></a>"
             )
         sub_cards = '<div class="sub-grid">' + "".join(sc) + "</div>"
 
@@ -520,11 +520,11 @@ def build_category_page(meta, cat, grouped):
             '<div class="fitem-date">' + escape(item.get("modified", "")[:10]) + '</div>'
             '<div class="fitem-size">' + fmt_size(item["size"]) + "</div></div>"
         )
-    file_html = "".join(rows) if rows else '<div class="fitem-empty">No files yet</div>'
+    file_html = "".join(rows) if rows else '<div class="fitem-empty">暂无文件</div>'
 
     body = (
         '<section class="page-hero"><div class="wrap">'
-        '<div class="breadcrumbs"><a href="/">Home</a><span>\u203a</span>'
+        '<div class="breadcrumbs"><a href="/">首页</a><span>\u203a</span>'
         "<span>" + escape(cat["name"]) + "</span></div>"
         '<h1 class="page-title">' + escape(cat["icon"]) + " " + escape(cat["name"]) + "</h1>"
         '<div class="page-desc">' + escape(cat["description"]) + "</div>"
@@ -550,7 +550,7 @@ def build_subpage(meta, cat, sp, sp_items):
 
     body = (
         '<section class="page-hero"><div class="wrap">'
-        '<div class="breadcrumbs"><a href="/">Home</a><span>\u203a</span>'
+        '<div class="breadcrumbs"><a href="/">首页</a><span>\u203a</span>'
         '<a href="/cat/' + escape(cat["slug"]) + '.html">' + escape(cat["name"]) + '</a>'
         "<span>\u203a</span><span>" + escape(sp["name"]) + "</span></div>"
         '<h1 class="page-title">' + escape(sp["icon"]) + " " + escape(sp["name"]) + "</h1>"
@@ -558,7 +558,7 @@ def build_subpage(meta, cat, sp, sp_items):
         '<div class="chip-nav"><a class="chip" href="/cat/' + escape(cat["slug"])
         + '.html">\u2190 Back</a></div></div></section>'
         '<section class="sec"><div class="sec-inner">'
-        '<div class="toolbar"><input type="text" class="search-input" id="s" placeholder="Search files..."></div>'
+        '<div class="toolbar"><input type="text" class="search-input" id="s" placeholder="搜索文件..."></div>'
         '<div class="file-panel" id="p"></div>'
         '<div class="pg-bar">'
         '<select class="pg-size-select" id="z">'
@@ -578,10 +578,10 @@ def build_subpage(meta, cat, sp, sp_items):
         + "+e(x.n)+'</a></div><div class=\"fitem-date\">'+x.d+'</div>"
         + '<div class=\"fitem-size\">\'+x.s+\'</div></div>\'}'
         + "function r(d){var x=(c-1)*s,y=Math.min(x+s,d.length),o='';"
-        + "for(var i=x;i<y;i++)o+=h(d[i]);if(!d.length)o='<div class=\"fitem-empty\">No matching files</div>';"
+        + "for(var i=x;i<y;i++)o+=h(d[i]);if(!d.length)o='<div class=\"fitem-empty\">没有匹配的文件</div>';"
         + "p.innerHTML=o}"
         + "function v(tp){var tp2=Math.ceil(tp/s);if(tp2<=1){g.innerHTML='';"
-        + 't.innerHTML="Total: "+tp+" files";return}c=Math.min(c,tp2);'
+        + 't.innerHTML="共 "+tp+" 个文件";return}c=Math.min(c,tp2);'
         + 't.innerHTML="Total: "+tp+" files \\u00b7 Page "+c+"/"+tp2;'
         + "var o='';if(c>1)o+='<span class=\"pg-btn\" id=\"pv\">\\u2039</span>';"
         + "else o+='<span class=\"pg-btn disabled\">\\u2039</span>';var ps=[];"
