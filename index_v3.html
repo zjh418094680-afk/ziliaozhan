@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="theme-dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>资料栈 · 资料分享平台</title>
+<link rel="icon" href="/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;background:#08090A;color:#D0D6E0;line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.theme-light body{background:#FAFBFC;color:#31302E}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(59,130,246,.3);color:#FFF}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.2)}
+
+/* BG */
+.bg-layer{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px 256px}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(200px);opacity:.04}
+.bg-orb-1{width:600px;height:600px;background:#3B82F6;top:-200px;right:-100px}
+.bg-orb-2{width:500px;height:500px;background:#8B5CF6;bottom:-150px;left:-150px;opacity:.03}
+.bg-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:40px 40px}
+.theme-light .bg-dots{background-image:radial-gradient(rgba(0,0,0,.04) 1px,transparent 1px)}
+.theme-light .bg-noise{opacity:.5}
+.theme-light .bg-orb{opacity:.02}
+
+/* NAV */
+.navbar{position:sticky;top:0;z-index:100;background:rgba(8,9,10,.78);border-bottom:1px solid rgba(255,255,255,.06);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);transition:border-color .3s}
+.navbar.scrolled{border-bottom-color:rgba(255,255,255,.12)}
+.theme-light .navbar{background:rgba(250,251,252,.78);border-color:rgba(0,0,0,.06)}
+.theme-light .navbar.scrolled{border-color:rgba(0,0,0,.12)}
+.navbar-inner{width:min(1200px,calc(100vw - 48px));margin:0 auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:#F7F8F8;letter-spacing:-.3px}
+.theme-light .logo{color:#0F172A}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3B82F6,#818CF8);display:grid;place-items:center;box-shadow:0 6px 20px rgba(59,130,246,.25)}
+.logo-icon svg{width:22px;height:22px}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:#8A8F98}
+.nav-links a{transition:color .2s;letter-spacing:-.1px}
+.nav-links a:hover{color:#D0D6E0}
+.theme-light .nav-links{color:#78716C}
+.theme-light .nav-links a:hover{color:#0F172A}
+.theme-toggle{width:44px;height:26px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);position:relative;flex-shrink:0;overflow:hidden}
+.theme-light .theme-toggle{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.1)}
+.theme-toggle-inner{position:absolute;inset:0;display:flex;align-items:center;z-index:2}
+.toggle-light{position:absolute;left:7px;font-size:12px;display:none}
+.toggle-dark{position:absolute;right:7px;font-size:12px;display:none}
+.theme-dark .toggle-light{display:block}
+.theme-light .toggle-dark{display:block}
+.toggle-knob{position:absolute;top:3px;left:3px;z-index:1;width:20px;height:20px;border-radius:50%;background:#3B82F6;box-shadow:0 2px 8px rgba(59,130,246,.4);transition:left .28s cubic-bezier(.4,0,.2,1)}
+.theme-light .toggle-knob{left:21px;background:#F59E0B;box-shadow:0 2px 8px rgba(245,158,11,.4)}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:clamp(80px,10vw,140px) 24px clamp(60px,8vw,100px);text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:999px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.18);color:#60A5FA;font-size:13px;font-weight:500;margin-bottom:36px;letter-spacing:.2px}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:#3B82F6;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(59,130,246,.4)}50%{opacity:.6;box-shadow:0 0 0 8px rgba(59,130,246,0)}}
+.hero h1{font-size:clamp(42px,7vw,72px);line-height:1.05;font-weight:800;letter-spacing:-1.6px;color:#F7F8F8;margin-bottom:20px}
+.theme-light .hero h1{color:#0F172A}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#3B82F6 20%,#8B5CF6 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(16px,2vw,19px);color:#8A8F98;font-weight:400;line-height:1.7;max-width:540px;margin:0 auto 44px}
+.theme-light .hero p{color:#615D59}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:8px;font-size:15px;font-weight:600;border:none;letter-spacing:-.1px;transition:all .25s;cursor:pointer}
+.btn-primary{background:#3B82F6;color:#FFF;box-shadow:0 4px 20px rgba(59,130,246,.32),0 0 0 1px rgba(59,130,246,.2),0 0 60px rgba(59,130,246,.08)}
+.btn-primary:hover{background:#2563EB;box-shadow:0 8px 30px rgba(59,130,246,.4),0 0 80px rgba(59,130,246,.12);transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.03);color:#D0D6E0;border:1px solid rgba(255,255,255,.08)}
+.btn-ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
+.theme-light .btn-ghost{background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.08);color:#31302E}
+.theme-light .btn-ghost:hover{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.14)}
+
+/* STATS */
+.stats-bar{position:relative;z-index:1;display:flex;justify-content:center;gap:clamp(32px,8vw,64px);padding:0 24px 80px;flex-wrap:wrap}
+.stat-item{text-align:center}
+.stat-num{font-size:clamp(32px,5vw,42px);font-weight:800;color:#F7F8F8;letter-spacing:-.8px;line-height:1.1;font-variant-numeric:tabular-nums}
+.theme-light .stat-num{color:#0F172A}
+.stat-num-grad{background:linear-gradient(135deg,#3B82F6,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:13px;color:#62666D;font-weight:500;margin-top:8px;letter-spacing:.3px;text-transform:uppercase}
+
+/* SECTIONS */
+.section-pad{padding:0 24px 100px;position:relative;z-index:1}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{font-size:12px;font-weight:600;color:#3B82F6;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.section-title{font-size:clamp(26px,3vw,36px);font-weight:700;color:#F7F8F8;letter-spacing:-.4px;margin-bottom:12px}
+.theme-light .section-title{color:#0F172A}
+.section-sub{font-size:15px;color:#62666D;margin-bottom:40px;line-height:1.7;max-width:500px}
+
+/* RECENT FILES */
+.recent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.file-card{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:10px;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);transition:all .25s}
+.file-card:hover{background:rgba(255,255,255,.03);border-color:rgba(59,130,246,.25);box-shadow:0 8px 30px rgba(0,0,0,.3),0 0 0 1px rgba(59,130,246,.08);transform:translateY(-2px)}
+.theme-light .file-card{background:#FFF;border-color:rgba(0,0,0,.05);box-shadow:rgba(0,0,0,.02) 0px 2px 12px}
+.theme-light .file-card:hover{box-shadow:rgba(0,0,0,.06) 0px 8px 28px;border-color:rgba(59,130,246,.2)}
+.file-icon{width:40px;height:40px;border-radius:8px;flex-shrink:0;background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(239,68,68,.05));border:1px solid rgba(239,68,68,.15);display:grid;place-items:center;font-size:12px;font-weight:700;color:#EF4444}
+.file-info{min-width:0}
+.file-name{font-size:13px;font-weight:500;color:#D0D6E0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.theme-light .file-name{color:#1F2937}
+.file-meta{font-size:11px;color:#62666D;font-weight:400}
+
+/* CATEGORIES */
+.cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:20px}
+.cat-card{position:relative;display:flex;align-items:center;gap:18px;padding:22px 28px;border-radius:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);transition:all .3s;overflow:hidden}
+.cat-card::after{content:'';position:absolute;inset:0;border-radius:14px;background:radial-gradient(700px circle at var(--mx,50%) var(--my,50%),rgba(59,130,246,.07),transparent 40%);opacity:0;transition:opacity .4s}
+.cat-card:hover{background:rgba(255,255,255,.04);border-color:rgba(59,130,246,.2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 0 1px rgba(59,130,246,.06)}
+.cat-card:hover::after{opacity:1}
+.theme-light .cat-card{background:#FFF;border-color:rgba(0,0,0,.05);box-shadow:rgba(0,0,0,.015) 0px 4px 16px}
+.theme-light .cat-card:hover{box-shadow:rgba(0,0,0,.05) 0px 12px 36px;border-color:rgba(59,130,246,.25)}
+.cat-icon{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;font-size:28px;flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+.theme-light .cat-icon{background:#F1F5F9;border-color:rgba(0,0,0,.05)}
+.cat-info{min-width:0;flex:1}
+.cat-name{font-size:17px;font-weight:600;color:#F7F8F8;margin-bottom:4px;letter-spacing:-.1px}
+.theme-light .cat-name{color:#0F172A}
+.cat-count{font-size:13px;color:#62666D;font-weight:500}
+.cat-arrow{color:#4B5563;font-size:20px;flex-shrink:0;transition:all .3s;opacity:.5}
+.cat-card:hover .cat-arrow{transform:translateX(4px);color:#3B82F6;opacity:1}
+.empty-cats{display:flex;flex-wrap:wrap;gap:8px}
+.empty-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);font-size:12px;color:#4B5563;font-weight:500;transition:all .2s}
+.empty-pill:hover{background:rgba(255,255,255,.04);color:#8A8F98}
+.theme-light .empty-pill{background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.04);color:#9CA3AF}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.feat-card{padding:28px 28px 24px;border-radius:14px;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);transition:all .3s}
+.feat-card:hover{border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.025)}
+.theme-light .feat-card{background:#FFF;border-color:rgba(0,0,0,.04);box-shadow:rgba(0,0,0,.01) 0px 2px 10px}
+.feat-icon{font-size:28px;margin-bottom:16px;display:block}
+.feat-name{font-size:15px;font-weight:600;color:#F7F8F8;margin-bottom:6px;letter-spacing:-.1px}
+.theme-light .feat-name{color:#0F172A}
+.feat-desc{font-size:13px;color:#62666D;line-height:1.6}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;padding:64px 24px 36px;border-top:1px solid rgba(255,255,255,.05);color:#62666D;font-size:13px}
+.theme-light .footer{border-color:rgba(0,0,0,.05);color:#615D59}
+.footer-grid{max-width:1100px;margin:0 auto 32px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+.footer-brand .logo{font-size:18px;margin-bottom:12px}
+.footer-brand p{font-size:13px;color:#62666D;line-height:1.7;max-width:320px}
+.theme-light .footer-brand p{color:#78716C}
+.footer-col h4{font-size:12px;font-weight:600;color:#8A8F98;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+.theme-light .footer-col h4{color:#78716C}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{transition:color .2s}
+.footer-col a:hover{color:#3B82F6}
+.footer-bottom{max-width:1100px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.theme-light .footer-bottom{border-color:rgba(0,0,0,.04)}
+.footer-email{color:#3B82F6}
+
+/* SCROLL REVEAL */
+.reveal{animation:revealIn .5s ease-out both}
+.reveal:nth-child(1){animation-delay:.05s}
+.reveal:nth-child(2){animation-delay:.1s}
+.reveal:nth-child(3){animation-delay:.15s}
+.reveal:nth-child(4){animation-delay:.2s}
+.reveal:nth-child(5){animation-delay:.25s}
+.reveal:nth-child(6){animation-delay:.3s}
+@media(prefers-reduced-motion){.reveal{animation:none;opacity:1}}
+@keyframes revealIn{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero{padding:60px 20px 50px}
+  .cats-grid{grid-template-columns:1fr}
+  .recent-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .features-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .theme-toggle{width:56px;height:34px}
+  .theme-toggle .toggle-knob{width:28px;height:28px;top:3px;left:3px}
+  .theme-light .theme-toggle .toggle-knob{left:25px}
+  .toggle-light{left:9px;font-size:16px}
+  .toggle-dark{right:9px;font-size:16px}
+  .navbar-inner{padding:0 16px}
+  .hero h1{font-size:36px;letter-spacing:-1px}
+  .btn{padding:12px 22px;font-size:14px}
+  .cat-card{padding:18px 20px}
+  .cat-icon{width:46px;height:46px;font-size:22px}
+  .stats-bar{gap:24px}
+  .stat-num{font-size:28px}
+}
+</style>
+</head>
+<body class="theme-dark">
+
+<div class="bg-layer">
+  <div class="bg-noise"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-dots"></div>
+</div>
+
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="logo">
+      <span class="logo-icon">
+        <svg viewBox="0 0 48 48"><defs><linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F7D08A"/><stop offset="50%" stop-color="#D9A441"/><stop offset="100%" stop-color="#8D5A2A"/></linearGradient></defs><path d="M17 9h14l3 6H14l3-6Z" fill="url(#bg1)" stroke="#FFF" stroke-width="1.4" stroke-linejoin="round" opacity=".9"/><path d="M15 15h18v5H15z" fill="url(#bg1)" stroke="#FFF" stroke-width="1.3" stroke-linejoin="round" opacity=".9"/><path d="M14 19h20v8c0 4.6-3.4 8-8 8h-4c-4.6 0-8-3.4-8-8v-8Z" fill="url(#bg1)" stroke="#FFF" stroke-width="1.6" stroke-linejoin="round" opacity=".9"/><path d="M18 35h12l-1.8 3.5H19.8L18 35Z" fill="url(#bg1)" stroke="#FFF" stroke-width="1.3" stroke-linejoin="round" opacity=".9"/><path d="M24 4v3" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" opacity=".9"/><circle cx="24" cy="24" r="2.1" fill="#F7D08A" stroke="#FFF" stroke-width=".7" opacity=".9"/></svg>
+      </span>
+      资料栈
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/study/gaokao/">高考真题</a>
+        <a href="/history/">历史文物</a>
+        <a href="/about.html">关于</a>
+      </div>
+      <a class="theme-toggle" href="#" id="themeBtn" aria-label="切换主题">
+        <div class="theme-toggle-inner"><span class="toggle-light">☀️</span><span class="toggle-dark">🌙</span></div>
+        <span class="toggle-knob"></span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge reveal"><span class="hero-badge-dot"></span>2008 — 2025 高考真题全收录</div>
+  <h1 class="reveal">找资料<em>更简单</em></h1>
+  <p class="reveal">高考真题、学习文档、工作资料一站收录，干净快速直接下载。</p>
+  <div class="hero-actions reveal">
+    <a href="/study/gaokao/" class="btn btn-primary">📚 浏览高考真题 →</a>
+    <a href="/about.html" class="btn btn-ghost">了解更多</a>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="stat-item reveal"><div class="stat-num"><span class="stat-num-grad" id="count1">0</span></div><div class="stat-label">高考真题</div></div>
+  <div class="stat-item reveal"><div class="stat-num"><span class="stat-num-grad" id="count2">0</span></div><div class="stat-label">年份覆盖</div></div>
+  <div class="stat-item reveal"><div class="stat-num"><span class="stat-num-grad" id="count3">0</span></div><div class="stat-label">历史文物</div></div>
+</section>
+
+<section class="section-pad">
+  <div class="section-inner">
+    <div class="section-tag reveal">最近更新</div>
+    <div class="section-title reveal">最新添加的文件</div>
+    <div class="section-sub reveal">以下为最近上传的高考真题，点击即可查看和下载。</div>
+    <div class="recent-grid" id="recentGrid"></div>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="section-inner">
+    <div class="section-tag reveal">分类浏览</div>
+    <div class="section-title reveal">按分类查找资料</div>
+    <div class="section-sub reveal">选择你感兴趣的分类，快速找到所需文件。</div>
+    <div class="cats-grid" id="catsGrid">
+      <a href="/study/gaokao/" class="cat-card reveal"><div class="cat-icon">📚</div><div class="cat-info"><div class="cat-name">学习资料</div><div class="cat-count">2,551 个文件</div></div><span class="cat-arrow">→</span></a>
+      <a href="/history/" class="cat-card reveal"><div class="cat-icon">🏛️</div><div class="cat-info"><div class="cat-name">历史文物</div><div class="cat-count">1 个文件</div></div><span class="cat-arrow">→</span></a>
+    </div>
+    <div class="empty-cats reveal">
+      <span class="empty-pill">💼 工作文档</span>
+      <span class="empty-pill">🎬 影视资源</span>
+      <span class="empty-pill">🎮 游戏相关</span>
+      <span class="empty-pill">💰 赚钱项目</span>
+      <span class="empty-pill">🔧 工具软件</span>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="section-inner">
+    <div class="section-tag reveal">为什么选择我们</div>
+    <div class="section-title reveal">安全、快速、简单</div>
+    <div class="section-sub reveal">无需注册，无需付费，资料直接下载。</div>
+    <div class="features-grid">
+      <div class="feat-card reveal"><span class="feat-icon">📥</span><div class="feat-name">直接下载</div><div class="feat-desc">无需注册账号、无需登录，点击即可下载所有资料，PDF 格式兼容所有设备。</div></div>
+      <div class="feat-card reveal"><span class="feat-icon">🔒</span><div class="feat-name">安全无追踪</div><div class="feat-desc">不收集个人信息、不插入广告、不含商业推广，你的隐私不会泄露。</div></div>
+      <div class="feat-card reveal"><span class="feat-icon">⚡</span><div class="feat-name">极速访问</div><div class="feat-desc">服务器位于国内，CDN 加速，资料秒开。所有文件经过版权审查，合规安全。</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo"><span class="logo-icon"><svg viewBox="0 0 48 48" style="width:18px;height:18px"><path d="M17 9h14l3 6H14l3-6Z" fill="#F7D08A" stroke="#FFF" stroke-width="1.2" stroke-linejoin="round"/><path d="M15 15h18v5H15z" fill="#F7D08A" stroke="#FFF" stroke-width="1.2" stroke-linejoin="round"/><path d="M14 19h20v8c0 4.6-3.4 8-8 8h-4c-4.6 0-8-3.4-8-8v-8Z" fill="#F7D08A" stroke="#FFF" stroke-width="1.5" stroke-linejoin="round"/><path d="M18 35h12l-1.8 3.5H19.8L18 35Z" fill="#F7D08A" stroke="#FFF" stroke-width="1.2" stroke-linejoin="round"/><circle cx="24" cy="24" r="2" fill="#F7D08A" stroke="#FFF" stroke-width=".6"/></svg></span>资料栈</div>
+      <p>安全、高效、便捷的一站式资料分享平台。已收录 2,552 份文件，涵盖高考真题、历史文物等多个分类。</p>
+    </div>
+    <div class="footer-col">
+      <h4>资源</h4>
+      <ul><li><a href="/">首页</a></li><li><a href="/study/gaokao/">高考真题</a></li><li><a href="/history/">历史文物</a></li><li><a href="/about.html">关于我们</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>联系</h4>
+      <ul><li><a href="mailto:magic.zjh@qq.com" class="footer-email">magic.zjh@qq.com</a></li><li><a href="/privacy.html">隐私政策</a></li><li><a href="/terms.html">服务条款</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 资料栈 &mdash; 本站所有高考真题均适用《著作权法》第五条</span></div>
+</footer>
+
+<script>
+var RECENT_FILES = [{"n": "2009年高考数学试卷（理）（山东）（空白卷）", "p": "/study/gaokao/2009/数学/2009年高考数学试卷（理）（山东）（空白卷）.pdf", "d": "2009"}, {"n": "2009年高考数学试卷（理）（全国卷Ⅱ）（空白卷）", "p": "/study/gaokao/2009/数学/2009年高考数学试卷（理）（全国卷Ⅱ）（空白卷）.pdf", "d": "2009"}, {"n": "2009年高考数学试卷（文）（四川）（空白卷）", "p": "/study/gaokao/2009/数学/2009年高考数学试卷（文）（四川）（空白卷）.pdf", "d": "2009"}, {"n": "2009年高考数学试卷（理）（陕西）（空白卷）", "p": "/study/gaokao/2009/数学/2009年高考数学试卷（理）（陕西）（空白卷）.pdf", "d": "2009"}, {"n": "2009年高考数学试卷（理）（浙江）（空白卷）", "p": "/study/gaokao/2009/数学/2009年高考数学试卷（理）（浙江）（空白卷）.pdf", "d": "2009"}, {"n": "2009年高考数学试卷（文）（上海）（空白卷）", "p": "/study/gaokao/2009/数学/2009年高考数学试卷（文）（上海）（空白卷）.pdf", "d": "2009"}, {"n": "2009年高考数学试卷（江苏）（空白卷）", "p": "/study/gaokao/2009/数学/2009年高考数学试卷（江苏）（空白卷）.pdf", "d": "2009"}, {"n": "2009年高考数学试卷（文）（陕西）（空白卷）", "p": "/study/gaokao/2009/数学/2009年高考数学试卷（文）（陕西）（空白卷）.pdf", "d": "2009"}]
+
+(function(){
+  var grid = document.getElementById('recentGrid');
+  if (!grid) return;
+  var html = '';
+  for (var i = 0; i < RECENT_FILES.length; i++) {
+    var f = RECENT_FILES[i];
+    var name = f.n;
+    if (name.length > 35) name = name.substring(0, 32) + '...';
+    html += '<a href="' + f.p + '" class="file-card reveal" target="_blank">';
+    html += '<div class="file-icon">PDF</div>';
+    html += '<div class="file-info"><div class="file-name" title="' + f.n + '">' + name + '</div>';
+    html += '<div class="file-meta">' + f.d + '</div></div></a>';
+  }
+  grid.innerHTML = html;
+})();
+
+(function(){
+  // Apply saved theme
+  var htmlEl = document.documentElement;
+  var saved = document.cookie.replace(/(?:(?:^|.*;\s*)theme\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  if (saved === 'light') {
+    htmlEl.className = 'theme-light';
+  }
+  
+  var btn = document.getElementById('themeBtn');
+  if (!btn) return;
+  
+  btn.onclick = function(e) {
+    e.preventDefault();
+    var cn = htmlEl.className;
+    var isDark = cn.indexOf('theme-dark') >= 0 || cn.indexOf('theme-light') < 0;
+    if (isDark) {
+      htmlEl.className = 'theme-light';
+      document.cookie = 'theme=light;path=/;max-age=31536000';
+    } else {
+      htmlEl.className = 'theme-dark';
+      document.cookie = 'theme=dark;path=/;max-age=31536000';
+    }
+  };
+})();
+
+(function(){
+  var targets = [
+    {el: document.getElementById('count1'), end: 2551},
+    {el: document.getElementById('count2'), end: 17},
+    {el: document.getElementById('count3'), end: 1}
+  ];
+  var started = false;
+  function animate(el, end, duration) {
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var p = Math.min((ts - startTime) / duration, 1);
+      el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * end);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = end;
+    }
+    requestAnimationFrame(step);
+  }
+  function tryStart() {
+    if (started) return;
+    var c = document.getElementById('count1');
+    if (!c || c.getBoundingClientRect().top >= window.innerHeight) return;
+    started = true;
+    for (var i = 0; i < targets.length; i++) animate(targets[i].el, targets[i].end, 1500 + i * 200);
+  }
+  window.addEventListener('scroll', tryStart);
+  setTimeout(tryStart, 300);
+})();
+
+(function(){
+  var cards = document.querySelectorAll('.cat-card');
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('mousemove', function(e) {
+      var r = this.getBoundingClientRect();
+      this.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      this.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  }
+})();
+
+(function(){
+  var nb = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 10) nb.classList.add('scrolled');
+    else nb.classList.remove('scrolled');
+  });
+})();
+</script>
+
+<script>(function(){var h=document.documentElement;var c=document.cookie.replace(/(?:(?:^|.*;\s*)theme\s*\=\s*([^;]*).*$)|^.*$/,"$1");if(c==="light")h.className="theme-light";var b=document.getElementById("themeBtn");if(!b)return;b.onclick=function(e){e=e||window.event;e.preventDefault();var isDark=h.className.indexOf("theme-light")<0;if(isDark){h.className="theme-light";document.cookie="theme=light;path=/;max-age=31536000"}else{h.className="theme-dark";document.cookie="theme=dark;path=/;max-age=31536000"}};})();</script>
+<script>(function(){var els=document.querySelectorAll(".reveal");if(!els.length)return;function check(){var th=window.innerHeight*0.85;for(var i=0;i<els.length;i++){if(els[i].className.indexOf("visible")<0&&els[i].getBoundingClientRect().top<th)els[i].className+=" visible";}}window.onscroll=check;setTimeout(check,100);setTimeout(check,400);setTimeout(check,900);})();</script>
+</body>
+</html>

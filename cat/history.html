@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="<!--# if expr="$cookie_theme = light" -->theme-light<!--# else -->theme-dark<!--# endif -->">
+<html lang="zh-CN" class="theme-dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -86,7 +86,7 @@ a{color:inherit}
   .logo{font-size:22px}
   .logo-icon{width:42px;height:42px}
 }
-</style>
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
 </head>
 <body>
 <nav class="navbar">
@@ -112,9 +112,9 @@ a{color:inherit}
             </span>
             <span>资料栈</span>
         </a>
-        <div class="theme-btn">
-            <a class="theme-link to-light" href="/theme?set=light" aria-label="切换到白天模式">☀️</a>
-            <a class="theme-link to-dark" href="/theme?set=dark" aria-label="切换到黑夜模式">🌙</a>
+        <div class="theme-btn" id="themeBtn">
+            <span class="theme-link to-light">☀️</span>
+            <span class="theme-link to-dark">🌙</span>
             <span class="theme-knob" aria-hidden="true"></span>
         </div>
     </div>
@@ -178,5 +178,6 @@ a{color:inherit}
         </div>
     </div>
 </footer>
+<script>(function(){var h=document.documentElement;var c=document.cookie.replace(/(?:(?:^|.*;\s*)theme\s*\=\s*([^;]*).*$)|^.*$/,"$1");if(c==="light")h.className="theme-light";var b=document.getElementById("themeBtn");if(!b)return;b.onclick=function(e){e=e||window.event;e.preventDefault();var isDark=h.className.indexOf("theme-light")<0;if(isDark){h.className="theme-light";document.cookie="theme=light;path=/;max-age=31536000"}else{h.className="theme-dark";document.cookie="theme=dark;path=/;max-age=31536000"}};})();</script>
 </body>
 </html>

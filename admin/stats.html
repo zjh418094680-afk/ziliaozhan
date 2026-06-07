@@ -22,7 +22,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto
 .map-box .inner{width:100%;height:clamp(420px,60vh,700px)}
 .updated{color:#64748B;font-size:12px;text-align:right;margin-top:8px}
 @media(max-width:640px){.wrap{padding:14px}.cards{grid-template-columns:1fr 1fr}.map-box .inner{height:350px}}
-</style>
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
 </head>
 <body>
 <div class="wrap">

@@ -32,7 +32,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 .sound-toggle{position:fixed;top:20px;left:20px;padding:8px 16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;color:#94A3B8;font-size:14px;cursor:pointer}
 .sound-toggle:hover{background:rgba(255,255,255,.2);color:#fff}
 .sound-toggle.muted{opacity:.5}
-</style>
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
 </head>
 <body>
 <button class="sound-toggle" id="soundToggle" onclick="toggleSound()">🔊 声音开启</button>

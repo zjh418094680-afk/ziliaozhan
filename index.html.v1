@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="theme-dark">
+<html lang="zh-CN" class="<!--# if expr="$cookie_theme = light" -->theme-light<!--# else -->theme-dark<!--# endif -->">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -86,7 +86,7 @@ a{color:inherit}
   .logo{font-size:22px}
   .logo-icon{width:42px;height:42px}
 }
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
+</style>
 </head>
 <body>
 <nav class="navbar">
@@ -112,9 +112,9 @@ a{color:inherit}
             </span>
             <span>资料栈</span>
         </a>
-        <div class="theme-btn" id="themeBtn">
-            <span class="theme-link to-light">☀️</span>
-            <span class="theme-link to-dark">🌙</span>
+        <div class="theme-btn">
+            <a class="theme-link to-light" href="/theme?set=light" aria-label="切换到白天模式">☀️</a>
+            <a class="theme-link to-dark" href="/theme?set=dark" aria-label="切换到黑夜模式">🌙</a>
             <span class="theme-knob" aria-hidden="true"></span>
         </div>
     </div>
@@ -151,7 +151,7 @@ a{color:inherit}
 .theme-light .category-count{color:#6B7280}
 @media(max-width:768px){.main{width:min(100%,calc(100vw - 24px))}.hero-search{grid-template-columns:1fr}.hero-search button{width:100%}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
 @media(max-width:480px){.main{width:min(100%,calc(100vw - 20px))}.hero{padding:42px 10px 48px}.hero-panel{padding:16px 14px;border-radius:18px}.category-grid{grid-template-columns:1fr}.category-card{min-height:156px;padding:22px 14px}.category-icon{font-size:36px}}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion){.reveal{opacity:1;transform:none;transition:none}}</style>
+</style>
 <section class="hero">
     <div class="hero-content">
         <div class="hero-bridge"><span></span> 古今之桥 <span></span></div>
@@ -252,6 +252,5 @@ a{color:inherit}
         </div>
     </div>
 </footer>
-<script>(function(){var h=document.documentElement;var c=document.cookie.replace(/(?:(?:^|.*;\s*)theme\s*\=\s*([^;]*).*$)|^.*$/,"$1");if(c==="light")h.className="theme-light";var b=document.getElementById("themeBtn");if(!b)return;b.onclick=function(e){e=e||window.event;e.preventDefault();var isDark=h.className.indexOf("theme-light")<0;if(isDark){h.className="theme-light";document.cookie="theme=light;path=/;max-age=31536000"}else{h.className="theme-dark";document.cookie="theme=dark;path=/;max-age=31536000"}};})();</script>
 </body>
 </html>

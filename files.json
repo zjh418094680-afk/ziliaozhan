@@ -5,19 +5,9 @@
     "modified": "2026-06-06 11:00"
   },
   {
-    "name": "__pycache__//gen_pages_v2.cpython-312.pyc",
-    "size": 14151,
-    "modified": "2026-06-04 22:43"
-  },
-  {
-    "name": "__pycache__//site_builder.cpython-312.pyc",
-    "size": 28736,
-    "modified": "2026-06-06 11:00"
-  },
-  {
     "name": "about.html",
-    "size": 5310,
-    "modified": "2026-06-06 10:54"
+    "size": 5465,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "admin//china.json",
@@ -31,148 +21,53 @@
   },
   {
     "name": "admin//files.html",
-    "size": 8260,
-    "modified": "2026-06-06 11:55"
-  },
-  {
-    "name": "admin//files.html.bak_20260605_1650",
-    "size": 6221,
-    "modified": "2026-06-05 16:50"
-  },
-  {
-    "name": "admin//files.html.bak_20260605_1653",
-    "size": 6442,
-    "modified": "2026-06-05 16:53"
-  },
-  {
-    "name": "admin//files.html.bak_20260605_1658",
-    "size": 6902,
-    "modified": "2026-06-05 16:58"
-  },
-  {
-    "name": "admin//index.html.bak_20260605_1629",
-    "size": 15632,
-    "modified": "2026-06-05 16:29"
-  },
-  {
-    "name": "admin//index.html.bak_20260605_1642",
-    "size": 19227,
-    "modified": "2026-06-05 16:42"
-  },
-  {
-    "name": "admin//index.html.bak_20260605_1650",
-    "size": 15702,
-    "modified": "2026-06-05 16:50"
-  },
-  {
-    "name": "admin//index.html.bak_20260605_1715",
-    "size": 16111,
-    "modified": "2026-06-05 17:15"
-  },
-  {
-    "name": "admin//index.html.bak_before_split",
-    "size": 19079,
-    "modified": "2026-06-05 16:47"
-  },
-  {
-    "name": "admin//index.html.bak_fix",
-    "size": 16111,
-    "modified": "2026-06-06 11:57"
-  },
-  {
-    "name": "admin//index.html.bak_working",
-    "size": 15632,
-    "modified": "2026-06-05 16:28"
+    "size": 8491,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "admin//stats.html",
-    "size": 12676,
-    "modified": "2026-06-06 11:47"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1721",
-    "size": 8638,
-    "modified": "2026-06-05 17:21"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1724",
-    "size": 13759,
-    "modified": "2026-06-05 17:24"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1728",
-    "size": 14203,
-    "modified": "2026-06-05 17:28"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1734",
-    "size": 14314,
-    "modified": "2026-06-05 17:34"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1738",
-    "size": 15566,
-    "modified": "2026-06-05 17:38"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1745",
-    "size": 16287,
-    "modified": "2026-06-05 17:45"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1749",
-    "size": 17465,
-    "modified": "2026-06-05 17:49"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1751",
-    "size": 9331,
-    "modified": "2026-06-05 17:51"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1754",
-    "size": 9432,
-    "modified": "2026-06-05 17:54"
-  },
-  {
-    "name": "admin//stats.html.bak_20260605_1756",
-    "size": 11737,
-    "modified": "2026-06-05 17:56"
+    "size": 12907,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "cat//game.html",
-    "size": 10351,
-    "modified": "2026-06-06 17:29"
+    "size": 11124,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "cat//history.html",
-    "size": 10764,
-    "modified": "2026-06-06 17:29"
+    "size": 11537,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "cat//money.html",
-    "size": 10351,
-    "modified": "2026-06-06 17:29"
+    "size": 11124,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "cat//movie.html",
-    "size": 10351,
-    "modified": "2026-06-06 17:29"
+    "size": 11124,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "cat//study.html",
-    "size": 11053,
-    "modified": "2026-06-06 17:29"
+    "size": 11826,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "cat//tool.html",
-    "size": 10348,
-    "modified": "2026-06-06 17:29"
+    "size": 11121,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "cat//work.html",
-    "size": 10351,
-    "modified": "2026-06-06 17:29"
+    "size": 11124,
+    "modified": "2026-06-07 16:31"
+  },
+  {
+    "name": "design-test.html",
+    "size": 12307,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "favicon.ico",
@@ -181,8 +76,8 @@
   },
   {
     "name": "features.html",
-    "size": 6753,
-    "modified": "2026-06-06 10:54"
+    "size": 7163,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "gen_pages_v2.py",
@@ -200,14 +95,34 @@
     "modified": "2026-06-04 21:36"
   },
   {
+    "name": "index.html.v1",
+    "size": 16100,
+    "modified": "2026-06-07 14:29"
+  },
+  {
+    "name": "index.html.v1.bak",
+    "size": 16100,
+    "modified": "2026-06-07 15:55"
+  },
+  {
+    "name": "index_v2.html",
+    "size": 12307,
+    "modified": "2026-06-07 16:31"
+  },
+  {
+    "name": "index_v3.html",
+    "size": 26100,
+    "modified": "2026-06-07 16:31"
+  },
+  {
     "name": "privacy.html",
-    "size": 3804,
-    "modified": "2026-06-06 10:54"
+    "size": 3963,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "promo.html",
-    "size": 9572,
-    "modified": "2026-06-06 10:54"
+    "size": 9605,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "risk_word_db.json",
@@ -217,12 +132,7 @@
   {
     "name": "site_builder.py",
     "size": 23746,
-    "modified": "2026-06-06 13:02"
-  },
-  {
-    "name": "site_builder.py.bak",
-    "size": 23539,
-    "modified": "2026-06-06 12:56"
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "site_meta.json",
@@ -12991,23 +12901,23 @@
   },
   {
     "name": "terms.html",
-    "size": 4195,
-    "modified": "2026-06-06 10:54"
+    "size": 4354,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "tpl_page.html",
-    "size": 6241,
-    "modified": "2026-06-06 10:55"
+    "size": 6396,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "tpl_province.html",
-    "size": 4897,
-    "modified": "2026-06-06 10:55"
+    "size": 5069,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "tpl_subpage.html",
-    "size": 7635,
-    "modified": "2026-06-06 17:29"
+    "size": 7866,
+    "modified": "2026-06-07 16:31"
   },
   {
     "name": "wechat_qr.jpg",
