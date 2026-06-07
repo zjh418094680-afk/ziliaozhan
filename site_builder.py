@@ -281,9 +281,9 @@ def _navbar():
         '<nav class="navbar"><div class="nav-inner">'
         '<a href="/" class="logo"><span class="logo-icon" aria-hidden="true">'
         + LOGO_SVG + '</span><span>' + SITE_TITLE + '</span></a>'
-        '<div class="theme-btn">'
-        '<a class="theme-link to-light" href="/theme?set=light" aria-label="Switch to light">\u2600\ufe0f</a>'
-        '<a class="theme-link to-dark" href="/theme?set=dark" aria-label="Switch to dark">\U0001f319</a>'
+        '<div class="theme-btn" id="themeBtn" style="cursor:pointer">'
+        '<span class="theme-link to-light">\u2600\ufe0f</span>'
+        '<span class="theme-link to-dark">\U0001f319</span>'
         '<span class="theme-knob" aria-hidden="true"></span>'
         '</div></div></nav>'
     )

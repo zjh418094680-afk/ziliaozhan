@@ -16,8 +16,8 @@
   },
   {
     "name": "__pycache__//site_builder.cpython-312.pyc",
-    "size": 40559,
-    "modified": "2026-06-07 18:32"
+    "size": 29499,
+    "modified": "2026-06-07 22:18"
   },
   {
     "name": "__pycache__//test_site.cpython-312.pyc",
@@ -51,38 +51,38 @@
   },
   {
     "name": "cat//game.html",
-    "size": 17973,
-    "modified": "2026-06-07 19:32"
+    "size": 17456,
+    "modified": "2026-06-07 23:05"
   },
   {
     "name": "cat//history.html",
-    "size": 18281,
-    "modified": "2026-06-07 19:32"
+    "size": 17764,
+    "modified": "2026-06-07 23:05"
   },
   {
     "name": "cat//money.html",
-    "size": 17973,
-    "modified": "2026-06-07 19:32"
+    "size": 17456,
+    "modified": "2026-06-07 23:05"
   },
   {
     "name": "cat//movie.html",
-    "size": 17973,
-    "modified": "2026-06-07 19:32"
+    "size": 17456,
+    "modified": "2026-06-07 23:05"
   },
   {
     "name": "cat//study.html",
-    "size": 18399,
-    "modified": "2026-06-07 19:32"
+    "size": 17882,
+    "modified": "2026-06-07 23:05"
   },
   {
     "name": "cat//tool.html",
-    "size": 17970,
-    "modified": "2026-06-07 19:32"
+    "size": 17453,
+    "modified": "2026-06-07 23:05"
   },
   {
     "name": "cat//work.html",
-    "size": 17973,
-    "modified": "2026-06-07 19:32"
+    "size": 17456,
+    "modified": "2026-06-07 23:05"
   },
   {
     "name": "design-test.html",
@@ -117,17 +117,17 @@
   {
     "name": "inc//common.css",
     "size": 12880,
-    "modified": "2026-06-07 19:51"
+    "modified": "2026-06-07 23:01"
   },
   {
     "name": "inc//navbar.html",
     "size": 1301,
-    "modified": "2026-06-07 19:52"
+    "modified": "2026-06-07 23:05"
   },
   {
     "name": "inc//theme.js",
-    "size": 525,
-    "modified": "2026-06-07 19:51"
+    "size": 509,
+    "modified": "2026-06-07 23:04"
   },
   {
     "name": "index.html.v1",
@@ -166,8 +166,8 @@
   },
   {
     "name": "site_builder.py",
-    "size": 37082,
-    "modified": "2026-06-07 19:12"
+    "size": 37027,
+    "modified": "2026-06-07 23:05"
   },
   {
     "name": "site_meta.json",
