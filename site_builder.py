@@ -552,7 +552,7 @@ def build_subpage(meta, cat, sp, sp_items):
         '<h1 class="page-title">' + escape(sp["icon"]) + " " + escape(sp["name"]) + "</h1>"
         '<div class="page-desc">' + escape(sp["description"]) + "</div>"
         '<div class="chip-nav"><a class="chip" href="/cat/' + escape(cat["slug"])
-        + '.html">\u2190 Back</a></div></div></section>'
+        + '.html">\u2190 返回</a></div></div></section>'
         '<section class="sec"><div class="sec-inner">'
         '<div class="toolbar"><input type="text" class="search-input" id="s" placeholder="搜索文件..."></div>'
         '<div class="file-panel" id="p"></div>'
@@ -578,7 +578,7 @@ def build_subpage(meta, cat, sp, sp_items):
         + "p.innerHTML=o}"
         + "function v(tp){var tp2=Math.ceil(tp/s);if(tp2<=1){g.innerHTML='';"
         + 't.innerHTML="共 "+tp+" 个文件";return}c=Math.min(c,tp2);'
-        + 't.innerHTML="Total: "+tp+" files \\u00b7 Page "+c+"/"+tp2;'
+        + 't.innerHTML="共 "+tp+" 个文件 · 第 "+c+"/"+tp2+" 页";'
         + "var o='';if(c>1)o+='<span class=\"pg-btn\" id=\"pv\">\\u2039</span>';"
         + "else o+='<span class=\"pg-btn disabled\">\\u2039</span>';var ps=[];"
         + "if(tp2<=7){for(var i2=1;i2<=tp2;i2++)ps.push(i2)}else{ps.push(1);"
