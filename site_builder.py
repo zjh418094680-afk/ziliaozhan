@@ -316,7 +316,7 @@ def _page(title, body, meta):
         '<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n'
         "<title>" + escape(title) + "</title>\n"
         '<link rel="icon" href="/favicon.ico">\n<style>\n' + CSS + "\n</style>\n</head>\n<body>\n"
-        + _navbar() + "\n" + body + "\n" + _footer(meta) + "\n<script>(function(){var h=document.documentElement;var b=document.getElementById(\"themeBtn\");b.onclick=function(){var dark=h.className.indexOf(\"theme-dark\")!==-1;h.className=dark?\"theme-light\":\"theme-dark\";document.cookie=\"theme=\"+(dark?\"light\":\"dark\")+\";path=/;max-age=31536000;SameSite=Lax\";};})();</script>\n</body>\n</html>"
+        + _navbar().replace('<div class="theme-btn" id="themeBtn" style="cursor:pointer"><span class="theme-link to-light">☀️</span><span class="theme-link to-dark">🌙</span><span class="theme-knob" aria-hidden="true"></span></div>', "") + "\n" + body + "\n" + _footer(meta) + "\n<script>(function(){var h=document.documentElement;var b=document.getElementById(\"themeBtn\");b.onclick=function(){var dark=h.className.indexOf(\"theme-dark\")!==-1;h.className=dark?\"theme-light\":\"theme-dark\";document.cookie=\"theme=\"+(dark?\"light\":\"dark\")+\";path=/;max-age=31536000;SameSite=Lax\";};})();</script>\n</body>\n</html>"
     )
 
 # ── Data Layer ─────────────────────────────────────────
