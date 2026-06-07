@@ -281,13 +281,8 @@ def _navbar():
         '<nav class="navbar"><div class="nav-inner">'
         '<a href="/" class="logo"><span class="logo-icon" aria-hidden="true">'
         + LOGO_SVG + '</span><span>' + SITE_TITLE + '</span></a>'
-        '<div class="theme-btn" id="themeBtn" style="cursor:pointer">'
-        '<span class="theme-link to-light">\u2600\ufe0f</span>'
-        '<span class="theme-link to-dark">\U0001f319</span>'
-        '<span class="theme-knob" aria-hidden="true"></span>'
-        '</div></div></nav>'
+        '</div></nav>'
     )
-
 def _footer(meta):
     """Return the shared footer HTML."""
     cat_links = "".join(
@@ -316,7 +311,7 @@ def _page(title, body, meta):
         '<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n'
         "<title>" + escape(title) + "</title>\n"
         '<link rel="icon" href="/favicon.ico">\n<style>\n' + CSS + "\n</style>\n</head>\n<body>\n"
-        + _navbar().replace('<div class="theme-btn" id="themeBtn" style="cursor:pointer"><span class="theme-link to-light">☀️</span><span class="theme-link to-dark">🌙</span><span class="theme-knob" aria-hidden="true"></span></div>', "") + "\n" + body + "\n" + _footer(meta) + "\n<script>(function(){var h=document.documentElement;var b=document.getElementById(\"themeBtn\");b.onclick=function(){var dark=h.className.indexOf(\"theme-dark\")!==-1;h.className=dark?\"theme-light\":\"theme-dark\";document.cookie=\"theme=\"+(dark?\"light\":\"dark\")+\";path=/;max-age=31536000;SameSite=Lax\";};})();</script>\n</body>\n</html>"
+        + _navbar() + "\n" + body + "\n" + _footer(meta) + "\n<script>(function(){var h=document.documentElement;var b=document.getElementById(\"themeBtn\");b.onclick=function(){var dark=h.className.indexOf(\"theme-dark\")!==-1;h.className=dark?\"theme-light\":\"theme-dark\";document.cookie=\"theme=\"+(dark?\"light\":\"dark\")+\";path=/;max-age=31536000;SameSite=Lax\";};})();</script>\n</body>\n</html>"
     )
 
 # ── Data Layer ─────────────────────────────────────────
@@ -455,6 +450,7 @@ def build_homepage(meta, grouped):
     total = sum(g["count"] for g in grouped.values())
 
     body = (
+        '<div class="theme-btn" id="themeBtn" style="cursor:pointer;float:right;margin:12px 24px 0 0"><span class="theme-link to-light">\u2600\ufe0f</span><span class="theme-link to-dark">\U0001f319</span><span class="theme-knob" aria-hidden="true"></span></div>' +
         '<section class="hero">'
         "<h1>找资料<em>更简单</em></h1>"
         "<p>高考真题、学习资料、工作文档 &mdash; 清爽、快速、直接下载</p>"
