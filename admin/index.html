@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>资料栈后台管理</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#0F172A,#1E293B 50%,#334155);color:#F8FAFC;min-height:100vh;padding:24px}
+.wrap{width:min(1280px,100%);margin:0 auto}
+.hero{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+.title h1{font-size:clamp(28px,4vw,46px);font-weight:900;letter-spacing:-1px}
+.title p{margin-top:10px;color:#CBD5E1;font-size:16px}
+.badge{padding:10px 14px;border-radius:999px;background:rgba(59,130,246,.16);border:1px solid rgba(96,165,250,.35);color:#BFDBFE;font-size:13px}
+.grid{display:grid;grid-template-columns:1.2fr .9fr;gap:20px}
+.panel{background:rgba(15,23,42,.88);border:1px solid rgba(148,163,184,.16);border-radius:24px;padding:22px;box-shadow:0 24px 70px rgba(2,6,23,.25)}
+.panel h2{font-size:22px;font-weight:800;margin-bottom:16px}
+.panel h3{font-size:18px;font-weight:800;margin-bottom:14px}
+.stack{display:grid;gap:20px}
+.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.summary-card{padding:16px;border-radius:18px;background:rgba(30,41,59,.9);border:1px solid rgba(148,163,184,.14)}
+.summary-card .value{font-size:28px;font-weight:900;margin-bottom:6px}
+.summary-card .label{color:#94A3B8;font-size:13px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field{display:grid;gap:8px}
+.field.full{grid-column:1 / -1}
+label{font-size:14px;color:#CBD5E1}
+input,select,textarea,button{width:100%;border:none;outline:none;font:inherit}
+input,select,textarea{background:#0F172A;color:#F8FAFC;border:1px solid #334155;border-radius:14px;padding:12px 14px}
+textarea{min-height:92px;resize:vertical}
+button{background:linear-gradient(135deg,#2563EB,#60A5FA);color:#fff;border-radius:14px;padding:13px 16px;font-weight:800;cursor:pointer}
+.dropzone{border:2px dashed #475569;border-radius:18px;padding:28px 20px;text-align:center;background:rgba(15,23,42,.55);transition:border-color .2s,background .2s}
+.dropzone.active{border-color:#60A5FA;background:rgba(37,99,235,.12)}
+.dropzone strong{display:block;font-size:18px;margin-bottom:8px}
+.dropzone p{color:#94A3B8;font-size:14px}
+.file-list{margin-top:14px;display:grid;gap:8px}
+.file-item{padding:10px 12px;border-radius:12px;background:#0F172A;border:1px solid #334155;font-size:14px}
+.msg{margin-top:14px;padding:12px 14px;border-radius:14px;font-size:14px;display:none}
+.msg.ok{display:block;background:rgba(16,185,129,.12);border:1px solid rgba(52,211,153,.28);color:#BBF7D0}
+.msg.err{display:block;background:rgba(239,68,68,.12);border:1px solid rgba(248,113,113,.3);color:#FECACA}
+.del-btn{padding:6px 12px;border-radius:8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#FCA5A5;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.del-btn:hover{background:rgba(239,68,68,.28);color:#FECACA}
+.del-sub{width:20px;height:20px;border-radius:50%;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#FCA5A5;font-size:11px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;margin-left:4px;flex-shrink:0;line-height:1}
+.del-sub:hover{background:rgba(239,68,68,.3);color:#FECACA}
+.tree{display:grid;gap:14px}
+.tree-card{padding:16px;border-radius:18px;background:#0F172A;border:1px solid #334155}
+.tree-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.tree-name{font-size:17px;font-weight:800}
+.tree-desc{margin-top:6px;color:#94A3B8;font-size:13px}
+.sub-list{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+.sub-chip{padding:8px 12px;border-radius:999px;background:#1E293B;border:1px solid #334155;font-size:13px}
+.hint{color:#94A3B8;font-size:13px;line-height:1.7}
+@media(max-width:980px){.grid{grid-template-columns:1fr}.summary{grid-template-columns:1fr}}
+@media(max-width:640px){body{padding:14px}.panel{padding:18px}.form-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<div class="title"><h1>资料栈后台管理</h1><p>这里可以上传文件、创建板块、创建子页面，所有操作都会自动生成前台页面。</p></div>
+</div>
+<div class="summary" id="summary">
+<div class="summary-card"><div class="value" id="sumCategories">0</div><div class="label">板块数量</div></div>
+<div class="summary-card"><div class="value" id="sumSubpages">0</div><div class="label">子页面数量</div></div>
+<div class="summary-card"><div class="value" id="sumTargets">0</div><div class="label">可上传目录</div></div>
+</div>
+<div class="grid">
+<div class="stack">
+<div class="panel">
+<h2>上传文件</h2>
+<div class="form-grid"><div class="field full"><label for="uploadTarget">上传到哪个目录</label><select id="uploadTarget"></select></div></div>
+<div class="dropzone" id="dropzone"><strong>拖拽文件到这里</strong><p>或者点击选择文件，支持一次上传多个文件</p><input type="file" id="fileInput" multiple hidden></div>
+<div class="file-list" id="fileList"></div>
+<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button id="chooseBtn" type="button">选择文件</button><button id="uploadBtn" type="button">开始上传</button></div>
+<div class="msg" id="uploadMsg"></div>
+</div>
+<div class="panel">
+<h2>新建板块</h2>
+<div class="form-grid">
+<div class="field"><label for="catName">板块名称</label><input id="catName" placeholder="例如：课程资源"></div>
+<div class="field"><label for="catIcon">图标</label><input id="catIcon" value="📁" placeholder="例如：📁"></div>
+<div class="field full"><label for="catDesc">板块说明</label><textarea id="catDesc" placeholder="例如：课件、文档、整理资料"></textarea></div>
+<div class="field full"><label for="catSlug">URL 标识（可选，不填自动生成）</label><input id="catSlug" placeholder="例如：courses"></div>
+</div>
+<div style="margin-top:14px"><button id="createCategoryBtn" type="button">创建板块</button></div>
+<div class="msg" id="catMsg"></div>
+</div>
+<div class="panel">
+<h2>新建子页面</h2>
+<div class="form-grid">
+<div class="field"><label for="subParent">父分类</label><select id="subParent"></select></div>
+<div class="field"><label for="subName">子页面名称</label><input id="subName" placeholder="例如：期末资料"></div>
+<div class="field"><label for="subIcon">图标</label><input id="subIcon" value="📄" placeholder="例如：📄"></div>
+<div class="field"><label for="subSlug">URL 标识（可选）</label><input id="subSlug" placeholder="例如：final-exam"></div>
+<div class="field full"><label for="subDesc">子页面说明</label><textarea id="subDesc" placeholder="例如：按专题整理的资料集合"></textarea></div>
+</div>
+<div style="margin-top:14px"><button id="createSubBtn" type="button">创建子页面</button></div>
+<div class="msg" id="subMsg"></div>
+</div>
+</div>
+<div class="stack">
+<div class="panel"><h2>站点结构</h2><div class="tree" id="tree"></div></div>
+<div class="panel" style="text-align:center;padding:28px"><a href="/admin/files.html" style="display:inline-block;background:linear-gradient(135deg,#2563EB,#60A5FA);color:#fff;border-radius:14px;padding:14px 32px;font-weight:800;text-decoration:none;font-size:16px">📂 文件管理</a><a href="/admin/stats.html" style="display:inline-block;background:linear-gradient(135deg,#2563EB,#60A5FA);color:#fff;border-radius:14px;padding:14px 32px;font-weight:800;text-decoration:none;font-size:16px;margin-left:12px">📊 数据统计</a></div>
+<div class="panel"><h3>使用说明</h3><div class="hint"><p>1. 上传文件时先选择目录，再拖拽或选择文件。</p><p>2. 新建板块后会自动生成板块目录、分类页，并出现在首页。</p><p>3. 新建子页面后会自动生成子目录与子页面，并出现在对应分类页。</p><p>4. 这里没有首页入口，普通访客不会看到后台。</p></div></div>
+</div>
+</div>
+</div>
+<script>
+var state = { data: null, files: [] };
+var apiUrl = location.protocol + "//" + location.host + "/api/admin";
+function setMessage(id, text, type) { var box = document.getElementById(id); box.className = "msg " + (type || ""); box.textContent = text || ""; }
+async function request(action, formData) { var response = await fetch(apiUrl, { method: "POST", body: formData, credentials: "same-origin" }); var result = await response.json(); if (!result.ok) throw new Error(result.message || "操作失败"); return result; }
+async function loadState() { var response = await fetch(apiUrl + "?action=state", { credentials: "same-origin" }); var result = await response.json(); if (!result.ok) throw new Error(result.message || "加载失败"); state.data = result.data; renderState(); }
+function renderState() {
+  var data = state.data;
+  var subpageCount = data.categories.reduce(function(sum, item) { return sum + (item.subpages || []).length; }, 0);
+  document.getElementById("sumCategories").textContent = data.categories.length;
+  document.getElementById("sumSubpages").textContent = subpageCount;
+  document.getElementById("sumTargets").textContent = data.targets.length;
+  document.getElementById("uploadTarget").innerHTML = data.targets.map(function(item) { return '<option value="' + item.value + '">' + item.label + '</option>'; }).join("");
+  document.getElementById("subParent").innerHTML = data.categories.map(function(item) { return '<option value="' + item.slug + '">' + item.icon + ' ' + item.name + '</option>'; }).join("");
+  var tree = document.getElementById("tree");
+  tree.innerHTML = data.categories.map(function(c) {
+    return '<div class="tree-card">'
+      + '<div class="tree-head"><div class="tree-name">' + c.icon + ' ' + c.name + '</div>'
+      + '<div style="display:flex;align-items:center;gap:10px"><span>' + c.slug + '</span>'
+      + '<button class="del-btn" data-action="delete_category" data-slug="' + c.slug + '">删除板块</button></div></div>'
+      + '<div class="tree-desc">' + (c.description || "暂无说明") + '</div>'
+      + '<div class="sub-list">' + ((c.subpages || []).length ? c.subpages.map(function(s) {
+          return '<span class="sub-chip">' + s.icon + ' ' + s.name + '<button class="del-sub" data-action="delete_subpage" data-parent="' + c.slug + '" data-slug="' + s.slug + '">✕</button></span>';
+        }).join("") : '<span class="sub-chip">暂无子页面</span>') + '</div></div>';
+  }).join("");
+}
+function renderFiles() { var list = document.getElementById("fileList"); if (!state.files.length) { list.innerHTML = ""; return; } list.innerHTML = state.files.map(function(file) { return '<div class="file-item">' + file.name + '</div>'; }).join(""); }
+function bindDropzone() {
+  var dropzone = document.getElementById("dropzone"), fileInput = document.getElementById("fileInput"), chooseBtn = document.getElementById("chooseBtn");
+  chooseBtn.addEventListener("click", function() { fileInput.click(); });
+  dropzone.addEventListener("click", function() { fileInput.click(); });
+  fileInput.addEventListener("change", function() { state.files = Array.from(fileInput.files || []); renderFiles(); });
+  ["dragenter", "dragover"].forEach(function(eventName) { dropzone.addEventListener(eventName, function(event) { event.preventDefault(); dropzone.classList.add("active"); }); });
+  ["dragleave", "drop"].forEach(function(eventName) { dropzone.addEventListener(eventName, function(event) { event.preventDefault(); dropzone.classList.remove("active"); }); });
+  dropzone.addEventListener("drop", function(event) { state.files = Array.from(event.dataTransfer.files || []); renderFiles(); });
+}
+async function handleUpload() {
+  try { if (!state.files.length) throw new Error("请先选择要上传的文件");
+    var formData = new FormData(); formData.append("action", "upload"); formData.append("target", document.getElementById("uploadTarget").value);
+    state.files.forEach(function(file) { formData.append("files", file, file.name); });
+    var result = await request("upload", formData); setMessage("uploadMsg", result.message, "ok");
+    state.files = []; document.getElementById("fileInput").value = ""; renderFiles(); state.data = result.data; renderState();
+  } catch (error) { setMessage("uploadMsg", error.message, "err"); }
+}
+async function handleCreateCategory() {
+  try { var formData = new FormData(); formData.append("action", "create_category");
+    formData.append("name", document.getElementById("catName").value); formData.append("icon", document.getElementById("catIcon").value);
+    formData.append("description", document.getElementById("catDesc").value); formData.append("slug", document.getElementById("catSlug").value);
+    var result = await request("create_category", formData); setMessage("catMsg", result.message, "ok");
+    ["catName", "catDesc", "catSlug"].forEach(function(id) { document.getElementById(id).value = ""; }); document.getElementById("catIcon").value = "📁";
+    state.data = result.data; renderState();
+  } catch (error) { setMessage("catMsg", error.message, "err"); }
+}
+async function handleCreateSubpage() {
+  try { var formData = new FormData(); formData.append("action", "create_subpage");
+    formData.append("parent_slug", document.getElementById("subParent").value); formData.append("name", document.getElementById("subName").value);
+    formData.append("icon", document.getElementById("subIcon").value); formData.append("description", document.getElementById("subDesc").value);
+    formData.append("slug", document.getElementById("subSlug").value);
+    var result = await request("create_subpage", formData); setMessage("subMsg", result.message, "ok");
+    ["subName", "subDesc", "subSlug"].forEach(function(id) { document.getElementById(id).value = ""; }); document.getElementById("subIcon").value = "📄";
+    state.data = result.data; renderState();
+  } catch (error) { setMessage("subMsg", error.message, "err"); }
+}
+async function handleDeleteCategory(slug) {
+  try { if (!confirm("确定要删除板块 " + slug + " 及其所有文件吗？此操作不可撤销。")) return;
+    var formData = new FormData(); formData.append("action", "delete_category"); formData.append("slug", slug);
+    var result = await request("delete_category", formData); setMessage("uploadMsg", result.message, "ok"); state.data = result.data; renderState();
+  } catch (error) { setMessage("uploadMsg", error.message, "err"); }
+}
+async function handleDeleteSubpage(parentSlug, slug) {
+  try { if (!confirm("确定要删除子页面 " + slug + " 及其所有文件吗？此操作不可撤销。")) return;
+    var formData = new FormData(); formData.append("action", "delete_subpage"); formData.append("parent_slug", parentSlug); formData.append("slug", slug);
+    var result = await request("delete_subpage", formData); setMessage("uploadMsg", result.message, "ok"); state.data = result.data; renderState();
+  } catch (error) { setMessage("uploadMsg", error.message, "err"); }
+}
+document.getElementById("tree").addEventListener("click", function(event) {
+  var btn = event.target.closest("[data-action]"); if (!btn) return; event.preventDefault();
+  var action = btn.getAttribute("data-action"), slug = btn.getAttribute("data-slug"), parent = btn.getAttribute("data-parent");
+  if (action === "delete_category") handleDeleteCategory(slug); else if (action === "delete_subpage") handleDeleteSubpage(parent, slug);
+});
+document.getElementById("uploadBtn").addEventListener("click", handleUpload);
+document.getElementById("createCategoryBtn").addEventListener("click", handleCreateCategory);
+document.getElementById("createSubBtn").addEventListener("click", handleCreateSubpage);
+bindDropzone();
+loadState().catch(function(error) { setMessage("uploadMsg", error.message, "err"); });
+</script>
+</body>
+</html>

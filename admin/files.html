@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>文件管理</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#0F172A,#1E293B 50%,#334155);color:#F8FAFC;min-height:100vh;padding:24px}
+.wrap{width:min(1100px,100%);margin:0 auto}
+.bar{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.bar a{color:#60A5FA;text-decoration:none;font-size:14px}
+.bar h1{font-size:clamp(24px,4vw,36px);font-weight:900}
+.row{display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap;align-items:flex-end}
+.row .field{flex:1;min-width:240px;display:grid;gap:8px}
+.row button{width:auto;flex-shrink:0;padding:14px 24px}
+label{font-size:14px;color:#CBD5E1}
+select,input,button{width:100%;border:none;outline:none;font:inherit}
+select,input{background:#0F172A;color:#F8FAFC;border:1px solid #334155;border-radius:14px;padding:12px 14px}
+input:focus,select:focus{border-color:#60A5FA}
+button{background:linear-gradient(135deg,#2563EB,#60A5FA);color:#fff;border-radius:14px;padding:13px 16px;font-weight:800;cursor:pointer}
+.msg{margin-bottom:14px;padding:12px 14px;border-radius:14px;font-size:14px;display:none}
+.msg.ok{display:block;background:rgba(16,185,129,.12);border:1px solid rgba(52,211,153,.28);color:#BBF7D0}
+.msg.err{display:block;background:rgba(239,68,68,.12);border:1px solid rgba(248,113,113,.3);color:#FECACA}
+.fm-row{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:14px;background:#0F172A;border:1px solid #1E293B;margin-bottom:6px;font-size:15px}
+.fm-row:nth-child(odd){background:#111827}
+.fm-row a{color:#93C5FD;text-decoration:none;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fm-row a:hover{color:#60A5FA;text-decoration:underline}
+.fm-row .sz{color:#64748B;font-size:13px;white-space:nowrap;min-width:80px;text-align:right}
+.del{width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#FCA5A5;font-size:14px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.del:hover{background:rgba(239,68,68,.35);color:#FECACA}
+.pager{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:18px;font-size:14px;color:#94A3B8}
+.pager button{width:auto;padding:8px 18px;font-size:13px}
+.pager button:disabled{opacity:.35;cursor:default}
+.empty{padding:32px;color:#94A3B8;text-align:center;font-size:15px}
+@media(max-width:640px){body{padding:14px}.fm-row{gap:8px;padding:10px 14px;font-size:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="bar"><a href="/admin/">&larr; 返回后台</a><h1>文件管理</h1></div>
+<div class="row">
+<div class="field"><label for="target">选择目录</label><select id="target"><option value="">-- 加载中...</option></select></div>
+<button id="loadBtn" type="button">查看文件</button>
+</div>
+<div class="row"><input id="search" type="text" placeholder="搜索文件名..." oninput="doFilter()"></div>
+<div class="msg" id="msg"></div>
+<div id="list"><div class="empty">请选择目录后点击查看文件</div></div>
+<div class="pager" id="pager"></div>
+</div>
+<script>
+var API = "/api/admin";
+var allFiles = [];
+var page = 1;
+var pageSize = 30;
+
+function showMsg(text, type) {
+  var m = document.getElementById("msg");
+  m.className = "msg " + (type || "");
+  m.textContent = text || "";
+}
+
+function pad2(n) { return n < 10 ? "0" + n : "" + n; }
+
+function fmtDate(ts) {
+  var d = new Date(parseFloat(ts) * 1000);
+  return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+}
+
+function fmtSize(b) {
+  if (b < 1024) return b + " B";
+  if (b < 1048576) return (b / 1024).toFixed(1) + " KB";
+  if (b < 1073741824) return (b / 1048576).toFixed(2) + " MB";
+  return (b / 1073741824).toFixed(2) + " GB";
+}
+
+// Load directory dropdown
+function loadDirs() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", API + "?action=state", true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState !== 4) return;
+    if (xhr.status === 401) {
+      showMsg("请先登录后台", "err");
+      return;
+    }
+    try {
+      var d = JSON.parse(xhr.responseText);
+      if (!d.ok) throw new Error(d.message || "加载失败");
+      var sel = document.getElementById("target");
+      var html = "";
+      for (var i = 0; i < d.data.targets.length; i++) {
+        var t = d.data.targets[i];
+        html += '<option value="' + t.value + '">' + t.label + '</option>';
+      }
+      sel.innerHTML = html;
+    } catch(e) {
+      showMsg("加载目录失败: " + e.message, "err");
+    }
+  };
+  xhr.send();
+}
+
+// Load file list
+function loadFiles() {
+  var t = document.getElementById("target").value;
+  if (!t) { showMsg("请选择目录", "err"); return; }
+  showMsg("加载中...", "");
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", API, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState !== 4) return;
+    try {
+      var d = JSON.parse(xhr.responseText);
+      if (!d.ok) throw new Error(d.message || "加载失败");
+      document.getElementById("search").value = "";
+      allFiles = d.files || [];
+      page = 1;
+      doFilter();
+    } catch(e) {
+      showMsg(e.message, "err");
+    }
+  };
+  var fd = new FormData();
+  fd.append("action", "list_files");
+  fd.append("target", t);
+  xhr.send(fd);
+}
+
+// Delete file
+function delFile(path) {
+  if (!confirm("删除 " + path.split("/").pop() + "?")) return;
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", API, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState !== 4) return;
+    try {
+      var d = JSON.parse(xhr.responseText);
+      if (!d.ok) throw new Error(d.message || "删除失败");
+      showMsg(d.message, "ok");
+      loadFiles();
+    } catch(e) {
+      showMsg(e.message, "err");
+    }
+  };
+  var fd = new FormData();
+  fd.append("action", "delete_file");
+  fd.append("path", path);
+  xhr.send(fd);
+}
+
+// Filter and render
+function doFilter() {
+  if (!allFiles.length) return;
+  var q = (document.getElementById("search").value || "").toLowerCase();
+  var filtered = q ? allFiles.filter(function(f) { return f.name.toLowerCase().indexOf(q) !== -1; }) : allFiles;
+  var total = filtered.length;
+  var pages = Math.ceil(total / pageSize) || 1;
+  if (page > pages) page = pages;
+  var start = (page - 1) * pageSize;
+  var items = filtered.slice(start, start + pageSize);
+  var list = document.getElementById("list");
+  if (!items.length) {
+    list.innerHTML = '<div class="empty">' + (q ? "无匹配文件" : "此目录下无文件") + '</div>';
+  } else {
+    var html = "";
+    for (var i = 0; i < items.length; i++) {
+      var x = items[i];
+      html += '<div class="fm-row">';
+      html += '<a href="/' + x.path + '" target="_blank" rel="noopener noreferrer">' + x.name + '</a>';
+      html += '<span class="sz">' + fmtDate(x.modified) + '</span>';
+      html += '<span class="sz">' + fmtSize(x.size) + '</span>';
+      html += '<button class="del" data-path="' + x.path + '">✕</button>';
+      html += '</div>';
+    }
+    list.innerHTML = html;
+  }
+  var pg = document.getElementById("pager");
+  if (total <= pageSize) {
+    pg.innerHTML = total > 0 ? '<span>共 ' + total + ' 个文件</span>' : "";
+  } else {
+    pg.innerHTML = '<button onclick="goPage(' + (page - 1) + ')"' + (page <= 1 ? ' disabled' : '') + '>上一页</button>';
+    pg.innerHTML += '<span>' + page + ' / ' + pages + '（' + total + ' 个文件）</span>';
+    pg.innerHTML += '<button onclick="goPage(' + (page + 1) + ')"' + (page >= pages ? ' disabled' : '') + '>下一页</button>';
+  }
+  showMsg("", "");
+}
+
+function goPage(p) { page = p; doFilter(); }
+
+// Event delegation
+document.getElementById("loadBtn").onclick = loadFiles;
+document.getElementById("list").onclick = function(ev) {
+  var el = ev.target;
+  while (el && el !== this) {
+    if (el.getAttribute && el.getAttribute("data-path")) {
+      ev.preventDefault();
+      delFile(el.getAttribute("data-path"));
+      return;
+    }
+    el = el.parentNode;
+  }
+};
+
+// Init
+loadDirs();
+</script>
+</body>
+</html>

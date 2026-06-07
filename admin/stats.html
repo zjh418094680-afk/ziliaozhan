@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>数据统计 - 资料栈后台</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#0a0f1a,#111827 50%,#1a1f2e);color:#F8FAFC;min-height:100vh;overflow-x:hidden}
+.wrap{width:min(1200px,100%);margin:0 auto;padding:24px}
+.bar{display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.bar a{color:#60A5FA;text-decoration:none;font-size:14px}
+.bar h1{font-size:clamp(24px,4vw,34px);font-weight:900}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.card{padding:18px 20px;border-radius:16px;background:rgba(15,23,42,.8);border:1px solid rgba(148,163,184,.12);text-align:center}
+.card .num{font-size:32px;font-weight:900;background:linear-gradient(135deg,#60A5FA,#93C5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card .lbl{color:#94A3B8;font-size:12px;margin-top:4px}
+.tabs{display:flex;gap:6px;margin-bottom:20px}
+.tab{padding:9px 20px;border-radius:10px;background:#1E293B;border:1px solid #334155;color:#94A3B8;font-size:13px;font-weight:600;cursor:pointer;outline:none}
+.tab.on{background:#3B82F6;border-color:#3B82F6;color:#fff}
+.map-box{background:rgba(15,23,42,.6);border-radius:20px;border:1px solid rgba(148,163,184,.12);margin-bottom:20px;overflow:hidden}
+.map-box .inner{width:100%;height:clamp(420px,60vh,700px)}
+.updated{color:#64748B;font-size:12px;text-align:right;margin-top:8px}
+@media(max-width:640px){.wrap{padding:14px}.cards{grid-template-columns:1fr 1fr}.map-box .inner{height:350px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="bar"><a href="/admin/">&larr; 返回后台</a><h1>数据统计</h1></div>
+<div class="cards" id="cards">
+<div class="card"><div class="num" id="totalViews">--</div><div class="lbl">总访问量</div></div>
+<div class="card"><div class="num" id="totalIPs">--</div><div class="lbl">独立访客</div></div>
+<div class="card"><div class="num" id="todayViews">--</div><div class="lbl">今日访问</div></div>
+<div class="card"><div class="num" id="avgDaily">--</div><div class="lbl">日均访问</div></div>
+</div>
+<div class="tabs">
+<button class="tab on" onclick="switchPeriod('daily',this)">天</button>
+<button class="tab" onclick="switchPeriod('weekly',this)">周</button>
+<button class="tab" onclick="switchPeriod('monthly',this)">月</button>
+<button class="tab" onclick="switchPeriod('yearly',this)">年</button>
+</div>
+<div class="map-box" style="position:relative"><div class="inner" id="chinaMap"></div><div id="clickInfo" style="position:absolute;top:16px;left:16px;z-index:10;background:rgba(15,23,42,.92);border:1px solid #3B82F6;border-radius:10px;padding:12px 16px;font-size:13px;color:#F8FAFC;display:none;max-width:200px"><div style="font-weight:800;color:#60A5FA;margin-bottom:4px" id="clickName"></div><div style="color:#94A3B8" id="clickCount"></div></div></div>
+<div class="updated" id="updated"></div>
+</div>
+<script src="/admin/echarts.min.js"></script>
+<script>
+var data=null,currentPeriod='daily',chart=null;
+var nameMap={'Beijing':'北京市','Tianjin':'天津市','Hebei':'河北省','Shanxi':'山西省','Inner Mongolia':'内蒙古自治区',
+  'Liaoning':'辽宁省','Jilin':'吉林省','Heilongjiang':'黑龙江省','Shanghai':'上海市','Jiangsu':'江苏省',
+  'Zhejiang':'浙江省','Anhui':'安徽省','Fujian':'福建省','Jiangxi':'江西省','Shandong':'山东省',
+  'Henan':'河南省','Hubei':'湖北省','Hunan':'湖南省','Guangdong':'广东省','Guangxi':'广西壮族自治区',
+  'Hainan':'海南省','Chongqing':'重庆市','Sichuan':'四川省','Guizhou':'贵州省','Yunnan':'云南省',
+  'Tibet':'西藏自治区','Shaanxi':'陕西省','Gansu':'甘肃省','Qinghai':'青海省','Ningxia':'宁夏回族自治区',
+  'Xinjiang':'新疆维吾尔自治区','Taiwan':'台湾省','Hong Kong':'香港特别行政区','Macau':'澳门特别行政区'};
+
+function switchPeriod(p,btn){
+  currentPeriod=p;
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  btn.classList.add('on');
+  var labels={daily:'今日访问',weekly:'本周访问',monthly:'本月访问',yearly:'本年访问'};
+  document.querySelector('#cards .card:nth-child(3) .lbl').textContent=labels[p]||'今日访问';
+  var items=data[p]||[];
+  if(items.length>0){
+    document.getElementById('todayViews').textContent=items[items.length-1].views.toLocaleString();
+    var sum=0;items.forEach(function(d){sum+=d.views;});
+    var avgLabels={daily:'日均访问',weekly:'周均访问',monthly:'月均访问',yearly:'年均访问'};
+    document.querySelector('#cards .card:nth-child(4) .lbl').textContent=avgLabels[p]||'日均访问';
+    document.getElementById('avgDaily').textContent=Math.round(sum/items.length).toLocaleString();
+  }
+}
+
+function decodePath(p){try{return decodeURIComponent(p);}catch(e){return p;}}
+function friendlyName(p){var d=decodePath(p);if(d=="/")return "首页";if(/^\d{3}$/.test(d))return null;if(d.indexOf("/theme")===0||d.indexOf("/admin")===0||d.indexOf("/api")===0)return null;var cats={history:"历史文物",study:"学习资料",work:"工作文档",movie:"影视资源",game:"游戏相关",money:"赚钱项目",tool:"工具软件"};var m=d.match(/^\/cat\/(.+)\.html$/);if(m)return cats[m[1]]||m[1];var s=d.match(/^\/(\w+)\/(\w+)\/$/);if(s){var sub={gaokao:"高考资料",kaoyan:"考研资料"};return (cats[s[1]]||s[1])+" · "+(sub[s[2]]||s[2]);}if(d=="/about.html")return "关于我们";if(d=="/privacy.html")return "隐私政策";if(d=="/terms.html")return "服务条款";if(d=="/features.html")return "功能介绍";if(d=="/wechat_qr.jpg")return "微信二维码";var p=d.split("/"),l=p[p.length-1];if(!l)l=p[p.length-2]||d;if(l.length>30)l=l.substring(0,28);return l;}
+function shortPath(p,ml){
+  var d=decodePath(p);if(d==='/')return '首页';
+  var parts=d.split('/').filter(function(x){return x;});
+  if(parts.length<=2)return d;
+  var last=parts[parts.length-1];
+  if(last.length>ml)last=last.substring(0,ml)+'...';
+  return parts[0]+'/.../'+last;
+}
+
+function buildMapData(){
+  var mapData=[],maxV=0,seen={};
+  (data.provinces||[]).forEach(function(p){
+    var cn=nameMap[p.name]||p.name;
+    if(p.views>maxV)maxV=p.views;
+    mapData.push({name:cn,value:p.views});
+    seen[cn]=true;
+  });
+  // Fill ALL provinces with 0 if not in data
+  var allNames=['北京市','天津市','河北省','山西省','内蒙古自治区','辽宁省','吉林省','黑龙江省','上海市','江苏省','浙江省','安徽省','福建省','江西省','山东省','河南省','湖北省','湖南省','广东省','广西壮族自治区','海南省','重庆市','四川省','贵州省','云南省','西藏自治区','陕西省','甘肃省','青海省','宁夏回族自治区','新疆维吾尔自治区','台湾省','香港特别行政区','澳门特别行政区'];
+  allNames.forEach(function(n){if(!seen[n])mapData.push({name:n,value:0});});
+  return {data:mapData,max:maxV||1};
+}
+
+function initMap(){
+  document.getElementById('chinaMap').innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748B;font-size:14px">地图加载中...</div>';
+  var dom=document.getElementById('chinaMap');
+  if(chart){chart.dispose();}
+  chart=echarts.init(dom);
+
+  fetch('/admin/china.json',{credentials:'same-origin'}).then(function(r){
+    return r.json();
+  }).then(function(geoJson){
+    echarts.registerMap('china',geoJson);
+    var mapInfo=buildMapData();
+
+    // Build flight lines from visitor IPs to Qingdao
+    var qingdao=[120.38,36.07];
+    var flightLines=[];
+    var scatterPoints=[{name:'青岛',value:[120.38,36.07,12]}];
+    var seen={};
+    (data.geoData||[]).forEach(function(g){
+      if(!g.lat||!g.lon)return;
+      var key=g.lat.toFixed(1)+','+g.lon.toFixed(1);
+      if(seen[key])return;
+      seen[key]=true;
+      flightLines.push({coords:[[g.lon,g.lat],qingdao]});
+      scatterPoints.push({name:g.city||g.region||'',value:[g.lon,g.lat,3]});
+    });
+
+    var option={
+      tooltip:{
+        trigger:'item',
+        formatter:function(p){
+          if(p.seriesType==='map')return p.name+'<br/>访问: '+(p.value||0)+' 次';
+          if(p.seriesType==='lines')return '访问路径';
+          if(p.seriesType==='effectScatter'&&p.name!=='青岛')return p.name||'访客';
+          return p.name;
+        },
+        backgroundColor:'rgba(15,23,42,.95)',
+        borderColor:'#3B82F6',
+        textStyle:{color:'#F8FAFC',fontSize:13}
+      },
+      visualMap:{
+        min:0,max:Math.max(mapInfo.max,1),
+        left:'left',bottom:'5%',
+        text:['多','少'],textStyle:{color:'#94A3B8',fontSize:12},
+        inRange:{color:['#0f2b4a','#143661','#1a4278','#214d8f','#2b5aa6','#3568bd','#4478d4','#568aeb','#6d9cf2','#8ab4f9']},
+        calculable:false
+      },
+      geo:{
+        map:'china',roam:false,zoom:1.2,
+        center:[105,36],
+        itemStyle:{areaColor:'#0f2b4a',borderColor:'#1E293B',borderWidth:1},
+        emphasis:{label:{show:true,color:'#F8FAFC',fontSize:14,fontWeight:'bold'},itemStyle:{areaColor:'#3B82F6',borderColor:'#60A5FA',borderWidth:2}},
+        label:{show:false}
+      },
+      series:[{
+        type:'map',map:'china',geoIndex:0,
+        data:mapInfo.data
+      },{
+        type:'lines',coordinateSystem:'geo',polyline:false,
+        data:flightLines,
+        lineStyle:{color:'#60A5FA',width:1,opacity:.25,curveness:0.2},
+        effect:{show:true,period:6,trailLength:0.3,symbol:'circle',symbolSize:4,color:'#93C5FD'},
+        zlevel:1
+      },{
+        type:'effectScatter',coordinateSystem:'geo',
+        data:[{name:'青岛',value:[120.38,36.07,10]}],
+        symbolSize:function(v){return v[2]||8;},
+        showEffectOn:'render',
+        rippleEffect:{brushType:'stroke',scale:4,period:3},
+        itemStyle:{color:'#F59E0B',shadowBlur:20,shadowColor:'#F59E0B'},
+        label:{show:true,formatter:'青岛',position:'right',color:'#F59E0B',fontSize:12},
+        zlevel:2
+      },{
+        type:'effectScatter',coordinateSystem:'geo',
+        data:scatterPoints.filter(function(p){return p.name!=='青岛';}),
+        symbolSize:4,
+        showEffectOn:'emphasis',
+        rippleEffect:{brushType:'stroke',scale:2},
+        itemStyle:{color:'#60A5FA'},
+        label:{show:false},
+        zlevel:1
+      }]
+    };
+    chart.setOption(option);
+
+    // Click province to show info
+    // Show tooltip on click and keep it
+    chart.off('click');
+    chart.on('click',function(params){
+      if(!params.name)return;
+      chart.dispatchAction({type:'showTip',seriesIndex:0,dataIndex:params.dataIndex});
+      document.getElementById('clickName').textContent=params.name;
+      var v=params.value;
+      if(typeof v==='object'&&v!==null)v=v.value||v[2]||0;
+      document.getElementById('clickCount').textContent='访问: '+(v||0)+' 次';
+      document.getElementById('clickInfo').style.display='block';
+      clearTimeout(window._clickTimer);
+      window._clickTimer=setTimeout(function(){document.getElementById('clickInfo').style.display='none';},4000);
+    });
+  });
+
+  window.addEventListener('resize',function(){
+    if(chart){chart.resize();}
+  });
+  // Observe container size changes
+  if(window.ResizeObserver){
+    new ResizeObserver(function(){if(chart)chart.resize();}).observe(dom);
+  }
+}
+
+async function loadData(){
+  try{
+    var r=await fetch('/api/stats',{credentials:'same-origin'});
+    if(!r.ok)throw new Error('fail');
+    data=await r.json();
+    render();
+  }catch(e){
+    document.getElementById('cards').innerHTML='<div style="padding:40px;text-align:center;color:#64748B">加载失败: '+e.message+'<br><small>请刷新重试</small></div>';
+  }
+}
+
+function render(){
+  try{
+  document.getElementById('totalViews').textContent=(data.totalViews||0).toLocaleString();
+  document.getElementById('totalIPs').textContent=(data.totalIPs||0).toLocaleString();
+  document.getElementById('updated').textContent='更新于 '+(data.updated||'');
+  var dl=data.daily||[];
+  if(dl.length>0){
+    document.getElementById('todayViews').textContent=dl[dl.length-1].views.toLocaleString();
+    var sum=0;dl.forEach(function(d){sum+=d.views;});
+    document.getElementById('avgDaily').textContent=Math.round(sum/dl.length).toLocaleString();
+  }
+  initMap();
+  }catch(e){document.getElementById('cards').innerHTML='<div style="padding:40px;text-align:center;color:#FCA5A5">渲染失败: '+e.message+'</div>';}
+}
+
+
+loadData();
+</script>
+</body>
+</html>

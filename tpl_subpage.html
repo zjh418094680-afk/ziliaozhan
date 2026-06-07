@@ -1,0 +1,183 @@
+{{THEME_HEAD}}
+<section class="page-hero">
+    <div class="wrap">
+        <div class="breadcrumbs"><a href="/">首页</a><span>›</span><a href="/cat/{{CAT_SLUG}}.html">{{CAT_NAME}}</a><span>›</span><span>{{SUB_NAME}}</span></div>
+        <h1 class="page-title">{{SUB_ICON}} {{SUB_NAME}}</h1>
+        <div class="page-desc">{{SUB_DESC}}</div>
+    </div>
+</section>
+<section class="wrap">
+    <div class="chip-nav"><a class="chip" href="/cat/{{CAT_SLUG}}.html">← 返回 {{CAT_NAME}}</a></div>
+    <div class="toolbar">
+        <input type="text" class="search-input" id="fileSearch" placeholder="搜索本页文件...">
+    </div>
+    <div class="file-panel" id="filePanel"></div>
+    <div class="pagination-bar">
+        <select class="page-size-select" id="pageSizeSelect">
+            <option value="10">10条/页</option>
+            <option value="30" selected>30条/页</option>
+            <option value="50">50条/页</option>
+        </select>
+        <div class="pagination" id="pagination"></div>
+        <span class="page-info-text" id="pageInfo"></span>
+    </div>
+</section>
+<script>
+var ALL_FILES = {{FILES_JSON}};
+
+(function(){
+var allData = ALL_FILES;
+var filteredData = allData.slice();
+var pageSize = 30;
+var currentPage = 1;
+
+var filePanel = document.getElementById('filePanel');
+var paginationEl = document.getElementById('pagination');
+var pageInfo = document.getElementById('pageInfo');
+var searchInput = document.getElementById('fileSearch');
+var pageSizeSelect = document.getElementById('pageSizeSelect');
+
+function formatFileHTML(item) {
+    return '<div class="file-item">' +
+        '<div class="file-name"><a href="' + item.url + '" target="_blank" rel="noopener noreferrer">' + item.name + '</a></div>' +
+        '<div class="file-meta">' + item.date + '</div>' +
+        '<div class="file-meta">' + item.size + '</div>' +
+        '</div>';
+}
+
+function renderFiles(data) {
+    var start = (currentPage - 1) * pageSize;
+    var end = Math.min(start + pageSize, data.length);
+    var html = '';
+    for (var i = start; i < end; i++) {
+        html += formatFileHTML(data[i]);
+    }
+    if (data.length === 0) {
+        html = '<div class="empty">没有匹配的文件</div>';
+    }
+    filePanel.innerHTML = html;
+}
+
+function renderPagination(totalItems) {
+    var totalPages = Math.ceil(totalItems / pageSize);
+    if (totalPages <= 1) {
+        paginationEl.innerHTML = '';
+        pageInfo.innerHTML = '共 ' + totalItems + ' 个文件';
+        return;
+    }
+    currentPage = Math.min(currentPage, totalPages);
+    pageInfo.innerHTML = '共 ' + totalItems + ' 个文件 · 第 ' + currentPage + '/' + totalPages + ' 页';
+    var html = '';
+    if (currentPage > 1) {
+        html += '<span class="page-btn" id="prevBtn">&#8249;</span>';
+    } else {
+        html += '<span class="page-btn disabled">&#8249;</span>';
+    }
+    var pages = [];
+    if (totalPages <= 7) {
+        for (var p = 1; p <= totalPages; p++) pages.push(p);
+    } else {
+        pages.push(1);
+        if (currentPage > 3) pages.push('...');
+        var startP = Math.max(2, currentPage - 1);
+        var endP = Math.min(totalPages - 1, currentPage + 1);
+        for (var p = startP; p <= endP; p++) pages.push(p);
+        if (currentPage < totalPages - 2) pages.push('...');
+        pages.push(totalPages);
+    }
+    for (var i = 0; i < pages.length; i++) {
+        var p = pages[i];
+        if (p === '...') {
+            html += '<span class="page-ellipsis">...</span>';
+        } else if (p === currentPage) {
+            html += '<span class="page-btn active">' + p + '</span>';
+        } else {
+            html += '<span class="page-btn page-num" data-page="' + p + '">' + p + '</span>';
+        }
+    }
+    if (currentPage < totalPages) {
+        html += '<span class="page-btn" id="nextBtn">&#8250;</span>';
+    } else {
+        html += '<span class="page-btn disabled">&#8250;</span>';
+    }
+    paginationEl.innerHTML = html;
+    bindPaginationEvents();
+}
+
+function bindPaginationEvents() {
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var pageNums = document.getElementsByClassName('page-num');
+    if (prevBtn) {
+        prevBtn.onclick = function() {
+            if (currentPage > 1) { currentPage--; updateView(); }
+        };
+    }
+    if (nextBtn) {
+        nextBtn.onclick = function() {
+            var tp = Math.ceil(filteredData.length / pageSize);
+            if (currentPage < tp) { currentPage++; updateView(); }
+        };
+    }
+    for (var i = 0; i < pageNums.length; i++) {
+        pageNums[i].onclick = function() {
+            currentPage = parseInt(this.getAttribute('data-page'));
+            updateView();
+        };
+    }
+}
+
+function doSearch() {
+    var term = searchInput.value.toLowerCase().trim();
+    if (term === '') {
+        filteredData = allData.slice();
+    } else {
+        filteredData = [];
+        for (var i = 0; i < allData.length; i++) {
+            if (allData[i].name.toLowerCase().indexOf(term) >= 0) {
+                filteredData.push(allData[i]);
+            }
+        }
+    }
+    currentPage = 1;
+    updateView();
+}
+
+function updateView() {
+    renderFiles(filteredData);
+    renderPagination(filteredData.length);
+}
+
+searchInput.oninput = function() { doSearch(); };
+pageSizeSelect.onchange = function() {
+    pageSize = parseInt(pageSizeSelect.value);
+    currentPage = 1;
+    updateView();
+};
+updateView();
+})();
+</script>
+<style>
+.toolbar{display:flex;gap:12px;align-items:center;margin:0 0 16px;flex-wrap:wrap}
+.search-input{flex:1;min-width:180px;padding:10px 16px;border-radius:10px;border:1.5px solid #334155;background:#1E293B;color:#F1F5F9;font-size:14px;outline:none}
+.theme-light .search-input{background:#FFF;border-color:#E5E7EB;color:#111827}
+.search-input:focus{border-color:#3B82F6}
+.search-input::placeholder{color:#94A3B8}
+.theme-light .search-input::placeholder{color:#6B7280}
+.pagination-bar{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:20px;flex-wrap:wrap}
+.pagination-bar .page-size-select{height:34px;padding:0 10px;border-radius:8px;border:1.5px solid #334155;background:#1E293B;color:#94A3B8;font-size:14px;cursor:pointer;outline:none;flex-shrink:0;display:inline-flex;align-items:center}
+.theme-light .pagination-bar .page-size-select{background:#FFF;border-color:#E5E7EB;color:#6B7280}
+.pagination-bar .page-size-select:focus{border-color:#3B82F6}
+.pagination-bar .page-info-text{height:34px;padding:0 4px;font-size:13px;color:#94A3B8;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center}
+.theme-light .page-info-text{color:#6B7280}
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:20px;flex-wrap:wrap}
+.pagination-bar .pagination{margin-top:0;flex-wrap:wrap}
+.page-btn{min-width:34px;height:34px;border-radius:8px;border:1.5px solid #334155;background:#1E293B;color:#94A3B8;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;user-select:none;transition:all .2s}
+.theme-light .page-btn{border-color:#E5E7EB;background:#FFF;color:#6B7280}
+.page-btn:hover{border-color:#3B82F6;color:#3B82F6}
+.page-btn.active{background:#3B82F6;color:#FFF;border-color:#3B82F6;font-weight:700}
+.page-btn.disabled{opacity:.4;cursor:default;pointer-events:none}
+.page-ellipsis{padding:0 4px;color:#94A3B8;font-size:14px}
+@media(max-width:480px){.pagination-bar{gap:4px}.pagination-bar .page-size-select{height:30px;font-size:13px;padding:0 8px}.pagination-bar .page-info-text{font-size:12px}.page-btn{min-width:30px;height:30px;font-size:13px}}
+</style>
+{{FOOTER}}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="htmlRoot" class="<!--# if expr="$cookie_theme = light" -->theme-light<!--# else -->theme-dark<!--# endif -->">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>{{TITLE}}</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;background:#0F172A;color:#F1F5F9;line-height:1.6;min-height:100vh;transition:background .35s,color .35s}
+.theme-light,.theme-light body{background:#F9FAFB;color:#111827}
+.navbar{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.92);backdrop-filter:blur(12px);border-bottom:1px solid #334155;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.theme-light .navbar{background:rgba(255,255,255,.92);border-bottom:1px solid #E5E7EB}
+.navbar-title{font-weight:700;color:#3B82F6}
+.back-link{color:#94A3B8;font-size:14px;text-decoration:none}
+.theme-light .back-link{color:#6B7280}
+.back-link:hover{color:#3B82F6}
+.theme-toggle{width:56px;height:30px;border-radius:15px;border:2px solid #334155;background:#1E293B;cursor:pointer;display:flex;align-items:center;padding:0 4px;transition:all .3s;flex-shrink:0}
+.theme-light .theme-toggle{border-color:#E5E7EB;background:#FFF}
+.theme-toggle-knob{width:22px;height:22px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-size:13px;transition:margin-left .3s}
+.theme-light .theme-toggle-knob{margin-left:24px}
+.breadcrumb{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:13px;color:#94A3B8}
+.theme-light .breadcrumb{color:#6B7280}
+.breadcrumb a{color:#3B82F6;text-decoration:none}
+.main{max-width:1200px;margin:20px auto;padding:0 24px}
+.page-title{font-size:24px;font-weight:700;margin-bottom:4px;color:#F1F5F9}
+.theme-light .page-title{color:#111827}
+.page-info{font-size:13px;color:#94A3B8;margin-bottom:24px}
+.theme-light .page-info{color:#6B7280}
+.file-list{list-style:none}
+.file-item{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #334155;transition:background .15s}
+.theme-light .file-item{border-bottom:1px solid #E5E7EB}
+.file-item:nth-child(odd){background:rgba(30,41,59,.5)}
+.theme-light .file-item:nth-child(odd){background:rgba(249,250,251,.8)}
+.file-item:hover{background:rgba(59,130,246,.12)!important}
+.file-name{flex:1;font-size:15px;color:#F1F5F9;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;padding-right:16px}
+.theme-light .file-name{color:#111827}
+.file-name a{color:inherit;text-decoration:none}
+.file-name a:hover{color:#3B82F6}
+.file-date{font-size:12px;color:#94A3B8;white-space:nowrap;flex-shrink:0}
+.theme-light .file-date{color:#6B7280}
+.file-size{font-size:12px;color:#64748B;margin-left:16px;white-space:nowrap;flex-shrink:0;min-width:60px;text-align:right}
+.theme-light .file-size{color:#9CA3AF}
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:32px;flex-wrap:wrap}
+.page-btn{min-width:38px;height:38px;border-radius:8px;border:1.5px solid #334155;background:#1E293B;color:#94A3B8;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .2s}
+.theme-light .page-btn{border-color:#E5E7EB;background:#FFF;color:#6B7280}
+.page-btn:hover{border-color:#3B82F6;color:#3B82F6}
+.page-btn.active{background:#3B82F6;color:#FFF;border-color:#3B82F6;font-weight:700}
+.page-btn.disabled{opacity:.4;cursor:default;pointer-events:none}
+.page-ellipsis{padding:0 4px;color:#94A3B8;font-size:14px}
+.footer{text-align:center;padding:40px 24px;margin-top:60px;border-top:1px solid #334155;color:#94A3B8;font-size:13px}
+.theme-light .footer{border-top:1px solid #E5E7EB;color:#6B7280}
+@media(max-width:768px){.file-item{flex-wrap:wrap;gap:8px}.file-date{order:3;width:100%}.breadcrumb{font-size:12px}.page-title{font-size:20px}}
+@media(max-width:480px){.file-name{font-size:14px}.pagination{gap:4px}.page-btn{min-width:32px;height:32px;font-size:13px}}
+</style>
+</head>
+<body>
+<script>
+(function(){
+function getCookie(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n.replace(/([.$?*|{}()\\[\\]\\\\\\/\\+^])/g,'\\\\$1')+'=([^;]*)'));return m?decodeURIComponent(m[1]):'';}
+function getTheme(){try{var t=localStorage.getItem('theme');if(t)return t;}catch(e){}return getCookie('theme')||'dark';}
+var r=document.getElementById('htmlRoot');var s=getTheme();r.className=(s==='light')?'theme-light':'theme-dark';
+window.__setTheme=function(t){r.className=(t==='light')?'theme-light':'theme-dark';try{localStorage.setItem('theme',t);}catch(e){}document.cookie='theme='+encodeURIComponent(t)+'; path=/; max-age=31536000; samesite=lax';};
+})();
+</script>
+<nav class="navbar">
+<a href="{{BACK_URL}}" class="back-link">← {{BACK_LABEL}}</span>
+<span class="navbar-title">资料栈</span>
+<div class="theme-toggle" id="themeToggle"><div class="theme-toggle-knob" id="themeKnob">☀️</div></div>
+</nav>
+<div class="breadcrumb">
+<a href="/">首页</span> › <a href="/cat/study.html">学习资料</span> › <a href="{{PROVINCE_URL}}">{{PROVINCE}}</span> › <span>{{SUBJECT}}</span>
+</div>
+<section class="main">
+<h1 class="page-title">{{PROVINCE}} · {{SUBJECT}}</h1>
+<p class="page-info">共 {{TOTAL_FILES}} 个文件 · 第 {{PAGE}}/{{TOTAL_PAGES}} 页</p>
+<ul class="file-list">
+{{FILE_LIST}}
+</ul>
+<div class="pagination">
+{{PAGINATION}}
+</div>
+</section>
+<footer class="footer"><p>© 2026 资料栈 · 保留所有权利</p><p style="margin-top:4px">📧 联系站内管理员</p></footer>
+<script>
+(function(){var h=document.getElementById('htmlRoot'),k=document.getElementById('themeKnob');k.textContent=h.className.indexOf('theme-light')!==-1?'☀️':'🌙'})();
+document.getElementById('themeToggle').onclick=function(){var h=document.getElementById('htmlRoot'),k=document.getElementById('themeKnob');if(h.className.indexOf('theme-light')!==-1){window.__setTheme('dark');k.textContent='🌙'}else{window.__setTheme('light');k.textContent='☀️'}};
+</script>
+</body>
+</html>

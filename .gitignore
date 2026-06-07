@@ -1,0 +1,8 @@
+study/
+history/
+*.pdf
+*.PDF
+__pycache__/
+*.pyc
+*.bak*
+.DS_Store

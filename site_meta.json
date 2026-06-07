@@ -1,0 +1,68 @@
+{
+  "site_name": "资料栈",
+  "contact_email": "联系站内管理员",
+  "categories": [
+    {
+      "slug": "study",
+      "name": "学习资料",
+      "icon": "📚",
+      "description": "课程资料、试题整理、复习笔记",
+      "subpages": [
+        {
+          "slug": "gaokao",
+          "name": "高考资料",
+          "icon": "📝",
+          "description": "高考真题、模拟卷、答案解析"
+        },
+        {
+          "slug": "kaoyan",
+          "name": "考研资料",
+          "icon": "🎓",
+          "description": "考研公共课、专业课和复习资料"
+        }
+      ]
+    },
+    {
+      "slug": "work",
+      "name": "工作文档",
+      "icon": "💼",
+      "description": "工作模板、资料汇总、办公素材",
+      "subpages": []
+    },
+    {
+      "slug": "movie",
+      "name": "影视资源",
+      "icon": "🎬",
+      "description": "视频资源、字幕整理、影视资料",
+      "subpages": []
+    },
+    {
+      "slug": "game",
+      "name": "游戏相关",
+      "icon": "🎮",
+      "description": "游戏工具、攻略资料、整合资源",
+      "subpages": []
+    },
+    {
+      "slug": "money",
+      "name": "赚钱项目",
+      "icon": "💰",
+      "description": "项目资料、案例拆解、实操方案",
+      "subpages": []
+    },
+    {
+      "slug": "history",
+      "name": "历史文物",
+      "icon": "🏛️",
+      "description": "历史文档、文物资料、古代文明内容",
+      "subpages": []
+    },
+    {
+      "slug": "tool",
+      "name": "工具软件",
+      "icon": "🔧",
+      "description": "实用工具、软件包、配置资源",
+      "subpages": []
+    }
+  ]
+}
