@@ -234,7 +234,7 @@ CSS = (
     ".footer-col a{font-size:12px;transition:color .2s}"
     ".footer-col a:hover{color:#60A5FA}"
     ".footer-bottom{max-width:1100px;margin:0 auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.03);"
-    "display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px}"
+    "display:flex;justify-content:center;gap:24px;flex-wrap:wrap;gap:10px;font-size:11px}"
     ".theme-light .footer-bottom{border-color:rgba(0,0,0,.03)}"
     ".footer-email{color:#3B82F6}"
 
