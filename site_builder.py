@@ -255,23 +255,89 @@ CSS = (
     ".to-dark{padding-right:9px;font-size:16px}.pg-btn{min-width:28px;height:28px;font-size:12px}}"
 )
 
+# A restrained editorial layer for a long-running document library.
+REFINED_CSS = (
+    ":root{color-scheme:dark light}"
+    "body{background:#0b0d0e;color:#c9ced3;letter-spacing:0}"
+    ".theme-light body{background:#f6f7f5;color:#303531}"
+    ".navbar{background:rgba(11,13,14,.94);border-color:#24282a;backdrop-filter:blur(12px)}"
+    ".theme-light .navbar{background:rgba(246,247,245,.94);border-color:#dfe3df}"
+    ".nav-inner{min-height:64px;gap:28px}"
+    ".logo{font-size:18px;letter-spacing:0}.logo-icon{width:34px;height:34px;border-radius:7px;"
+    "background:#d4a84f;box-shadow:none;color:#16191a}.logo-icon svg{width:19px;height:19px}"
+    ".nav-links{display:flex;align-items:center;gap:24px;margin-left:auto}"
+    ".nav-links a{font-size:13px;color:#939b9f}.nav-links a:hover{color:#f2f4f3}"
+    ".theme-light .nav-links a{color:#657069}.theme-light .nav-links a:hover{color:#18201b}"
+    ".theme-btn{width:34px;height:34px;border-radius:7px;display:grid;place-items:center;position:relative;"
+    "background:#15191b;border:1px solid #2a3032;cursor:pointer;overflow:hidden}"
+    ".theme-light .theme-btn{background:#fff;border-color:#d8ddd9}"
+    ".theme-link{padding:0!important;justify-content:center!important}.theme-link svg{width:16px;height:16px}"
+    ".theme-knob{display:none}"
+    ".hero{padding:72px 24px 46px;text-align:left;background:#0f1213;border-bottom:1px solid #202527}"
+    ".theme-light .hero{background:#eef1ed;border-color:#dce1dc}"
+    ".hero-inner{max-width:1100px;margin:0 auto}.hero-kicker{font-size:12px;color:#d4a84f;font-weight:700;"
+    "margin-bottom:16px}.hero h1{max-width:720px;font-size:clamp(38px,5.5vw,62px);line-height:1.12;"
+    "letter-spacing:0;margin-bottom:18px;font-weight:760}.hero h1 em{color:#d4a84f;background:none;"
+    "-webkit-text-fill-color:currentColor}.hero p{margin:0 0 28px;max-width:680px;font-size:16px;color:#949c9f}"
+    ".theme-light .hero p{color:#626b65}.hero-actions{justify-content:flex-start}"
+    ".btn{border-radius:7px;padding:12px 20px;font-size:14px;transition:background .18s,border-color .18s}"
+    ".btn:hover{transform:none!important;box-shadow:none!important}"
+    ".btn-primary{background:#d4a84f;color:#17191a;box-shadow:none}.btn-primary:hover{background:#e0b85f}"
+    ".btn-ghost{background:transparent;border-color:#33393b}.btn-icon{width:17px;height:17px}"
+    ".stats{max-width:1100px;margin:0 auto;justify-content:flex-start;gap:0;padding:28px 24px 64px}"
+    ".stat{text-align:left;min-width:150px;padding-right:40px;margin-right:40px;border-right:1px solid #262b2d}"
+    ".stat:last-child{border-right:0}.stat-num{font-size:28px;letter-spacing:0}.stat-num-grad{background:none;"
+    "-webkit-text-fill-color:currentColor;color:#edf0ee}.theme-light .stat-num-grad{color:#202720}"
+    ".stat-label{text-transform:none;letter-spacing:0;margin-top:4px;color:#747c80}"
+    ".sec{padding-bottom:64px}.sec-inner{max-width:1100px}.sec-tag{color:#b89143;letter-spacing:0;"
+    "text-transform:none;font-size:12px}.sec-title{font-size:28px;letter-spacing:0;margin-bottom:8px}"
+    ".sec-sub{margin-bottom:24px}.file-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;"
+    "background:#252a2c;border:1px solid #252a2c;border-radius:7px;overflow:hidden}"
+    ".file-card{border:0;border-radius:0;background:#101314;padding:15px 16px;transform:none}"
+    ".file-card:hover{background:#171b1c;transform:none}.fc-icon{border-radius:5px;background:#251719;"
+    "border-color:#4d272a}.fc-name{font-size:13px}.cat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}"
+    ".cat-card{border-radius:7px;padding:20px;background:#101314;border-color:#292e30;transform:none}"
+    ".cat-card:hover{transform:none;box-shadow:none;background:#15191a;border-color:#4c5356}"
+    ".cat-icon{width:42px;height:42px;border-radius:6px;background:#171b1c;border-color:#303638;color:#d4a84f}"
+    ".cat-icon svg{width:21px;height:21px}.cat-arrow svg{width:17px;height:17px}"
+    ".cat-name{font-size:15px}.page-hero{background:#0f1213;border-bottom:1px solid #202527}"
+    ".theme-light .page-hero{background:#eef1ed;border-color:#dce1dc}"
+    ".page-title{letter-spacing:0}.page-title-icon{display:inline-grid;place-items:center;width:30px;height:30px;"
+    "vertical-align:-6px;margin-right:5px;color:#d4a84f}.page-title-icon svg{width:24px;height:24px}"
+    ".chip{border-radius:6px}.chip.active{background:#d4a84f;border-color:#d4a84f;color:#17191a}"
+    ".sub-card,.file-panel,.search-input{border-radius:7px}.sub-icon{color:#d4a84f}.sub-icon svg{width:28px;height:28px}"
+    ".footer{background:#090b0c;border-color:#202426}.theme-light .footer{background:#eef1ed;border-color:#dce1dc}"
+    ".footer-col h4{text-transform:none;letter-spacing:0}.footer-bottom{justify-content:space-between}"
+    "@media(max-width:768px){.nav-links{display:none}.hero{padding:52px 20px 36px}.file-grid,.cat-grid{grid-template-columns:1fr}"
+    ".stats{padding-bottom:52px}.stat{min-width:0;flex:1;padding-right:18px;margin-right:18px}.footer-bottom{justify-content:center}}"
+    "@media(max-width:480px){.hero h1{font-size:34px}.hero-actions{display:grid;grid-template-columns:1fr 1fr}"
+    ".btn{justify-content:center;padding:11px 12px}.stats{gap:0}.stat-num{font-size:24px}.stat-label{font-size:11px}"
+    ".sec-title{font-size:25px}.theme-btn{width:34px;height:34px}.cat-card{padding:16px}}"
+)
+
 # ── SVG Icons ──────────────────────────────────────────
 
 LOGO_SVG = (
-    '<svg viewBox="0 0 48 48" role="img">'
-    '<defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">'
-    '<stop offset="0%" stop-color="#F7D08A"/><stop offset="40%" stop-color="#D9A441"/>'
-    '<stop offset="72%" stop-color="#8D5A2A"/><stop offset="100%" stop-color="#557A62"/>'
-    '</linearGradient></defs>'
-    '<path d="M17 9h14l3 6H14l3-6Z" fill="url(#bg)" stroke="#111827" stroke-width="1.5" stroke-linejoin="round"/>'
-    '<path d="M15 15h18v5H15z" fill="url(#bg)" stroke="#111827" stroke-width="1.4" stroke-linejoin="round"/>'
-    '<path d="M14 19h20v8c0 4.6-3.4 8-8 8h-4c-4.6 0-8-3.4-8-8v-8Z" fill="url(#bg)" stroke="#111827" stroke-width="1.7" stroke-linejoin="round"/>'
-    '<path d="M18 35h12l-1.8 3.5H19.8L18 35Z" fill="url(#bg)" stroke="#111827" stroke-width="1.4" stroke-linejoin="round"/>'
-    '<path d="M24 4v3" fill="none" stroke="#111827" stroke-width="1.6" stroke-linecap="round"/>'
-    '<circle cx="24" cy="24" r="2.1" fill="#F7D08A" stroke="#111827" stroke-width=".8"/></svg>'
+    '<svg viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="1.8" '
+    'stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v14H4z"/>'
+    '<path d="M7 5.5V3h10v2.5M8 10h8M8 14h5"/></svg>'
 )
 
 LOGO_SVG_SMALL = LOGO_SVG.replace('viewBox="0 0 48 48"', 'viewBox="0 0 48 48" style="width:16px;height:16px"')
+
+ICON_SVGS = {
+    "study": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5z"/></svg>',
+    "history": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V9h14v12M3 9l9-6 9 6M9 13v4M15 13v4"/></svg>',
+    "default": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>',
+}
+
+ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M14 7l5 5-5 5"/></svg>'
+SEARCH_SVG = '<svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>'
+SUN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+MOON_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 15.5A8 8 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5z"/></svg>'
+
+def _category_icon(slug):
+    return ICON_SVGS.get(slug, ICON_SVGS["default"])
 
 # ── HTML Templates ─────────────────────────────────────
 
@@ -281,12 +347,17 @@ def _navbar():
         '<nav class="navbar"><div class="nav-inner">'
         '<a href="/" class="logo"><span class="logo-icon" aria-hidden="true">'
         + LOGO_SVG + '</span><span>' + SITE_TITLE + '</span></a>'
+        '<div class="nav-links"><a href="/">首页</a><a href="/cat/study.html">资料库</a><a href="/about.html">关于</a></div>'
+        '<button class="theme-btn" id="themeBtn" type="button" aria-label="切换明暗主题">'
+        '<span class="theme-link to-light">' + SUN_SVG + '</span>'
+        '<span class="theme-link to-dark">' + MOON_SVG + '</span>'
+        '<span class="theme-knob" aria-hidden="true"></span></button>'
         '</div></nav>'
     )
 def _footer(meta):
     """Return the shared footer HTML."""
     cat_links = "".join(
-        '<li><a href="/cat/' + escape(c["slug"]) + '.html">' + escape(c["icon"]) + " " + escape(c["name"]) + "</a></li>"
+        '<li><a href="/cat/' + escape(c["slug"]) + '.html">' + escape(c["name"]) + "</a></li>"
         for c in meta["categories"]
     )
     return (
@@ -296,9 +367,8 @@ def _footer(meta):
         + '</div><p>安全、高效、便捷。高考试题根据著作权法第五条属于公有领域。</p></div>'
         '<div class="footer-col"><h4>资源</h4><ul><li><a href="/">首页</a></li>'
         + cat_links + '<li><a href="/about.html">关于</a></li></ul></div>'
-        '<div class="footer-col"><h4>联系</h4><ul>'
-        '<li><a href="mailto:' + escape(meta["contact_email"]) + '" class="footer-email">'
-        + escape(meta["contact_email"]) + "</a></li>"
+        '<div class="footer-col"><h4>站点信息</h4><ul>'
+        '<li><a href="/about.html" class="footer-email">内容与版权说明</a></li>'
         '<li><a href="/privacy.html">隐私政策</a></li><li><a href="/terms.html">服务条款</a></li>'
         '</ul></div></div>'
         '<div class="footer-bottom"><span>&copy; 2026 ' + escape(meta["site_name"]) + '</span><span><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener">赣ICP备2026012339号-1</a></span></div></footer>'
@@ -310,7 +380,7 @@ def _page(title, body, meta):
         '<!DOCTYPE html>\n<html lang="zh-CN" class="<!--# if expr=\"$cookie_theme = light\" -->theme-light<!--# else -->theme-dark<!--# endif -->">\n'
         '<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n'
         "<title>" + escape(title) + "</title>\n"
-        '<link rel="icon" href="/favicon.ico">\n<meta name="description" content="' + escape(title) + '">\n<style>\n' + CSS + "\n</style>\n</head>\n<body>\n"
+        '<link rel="icon" href="/favicon.ico">\n<meta name="description" content="' + escape(title) + '">\n<style>\n' + CSS + REFINED_CSS + "\n</style>\n</head>\n<body>\n"
         + _navbar() + "\n" + body + "\n" + _footer(meta) + "\n<script>(function(){var h=document.documentElement;var b=document.getElementById(\"themeBtn\");b.onclick=function(){var dark=h.className.indexOf(\"theme-dark\")!==-1;h.className=dark?\"theme-light\":\"theme-dark\";document.cookie=\"theme=\"+(dark?\"light\":\"dark\")+\";path=/;max-age=31536000;SameSite=Lax\";};})();</script>\n</body>\n</html>"
     )
 
@@ -420,12 +490,14 @@ def build_homepage(meta, grouped):
     cards = []
     for c in meta["categories"]:
         cnt = grouped[c["slug"]]["count"]
+        if cnt == 0:
+            continue
         cards.append(
             '<a href="/cat/' + escape(c["slug"]) + '.html" class="cat-card">'
-            '<div class="cat-icon">' + escape(c["icon"]) + '</div>'
+            '<div class="cat-icon" aria-hidden="true">' + _category_icon(c["slug"]) + '</div>'
             '<div class="cat-info"><div class="cat-name">' + escape(c["name"]) + '</div>'
-            '<div class="cat-count">' + str(cnt) + " 个文件</div></div>"
-            '<span class="cat-arrow">\u2192</span></a>'
+            '<div class="cat-count">' + str(cnt) + " 份资料</div></div>"
+            '<span class="cat-arrow" aria-hidden="true">' + ARROW_SVG + '</span></a>'
         )
 
     # Recent files (from study/gaokao)
@@ -450,32 +522,32 @@ def build_homepage(meta, grouped):
     total = sum(g["count"] for g in grouped.values())
 
     body = (
-        '<div class="theme-btn" id="themeBtn" style="cursor:pointer;float:right;margin:12px 24px 0 0"><span class="theme-link to-light">\u2600\ufe0f</span><span class="theme-link to-dark">\U0001f319</span><span class="theme-knob" aria-hidden="true"></span></div>' +
         '<section class="hero">'
-        "<h1>找资料<em>更简单</em></h1>"
-        "<p>高考真题、学习资料、工作文档 &mdash; 清爽、快速、直接下载</p>"
+        '<div class="hero-inner"><div class="hero-kicker">中高考真题资料库</div>'
+        "<h1>历年真题，<em>按年份与科目整理</em></h1>"
+        "<p>收录各地区中高考空白试卷，保留原始 PDF，打开即可预览或下载。</p>"
         '<div class="hero-actions">'
-        '<a href="/cat/study.html" class="btn btn-primary">\U0001f4da 浏览资料 →</a>'
-        '<a href="/about.html" class="btn btn-ghost">了解更多</a>'
-        "</div></section>"
+        '<a href="/cat/study.html" class="btn btn-primary">' + SEARCH_SVG + '进入资料库</a>'
+        '<a href="/about.html" class="btn btn-ghost">关于本站</a>'
+        "</div></div></section>"
         '<section class="stats">'
         '<div class="stat"><div class="stat-num"><span class="stat-num-grad">' + str(total)
-        + '</span></div><div class="stat-label">文件总数</div></div>'
+        + '</span></div><div class="stat-label">份可用资料</div></div>'
         '<div class="stat"><div class="stat-num"><span class="stat-num-grad">17</span></div>'
-        '<div class="stat-label">年份</div></div>'
+        '<div class="stat-label">个年份跨度</div></div>'
         '<div class="stat"><div class="stat-num"><span class="stat-num-grad">'
-        + str(len(meta["categories"])) + '</span></div><div class="stat-label">分类</div></div>'
+        + str(len(cards)) + '</span></div><div class="stat-label">个有效分类</div></div>'
         "</section>"
         '<section class="sec"><div class="sec-inner">'
-        '<div class="sec-tag">最近更新</div>'
-        '<div class="sec-title">最新文件</div>'
-        '<div class="sec-sub">最近上传的高考真题试卷</div>'
+        '<div class="sec-tag">本周整理</div>'
+        '<div class="sec-title">最近收录</div>'
+        '<div class="sec-sub">最新归档的真题试卷，按上传时间排列。</div>'
         '<div class="file-grid">' + "".join(recent_rows) + "</div>"
         "</div></section>"
         '<section class="sec"><div class="sec-inner">'
-        '<div class="sec-tag">浏览</div>'
-        '<div class="sec-title">按分类</div>'
-        '<div class="sec-sub">选择分类快速找到你需要的资料</div>'
+        '<div class="sec-tag">资料导航</div>'
+        '<div class="sec-title">按用途浏览</div>'
+        '<div class="sec-sub">只展示已有内容的分类，减少无效入口。</div>'
         '<div class="cat-grid">' + "".join(cards) + "</div>"
         "</div></section>"
     )
@@ -489,7 +561,7 @@ def build_category_page(meta, cat, grouped):
         act = " active" if c["slug"] == cat["slug"] else ""
         chips.append(
             '<a class="chip' + act + '" href="/cat/' + escape(c["slug"]) + '.html">'
-            + escape(c["icon"]) + " " + escape(c["name"]) + "</a>"
+            + escape(c["name"]) + "</a>"
         )
 
     # Subpage cards
@@ -500,7 +572,7 @@ def build_category_page(meta, cat, grouped):
             cnt = len(grouped[cat["slug"]]["subpages"].get(sp["slug"], []))
             sc.append(
                 '<a href="/' + escape(cat["slug"]) + "/" + escape(sp["slug"]) + '/" class="sub-card">'
-                '<div class="sub-icon">' + escape(sp["icon"]) + '</div>'
+                '<div class="sub-icon" aria-hidden="true">' + _category_icon(cat["slug"]) + '</div>'
                 '<div class="sub-name">' + escape(sp["name"]) + '</div>'
                 '<div class="sub-desc">' + escape(sp["description"]) + " \u00b7 " + str(cnt) + " 个文件</div></a>"
             )
@@ -522,7 +594,7 @@ def build_category_page(meta, cat, grouped):
         '<section class="page-hero"><div class="wrap">'
         '<div class="breadcrumbs"><a href="/">首页</a><span>\u203a</span>'
         "<span>" + escape(cat["name"]) + "</span></div>"
-        '<h1 class="page-title">' + escape(cat["icon"]) + " " + escape(cat["name"]) + "</h1>"
+        '<h1 class="page-title"><span class="page-title-icon">' + _category_icon(cat["slug"]) + '</span>' + escape(cat["name"]) + "</h1>"
         '<div class="page-desc">' + escape(cat["description"]) + "</div>"
         '<div class="chip-nav">' + "".join(chips) + "</div></div></section>"
         '<section class="sec"><div class="sec-inner">'
@@ -549,7 +621,7 @@ def build_subpage(meta, cat, sp, sp_items):
         '<div class="breadcrumbs"><a href="/">首页</a><span>\u203a</span>'
         '<a href="/cat/' + escape(cat["slug"]) + '.html">' + escape(cat["name"]) + '</a>'
         "<span>\u203a</span><span>" + escape(sp["name"]) + "</span></div>"
-        '<h1 class="page-title">' + escape(sp["icon"]) + " " + escape(sp["name"]) + "</h1>"
+        '<h1 class="page-title"><span class="page-title-icon">' + _category_icon(cat["slug"]) + '</span>' + escape(sp["name"]) + "</h1>"
         '<div class="page-desc">' + escape(sp["description"]) + "</div>"
         '<div class="chip-nav"><a class="chip" href="/cat/' + escape(cat["slug"])
         + '.html">\u2190 返回</a></div></div></section>'
