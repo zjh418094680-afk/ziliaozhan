@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://ziliaozhan.vip/sitemap.xml
