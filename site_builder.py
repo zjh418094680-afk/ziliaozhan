@@ -310,7 +310,7 @@ def _page(title, body, meta):
         '<!DOCTYPE html>\n<html lang="zh-CN" class="<!--# if expr=\"$cookie_theme = light\" -->theme-light<!--# else -->theme-dark<!--# endif -->">\n'
         '<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n'
         "<title>" + escape(title) + "</title>\n"
-        '<link rel="icon" href="/favicon.ico">\n<style>\n' + CSS + "\n</style>\n</head>\n<body>\n"
+        '<link rel="icon" href="/favicon.ico">\n<meta name="description" content="' + escape(title) + '">\n<style>\n' + CSS + "\n</style>\n</head>\n<body>\n"
         + _navbar() + "\n" + body + "\n" + _footer(meta) + "\n<script>(function(){var h=document.documentElement;var b=document.getElementById(\"themeBtn\");b.onclick=function(){var dark=h.className.indexOf(\"theme-dark\")!==-1;h.className=dark?\"theme-light\":\"theme-dark\";document.cookie=\"theme=\"+(dark?\"light\":\"dark\")+\";path=/;max-age=31536000;SameSite=Lax\";};})();</script>\n</body>\n</html>"
     )
 
@@ -479,7 +479,7 @@ def build_homepage(meta, grouped):
         '<div class="cat-grid">' + "".join(cards) + "</div>"
         "</div></section>"
     )
-    write_text(SITE_ROOT / "index.html", _page(meta["site_name"] + " \u00b7 " + SITE_NAME, body, meta))
+    write_text(SITE_ROOT / "index.html", _page(meta["site_name"] + " - 中高考真题空白卷免费下载", body, meta))
 
 def build_category_page(meta, cat, grouped):
     """Generate cat/{slug}.html with subpage cards and direct file list."""
