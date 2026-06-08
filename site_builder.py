@@ -38,7 +38,7 @@ SITE_ROOT   = Path(__file__).resolve().parent
 META_PATH   = SITE_ROOT / "site_meta.json"
 FILES_PATH  = SITE_ROOT / "files.json"
 CATEGORY_DIR = SITE_ROOT / "cat"
-SITE_NAME    = "Ziliaozhan"
+SITE_NAME    = "资料栈"
 SITE_TITLE   = "\u8d44\u6599\u6808"  # 资料栈
 
 # ── CSS ────────────────────────────────────────────────
