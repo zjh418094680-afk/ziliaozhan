@@ -301,7 +301,7 @@ def _footer(meta):
         + escape(meta["contact_email"]) + "</a></li>"
         '<li><a href="/privacy.html">隐私政策</a></li><li><a href="/terms.html">服务条款</a></li>'
         '</ul></div></div>'
-        '<div class="footer-bottom"><span>&copy; 2026 ' + escape(meta["site_name"]) + "</span></div></footer>"
+        '<div class="footer-bottom"><span>&copy; 2026 ' + escape(meta["site_name"]) + '</span><span><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener">赣ICP备2026012339号-1</a></span></div></footer>'
     )
 
 def _page(title, body, meta):
