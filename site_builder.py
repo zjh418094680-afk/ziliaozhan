@@ -558,8 +558,8 @@ def build_subpage(meta, cat, sp, sp_items):
         '<div class="file-panel" id="p"></div>'
         '<div class="pg-bar">'
         '<select class="pg-size-select" id="z">'
-        '<option value="10">10/page</option><option value="30" selected>30/page</option>'
-        '<option value="50">50/page</option></select>'
+        '<option value="10">10条/页</option><option value="30" selected>30条/页</option>'
+        '<option value="50">50条/页</option></select>'
         '<div id="n"></div><span class="pg-info" id="i"></span>'
         "</div></div></section>"
         # Embedded data + ES5 search/pagination

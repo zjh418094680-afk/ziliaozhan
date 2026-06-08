@@ -25,13 +25,15 @@ def parse_log_line(line, client_ip):
         
         method, path = request[0], request[1]
         
-        # 只统计对 materials 目录下文件的请求
-        if not path.startswith('/materials/') and not path.startswith('/files.json'):
-            if path != '/':
-                return None
+        # 统计所有非静态资源的请求
+        skip_exts = ('.css', '.js', '.ico', '.svg', '.png', '.jpg', '.gif', '.woff', '.woff2', '.ttf')
+        if any(path.lower().endswith(ext) for ext in skip_exts):
+            return None
+        if path in ('/', '/favicon.ico', '/robots.txt'):
+            return None
         
-        # 提取文件名
-        filename = path.split('/')[-1]
+        # 提取资源路径
+        filename = path
         if not filename:
             return None
         
@@ -39,8 +41,8 @@ def parse_log_line(line, client_ip):
         if filename in ['', 'index.html', 'files.json', 'stats.json']:
             return None
         
-        # 判断是下载还是查看
-        is_download = 'download' in path.lower() or method == 'GET'
+        # 判断：PDF文件算下载，HTML算查看
+        is_download = path.lower().endswith('.pdf')
         
         return {
             'filename': filename,
