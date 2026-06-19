@@ -1,0 +1,240 @@
+server {
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_min_length 256;
+    gzip_types text/css application/json application/javascript text/xml text/plain text/x-component application/xhtml+xml application/font-woff font/woff2 font/opentype image/svg+xml;
+    server_name ziliaozhan.vip www.ziliaozhan.vip;
+    root /var/www/materials;
+    index index.html;
+    client_max_body_size 10m;
+
+    ssi on;
+
+
+    # Quiet obvious scanner/probe noise without affecting real visitors.
+    location ~* ^/(?:wp-admin(?:/|$)|wp-login\.php$|xmlrpc\.php$|\.git(?:/|$)|\.env(?:/|$)|composer\.(?:json|lock)$|vendor(?:/|$)|phpmyadmin(?:/|$)|pma(?:/|$)|cgi-bin(?:/|$)|server-status(?:/|$)|SDK/webLanguage(?:/|$)|webui(?:/|$)|\.DS_Store$) {
+        return 444;
+    }
+
+    location = /wp-admin/install.php {
+        return 444;
+    }
+    location = /admin {
+        return 301 /admin/;
+    }
+
+    location ^~ /admin/ {
+        auth_basic "Materials Admin";
+        auth_basic_user_file /etc/nginx/.materials_admin_htpasswd;
+        add_header Cache-Control "no-store";
+        try_files $uri $uri/ =404;
+    }
+
+    location = /theme {
+        add_header Cache-Control "no-store";
+        set $theme "dark";
+        if ($arg_set = "light") { set $theme "light"; }
+        if ($arg_set = "dark")  { set $theme "dark"; }
+        add_header Set-Cookie "theme=$theme; Path=/; Max-Age=31536000; SameSite=Lax";
+        set $redirect "/";
+        if ($arg_next != "") { set $redirect $arg_next; }
+        if ($arg_next = "")  { set $redirect $http_referer; }
+        if ($redirect = "")  { set $redirect "/"; }
+        return 302 $redirect;
+    }
+
+    location /api/file_detail {
+        fastcgi_pass unix:/var/run/fcgiwrap.socket;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param QUERY_STRING $query_string;
+    }
+
+    location = /api/search {
+        fastcgi_pass unix:/var/run/fcgiwrap.socket;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root/api/search.py;
+        fastcgi_param SCRIPT_NAME /api/search;
+        fastcgi_param QUERY_STRING $query_string;
+    }
+
+    location = /api/admin {
+        fastcgi_request_buffering off;
+        fastcgi_pass unix:/var/run/fcgiwrap.socket;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root/api/admin.py;
+        fastcgi_param SCRIPT_NAME /api/admin;
+        fastcgi_param QUERY_STRING $query_string;
+    }
+
+    location /api/archive_contents {
+        fastcgi_pass unix:/var/run/fcgiwrap.socket;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param QUERY_STRING $query_string;
+    }
+
+    location /api/stats {
+        fastcgi_pass unix:/var/run/fcgiwrap.socket;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root/api/stats.py;
+        fastcgi_param QUERY_STRING $query_string;
+    }
+
+    location ~* \.pdf$ {
+        add_header Content-Disposition "inline";
+        add_header X-Content-Type-Options "nosniff";
+        types { }
+        default_type "application/pdf";
+    }
+
+
+
+    # === SECURITY: block sensitive files outside admin ===
+    location ~* \.(py|pyc)$ {
+        deny all;
+    }
+
+    location ~* \.(json|yaml|yml|toml|ini|cfg|conf)$ {
+        deny all;
+    }
+
+    location ~* \.(bak|bak2|old|orig|swp|tmp|save)$ {
+        deny all;
+    }
+
+    location ~ /\. {
+        deny all;
+    }
+
+    location ~ /__pycache__/ {
+        deny all;
+    }
+
+    location ~* \.(?:css|js|jpg|jpeg|gif|png|ico|svg|webp|woff|woff2|ttf)$ {
+        access_log off;
+        expires 7d;
+        add_header Cache-Control "public, max-age=604800, immutable";
+        try_files $uri =404;
+    }
+
+    location = /lianghua {
+        return 301 /lianghua/;
+    }
+
+    location ^~ /lianghua/ {
+        proxy_pass http://127.0.0.1:3000/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_read_timeout 300s;
+        proxy_redirect off;
+    }
+
+
+    location ^~ /resume/ {
+        add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+        add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://www.gstatic.com; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" always;
+        add_header X-Frame-Options "DENY" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+        add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()" always;
+        add_header Cross-Origin-Opener-Policy "same-origin" always;
+        add_header Cross-Origin-Resource-Policy "same-origin" always;
+        add_header Cache-Control "public, max-age=300";
+        open_file_cache off;
+        autoindex off;
+        try_files $uri $uri/ =404;
+    }
+
+    location = /hermes {
+        return 301 /hermes/;
+    }
+
+    location ^~ /hermes/ {
+        proxy_pass http://127.0.0.1:9120/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Prefix /hermes;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection upgrade;
+        proxy_read_timeout 300s;
+        proxy_redirect off;
+    }
+
+    location / {
+        include /etc/nginx/security-headers.conf;
+        add_header Cache-Control "public, max-age=300";
+        add_header Vary "Cookie";
+        open_file_cache off;
+        autoindex off;
+        try_files $uri $uri/ =404;
+    }
+
+    listen 443 ssl http2; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/ziliaozhan.vip/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/ziliaozhan.vip/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+
+
+
+}
+
+server {
+    # Quiet obvious scanner/probe noise before HTTPS redirects.
+    if ($request_uri ~* ^/(?:wp-admin(?:/|$)|wp-login\.php$|xmlrpc\.php$|\.git(?:/|$)|\.env(?:/|$)|composer\.(?:json|lock)$|vendor(?:/|$)|phpmyadmin(?:/|$)|pma(?:/|$)|cgi-bin(?:/|$)|server-status(?:/|$)|SDK/webLanguage(?:/|$)|webui(?:/|$)|\.DS_Store$)) {
+        return 444;
+    }
+
+    if ($request_uri = /wp-admin/install.php) {
+        return 444;
+    }
+
+    if ($host = www.ziliaozhan.vip) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = ziliaozhan.vip) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name ziliaozhan.vip www.ziliaozhan.vip;
+
+    # Quiet obvious scanner/probe noise without affecting real visitors.
+    location ~* ^/(?:wp-admin(?:/|$)|wp-login\.php$|xmlrpc\.php$|\.git(?:/|$)|\.env(?:/|$)|composer\.(?:json|lock)$|vendor(?:/|$)|phpmyadmin(?:/|$)|pma(?:/|$)|cgi-bin(?:/|$)|server-status(?:/|$)|SDK/webLanguage(?:/|$)|webui(?:/|$)|\.DS_Store$) {
+        return 444;
+    }
+
+    location = /wp-admin/install.php {
+        return 444;
+    }
+
+    # Baidu verification files
+    location = /baidu_verify_codeva-QCmQk99eYa.html {
+        root /var/www/materials;
+        try_files $uri =404;
+    }
+
+    # Redirect everything else to HTTPS
+    location / {
+        return 301 https://$host$request_uri;
+    }
+
+
+
+
+}
