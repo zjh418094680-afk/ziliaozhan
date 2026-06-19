@@ -1,0 +1,8 @@
+bindPort = 7000
+kcpBindPort = 7000
+dashboardPort = 7500
+dashboardUser = 'admin'
+dashboardPwd = 'frp2026admin'
+logFile = '/var/log/frps.log'
+logLevel = 'info'
+logMaxDays = 3

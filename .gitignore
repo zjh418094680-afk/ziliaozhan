@@ -37,3 +37,7 @@ gen_pages_v*.py
 # ===== nginx 配置（不属于项目代码） =====
 nginx-*.conf
 fstab
+fstab
+server-config/hermes/.env
+*.pem
+id_*
