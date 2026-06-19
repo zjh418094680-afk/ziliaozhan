@@ -6,3 +6,33 @@ __pycache__/
 *.pyc
 *.bak*
 .DS_Store
+
+# ===== 自动备份相关 =====
+backups/
+*.tar.gz
+*.zip
+
+# ===== 运行时生成 =====
+.stats_*
+*.lock
+
+# ===== 临时文件 =====
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ===== 备份目录 =====
+resume.backup-*/
+site_builder.py.bak*
+
+# ===== 版本迭代旧文件 =====
+index_v*.html
+index.html.v*
+index.html.bak*
+rename-map-*.json
+gen_pages_v*.py
+
+# ===== nginx 配置（不属于项目代码） =====
+nginx-*.conf

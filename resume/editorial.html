@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="张建辉，工艺助理工程师，UG / NX 三维建模作品与工程履历。">
+  <title>张建辉 · 工程履历</title>
+  <link rel="stylesheet" href="atlas.css">
+  <script type="module" src="vendor/model-viewer.min.js?v=4.1.0-local"></script>
+</head>
+<body>
+  <div class="mobile-contact-dock" aria-label="快捷联系方式">
+    <a href="tel:19179922891"><small>电话</small><b>191 7992 2891</b></a>
+    <a href="mailto:magic.zjh@qq.com"><small>邮箱</small><b>发送邮件</b></a>
+  </div>
+  <aside class="rail">
+    <a class="rail-mark" href="#home" aria-label="返回首页">ZH</a>
+    <div class="rail-principles"><span>结构</span><i></i><span>工艺</span><i></i><span>改善</span></div>
+    <nav aria-label="页面章节">
+      <a class="active" href="#home"><b>01</b><span>首页</span></a>
+      <a href="#works"><b>02</b><span>UG / CAD</span></a>
+      <a href="#experience"><b>03</b><span>工作经历</span></a>
+      <a href="#profile"><b>04</b><span>关于我</span></a>
+    </nav>
+    <a class="rail-contact" href="mailto:magic.zjh@qq.com">联系</a>
+  </aside>
+
+  <main>
+    <section id="home" class="hero section-observe">
+      <div class="identity">
+        <div class="vertical-name" aria-label="张建辉"><span>张</span><span>建</span><span>辉</span></div>
+        <div class="vertical-role">工艺助理工程师</div>
+        <p class="manifesto">以工程逻辑拆解复杂问题，<br>以现场验证推动持续改善。</p>
+        <div class="discipline"><small>专业方向</small><strong>结构 <i>·</i> 工艺 <i>·</i> 改善</strong></div>
+      </div>
+
+      <div class="hero-model">
+        <div class="model-index">01</div>
+        <div class="spec spec-a"><b>材料</b><span>工程合金 / 精密零件</span></div>
+        <div class="spec spec-b"><b>建模方式</b><span>Siemens NX / UG</span></div>
+        <div class="spec spec-c"><b>工艺要点</b><span>结构分析 / 尺寸控制 / 可制造性</span></div>
+        <model-viewer id="hero-viewer" src="assets/models/31051271/31051271.glb" alt="UG 三维建模作品 31051271" camera-controls camera-orbit="35deg 72deg 88%" auto-rotate auto-rotate-delay="4000" rotation-per-second="6deg" interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1.1" shadow-softness=".9">
+          <div class="loader" slot="poster"><span></span><b>LOADING MODEL</b></div>
+        </model-viewer>
+        <div class="model-instruction">拖拽旋转 / 滚轮缩放 / 双击复位</div>
+      </div>
+
+      <div class="hero-contact">
+        <div class="contact-context"><span>江西抚州</span><small>求职联系 / 随时沟通</small></div>
+        <a class="contact-phone" href="tel:19179922891"><small>PHONE / 电话</small><strong>191 7992 2891</strong></a>
+        <a class="contact-email" href="mailto:magic.zjh@qq.com"><small>EMAIL / 邮箱</small><strong>magic.zjh@qq.com</strong></a>
+      </div>
+    </section>
+
+    <section id="works" class="works section-observe">
+      <header class="section-head">
+        <div><span>02</span><p>SELECTED 3D WORKS</p></div>
+        <h2>UG / CAD 作品</h2>
+        <p>精选 UG / NX 三维建模作品，支持自由旋转、缩放与全屏查看。</p>
+      </header>
+      <div class="work-switcher" role="tablist" aria-label="UG 作品切换">
+        <button class="active" type="button" role="tab" aria-selected="true" data-model="assets/models/31051271/31051271.glb" data-id="01" data-code="31051271"><span>01</span><b>UG 建模作品 01</b><small>Siemens NX · 3D MODEL</small></button>
+        <button type="button" role="tab" aria-selected="false" data-model="assets/models/121577/121577.glb" data-id="02" data-code="121577"><span>02</span><b>UG 建模作品 02</b><small>Siemens NX · 3D MODEL</small></button>
+      </div>
+      <div class="work-stage">
+        <div class="work-meta">
+          <span id="work-number">01</span>
+          <div><small>OBJECT NUMBER</small><strong id="work-code">31051271</strong></div>
+          <p>保留作品原始三维形态，通过交互查看造型、比例与细节。</p>
+          <dl class="drawing-data">
+            <div><dt>MODEL</dt><dd id="model-code">31051271</dd></div>
+            <div><dt>SOFTWARE</dt><dd>SIEMENS NX / UG</dd></div>
+            <div><dt>FORMAT</dt><dd>GLB 2.0</dd></div>
+          </dl>
+          <button id="fullscreen-model" type="button">全屏检查模型</button>
+        </div>
+        <div class="model-viewport">
+          <div class="model-label"><b>UG / NX 3D MODEL</b><span>INTERACTIVE VIEW</span></div>
+          <model-viewer id="work-viewer" src="assets/models/31051271/31051271.glb" alt="UG 三维建模作品" camera-controls camera-orbit="35deg 72deg 90%" auto-rotate auto-rotate-delay="4000" rotation-per-second="6deg" interaction-prompt="none" environment-image="neutral" exposure="1" shadow-intensity="1.2">
+            <div class="loader" slot="poster"><span></span><b>LOADING MODEL</b></div>
+          </model-viewer>
+          <div class="model-hint">拖拽旋转 · 滚轮缩放 · 双击复位</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="experience section-observe">
+      <header class="section-head">
+        <div><span>03</span><p>EXPERIENCE / EDUCATION</p></div>
+        <h2>工程履历</h2>
+        <p>围绕项目评审、工艺文件、工序设计与现场改善，持续把设计要求转化为稳定、可执行的制造过程。</p>
+      </header>
+      <div class="experience-layout">
+        <article class="primary-job">
+          <time>2024.10 — 2025.09</time><h3>浙江云端汽车部件有限公司</h3><strong>工艺助理工程师</strong>
+          <div class="job-points">
+            <p><b>项目评审</b>参与“弗迪科技”等新项目报价评审，分析制造风险与产能瓶颈。</p>
+            <p><b>工艺文件</b>编制过程流程图、控制计划 CP、PFMEA，符合 IATF 16949 体系要求。</p>
+            <p><b>现场改善</b>处理生产质量异常，推进措施落实、效果验证与问题闭环。</p>
+            <p><b>工序设计</b>输出工艺尺寸图纸与制造工序排布，持续优化生产流程。</p>
+          </div>
+        </article>
+        <div class="education">
+          <article><time>2022.09 — 2024.07</time><h3>江西科技学院</h3><strong>车辆工程 · 本科</strong><p>汽车理论、机械制造工艺学、CAD、机械设计、材料力学</p></article>
+          <article><time>2019.09 — 2022.07</time><h3>江西工业工程职业技术学院</h3><strong>新能源汽车技术 · 专科</strong><p>新能源汽车电气技术、汽车工程材料、新能源汽车底盘技术</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="profile" class="profile section-observe">
+      <header class="section-head">
+        <div><span>04</span><p>CAPABILITY / PROFILE</p></div>
+        <h2>能力图谱</h2>
+        <p>兼顾三维建模、工程制图、体系文件与现场问题闭环，保持对结构和制造过程的双重理解。</p>
+      </header>
+      <div class="capabilities">
+        <div class="skill-list"><span>IATF 16949</span><span>PFMEA</span><span>控制计划 CP</span><span>过程流程图 PFD</span><span>CAD 三视图 / 标注</span><span>NX / UG</span><span>工程制图</span><span>Office</span></div>
+        <blockquote>严谨不是风格，而是让图纸、工艺与现场结果保持一致的方法。</blockquote>
+      </div>
+      <div class="contact-callout">
+        <div><small>CONTACT / 求职联系</small><strong>期待与你沟通</strong></div>
+        <a href="tel:19179922891"><span>电话</span><b>191 7992 2891</b></a>
+        <a href="mailto:magic.zjh@qq.com"><span>邮箱</span><b>magic.zjh@qq.com</b></a>
+      </div>
+      <footer><b>张建辉</b><span>PROCESS ENGINEER / 2026</span><a href="mailto:magic.zjh@qq.com">发起联系</a></footer>
+    </section>
+  </main>
+  <script src="atlas.js"></script>
+</body>
+</html>

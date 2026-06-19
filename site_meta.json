@@ -1,18 +1,18 @@
 {
   "site_name": "资料栈",
-  "contact_email": "联系站内管理员",
+  "contact_email": "zjh418094680@gmail.com",
   "categories": [
     {
       "slug": "study",
       "name": "学习资料",
       "icon": "📚",
-      "description": "课程资料、试题整理、复习笔记",
+      "description": "文档、试题、复习笔记",
       "subpages": [
         {
           "slug": "gaokao",
-          "name": "高考资料",
+          "name": "考试资料",
           "icon": "📝",
-          "description": "高考真题、模拟卷、答案解析"
+          "description": "历年真题、模拟卷、答案解析"
         },
         {
           "slug": "kaoyan",
